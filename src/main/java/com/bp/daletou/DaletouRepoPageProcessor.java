@@ -4,16 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.bp.util.all.CheckUtil;
 import com.bp.util.all.StreamUtil;
 import com.bp.util.all.StringUtil;
-import org.apache.commons.lang.ArrayUtils;
-import org.junit.Test;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by issuser on 2017/5/23.
