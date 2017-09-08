@@ -17,8 +17,6 @@ public class ParseUrlTest {
 
     @Test
     public void getNewDaletouSources() throws Exception {
-        parseUrl.setUrl("");
-        parseUrl.setCss("");
         parseUrl.getNewDaletouSources();
     }
 
