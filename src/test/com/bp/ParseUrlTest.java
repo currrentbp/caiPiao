@@ -20,6 +20,7 @@ public class ParseUrlTest {
         String url = "http://kaijiang.500.com/shtml/ssq/17106.shtml";
         String css = "table.kj_tablelist02 >tbody >tr>td>table>tbody>tr>td>div>ul>li";
         parseUrl.getCaipiaoHistory(url,css);
+        logger.info("===>");
     }
 
 }
