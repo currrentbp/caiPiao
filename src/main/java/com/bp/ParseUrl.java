@@ -7,6 +7,7 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -19,38 +20,20 @@ import java.util.List;
 public class ParseUrl {
     private final static Logger logger = LoggerFactory.getLogger(ParseUrl.class);
 
-    //需要下载内容的url
-    private  String url = "http://kaijiang.500.com/shtml/ssq/17106.shtml";
-    private  String css = "table.kj_tablelist02 >tbody >tr>td>table>tbody>tr>td>div";
 
-
-
-
-    public void getCaipiaoHistory(String url,String parseBy) {
+    public List<String> getCaipiaoHistory(String url, String parseBy) {
+        List<String> result = new ArrayList<String>();
         try {
             Document doc = Jsoup.connect(url).get();
             Elements elements = doc.select(parseBy);
-            logger.info("===>elementss:"+elements.html());
-        }catch (Exception e){
-            logger.error("===>msg:"+e.getMessage(),e);
+            for (Element element : elements) {
+                result.add(element.html());
+            }
+            logger.info("===>getCaipiaoHistory:" + result);
+        } catch (Exception e) {
+            logger.error("===>msg:" + e.getMessage(), e);
         }
+        return result;
     }
 
-
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public void setCss(String css) {
-        this.css = css;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public String getCss() {
-        return css;
-    }
 }

@@ -17,10 +17,15 @@ public class ParseUrlTest {
 
     @Test
     public void getNewDaletouSources() throws Exception {
-        String url = "http://kaijiang.500.com/shtml/ssq/17106.shtml";
+        //shuangseqiu
+        String url = "http://kaijiang.500.com/shtml/ssq/171061.shtml";
         String css = "table.kj_tablelist02 >tbody >tr>td>table>tbody>tr>td>div>ul>li";
         parseUrl.getCaipiaoHistory(url,css);
-        logger.info("===>");
+
+        //daletou
+        String url2 = "http://kaijiang.500.com/shtml/dlt/17093.shtml";
+        String css2 = "table.kj_tablelist02 >tbody >tr>td>table>tbody>tr>td>div>ul>li";
+        parseUrl.getCaipiaoHistory(url2,css2);
     }
 
 }
