@@ -19,6 +19,7 @@ public class ParseUrlTest {
     public void getNewDaletouSources() throws Exception {
         parseUrl.getNewDaletouSources();
         logger.info("===>result :"+parseUrl.getParam().get("result"));
+        logger.info("===>history :"+ParseUrl.history);
     }
 
 }
