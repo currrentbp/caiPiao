@@ -17,9 +17,9 @@ public class ParseUrlTest {
 
     @Test
     public void getNewDaletouSources() throws Exception {
-        parseUrl.getNewDaletouSources();
-        logger.info("===>result :"+parseUrl.getParam().get("result"));
-        logger.info("===>history :"+ParseUrl.history);
+        String url = "http://kaijiang.500.com/shtml/ssq/17106.shtml";
+        String css = "table.kj_tablelist02 >tbody >tr>td>table>tbody>tr>td>div>ul>li";
+        parseUrl.getCaipiaoHistory(url,css);
     }
 
 }
