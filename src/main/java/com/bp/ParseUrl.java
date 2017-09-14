@@ -28,18 +28,18 @@ public class ParseUrl implements PageProcessor {
     //需要下载内容的url
     private  String url = "http://kaijiang.500.com/shtml/ssq/17106.shtml";
     private  String css = "table.kj_tablelist02 >tbody >tr>td>table>tbody>tr>td>div";
-    private final Map<String,String> param = new HashMap<String, String>();
+    private final Map<String,Object> param = new HashMap<String, Object>();
     {
         param.put("url",url);
         param.put("css",css);
-        param.put("result",new String());
+        param.put("result",new StringBuffer());
     }
 
     private Site site = Site.me().setRetryTimes(3).setSleepTime(100);
 
 
     public void getNewDaletouSources() {
-        Spider.create(new ParseUrl()).addUrl(this.param.get("url")).thread(5).run();
+        Spider.create(new ParseUrl()).addUrl(this.param.get("url").toString()).thread(5).run();
         try {
             Thread.sleep(5 * 1000);
         } catch (InterruptedException e) {
@@ -48,9 +48,9 @@ public class ParseUrl implements PageProcessor {
     }
 
     public void process(Page page) {
-        List<String> historys = page.getHtml().css(this.param.get("css")).all();
+        List<String> historys = page.getHtml().css(this.param.get("css").toString()).all();
         logger.info("===>historys:"+JSON.toJSONString(historys));
-        this.param.put("result",historys.get(0));
+        ((StringBuffer)param.get("result")).append(historys.get(0));
     }
 
     public Site getSite() {
@@ -74,7 +74,7 @@ public class ParseUrl implements PageProcessor {
         return css;
     }
 
-    public Map<String, String> getParam() {
+    public Map<String, Object> getParam() {
         return param;
     }
 }
