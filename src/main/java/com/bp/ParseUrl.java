@@ -30,7 +30,7 @@ public class ParseUrl {
         try {
             Document doc = Jsoup.connect(url).get();
             Elements elements = doc.select(parseBy);
-            logger.info("===>elements:"+elements.html());
+            logger.info("===>elementss:"+elements.html());
         }catch (Exception e){
             logger.error("===>msg:"+e.getMessage(),e);
         }
