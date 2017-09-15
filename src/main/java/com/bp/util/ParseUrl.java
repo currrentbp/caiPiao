@@ -1,4 +1,4 @@
-package com.bp;
+package com.bp.util;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -21,7 +21,13 @@ public class ParseUrl {
     private final static Logger logger = LoggerFactory.getLogger(ParseUrl.class);
 
 
-    public List<String> getCaipiaoHistory(String url, String parseBy) {
+    /**
+     * 根据指定的url获取指定css样式的列表值
+     * @param url 指定的url
+     * @param parseBy 指定的样式
+     * @return 结果集
+     */
+    public List<String> getParseContents(String url, String parseBy) {
         List<String> result = new ArrayList<String>();
         try {
             Document doc = Jsoup.connect(url).get();

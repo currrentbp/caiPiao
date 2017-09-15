@@ -1,10 +1,9 @@
 package com.bp;
 
+import com.bp.util.ParseUrl;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import static org.junit.Assert.*;
 
 /**
  * @author current_bp
@@ -18,14 +17,14 @@ public class ParseUrlTest {
     @Test
     public void getNewDaletouSources() throws Exception {
         //shuangseqiu
-        String url = "http://kaijiang.500.com/shtml/ssq/171061.shtml";
+        String url = "http://kaijiang.500.com/shtml/ssq/17106.shtml";
         String css = "table.kj_tablelist02 >tbody >tr>td>table>tbody>tr>td>div>ul>li";
-        parseUrl.getCaipiaoHistory(url,css);
+        parseUrl.getParseContents(url,css);
 
         //daletou
         String url2 = "http://kaijiang.500.com/shtml/dlt/17093.shtml";
         String css2 = "table.kj_tablelist02 >tbody >tr>td>table>tbody>tr>td>div>ul>li";
-        parseUrl.getCaipiaoHistory(url2,css2);
+        parseUrl.getParseContents(url2,css2);
     }
 
 }
