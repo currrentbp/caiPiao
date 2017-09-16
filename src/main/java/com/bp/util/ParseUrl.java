@@ -23,7 +23,8 @@ public class ParseUrl {
 
     /**
      * 根据指定的url获取指定css样式的列表值
-     * @param url 指定的url
+     *
+     * @param url     指定的url
      * @param parseBy 指定的样式
      * @return 结果集
      */
@@ -37,7 +38,7 @@ public class ParseUrl {
             }
             logger.info("===>getParseContents:" + result);
         } catch (Exception e) {
-            logger.error("===>msg:" + e.getMessage(), e);
+            logger.error("===>url: " + url + " parseBy:" + parseBy + " msg:" + e.getMessage(), e);
         }
         return result;
     }

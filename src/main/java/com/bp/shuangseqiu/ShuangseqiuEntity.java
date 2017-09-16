@@ -1,6 +1,7 @@
 package com.bp.shuangseqiu;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * 双色球实体
@@ -13,6 +14,14 @@ public class ShuangseqiuEntity {
     private String id;
     private Integer[] red = new Integer[6];
     private Integer blue = 0;
+    public ShuangseqiuEntity(){}
+    public ShuangseqiuEntity(int id,List<Integer> allNums){
+        this.id = String.format("%05d", id);
+        for(int i=0;i<6;i++){
+            red[i] = allNums.get(i);
+        }
+        blue = allNums.get(6);
+    }
 
     public String getId() {
         return id;
