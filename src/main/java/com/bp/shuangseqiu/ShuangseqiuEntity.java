@@ -11,23 +11,23 @@ import java.util.List;
  */
 public class ShuangseqiuEntity {
 
-    private String id;
+    private Integer id;
     private Integer[] red = new Integer[6];
     private Integer blue = 0;
     public ShuangseqiuEntity(){}
     public ShuangseqiuEntity(int id,List<Integer> allNums){
-        this.id = String.format("%05d", id);
+        this.id = id;
         for(int i=0;i<6;i++){
             red[i] = allNums.get(i);
         }
         blue = allNums.get(6);
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
