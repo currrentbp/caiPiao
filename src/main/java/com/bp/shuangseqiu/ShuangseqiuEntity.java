@@ -2,8 +2,8 @@ package com.bp.shuangseqiu;
 
 import com.bp.util.all.ListUtil;
 import com.bp.util.all.StringUtil;
-import java.util.Arrays;
-import java.util.List;
+
+import java.util.*;
 
 /**
  * 双色球实体
@@ -16,8 +16,25 @@ public class ShuangseqiuEntity {
     private Integer id;
     private Integer[] red = new Integer[6];
     private Integer blue = 0;
+    private Integer[] blues = new Integer[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
+    private List<Integer> reds = new ArrayList<Integer>(Arrays.asList(new Integer[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,
+            19,20,21,22,23,24,25,26,27,28,29,30,31,32,33}));
+    private static int index = 0;
 
     public ShuangseqiuEntity() {
+    }
+    public ShuangseqiuEntity(boolean random){
+        if(random) {
+            Date date = new Date();
+            String time = "" + date.getTime()+""+(index++);
+            this.id = Integer.parseInt(time.substring(8));
+            this.blue = blues[new Random().nextInt(15)];
+            for (int i = 0; i < 6; i++) {
+                int index = new Random().nextInt(16 - i);
+                this.red[i] = reds.get(index);
+                reds.remove(index);
+            }
+        }
     }
 
     public ShuangseqiuEntity(int id, List<Integer> allNums) {

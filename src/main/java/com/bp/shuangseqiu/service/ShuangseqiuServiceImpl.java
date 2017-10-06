@@ -34,7 +34,7 @@ public class ShuangseqiuServiceImpl {
 
         ConcurrentLinkedQueue<ShuangseqiuEntity> concurrentLinkedQueue = new ConcurrentLinkedQueue();
         for (int i = 0; i < shuangseqiuEntities.size(); i++) {
-            if (concurrentLinkedQueue.size() < num + 1) {//数据不足时，填充数据
+            if (concurrentLinkedQueue.size() < num) {//数据不足时，填充数据
                 concurrentLinkedQueue.add(shuangseqiuEntities.get(i));
             } else {//数据充足时，分析数据
                 //获取前N个数字的重复度

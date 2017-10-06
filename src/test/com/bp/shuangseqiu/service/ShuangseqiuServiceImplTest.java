@@ -1,0 +1,35 @@
+package com.bp.shuangseqiu.service;
+
+import com.alibaba.fastjson.JSON;
+import com.bp.shuangseqiu.ShuangseqiuEntity;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.Assert.*;
+
+/**
+ * @author current_bp
+ * @createTime 20171006
+ */
+public class ShuangseqiuServiceImplTest {
+    private final static Logger logger = LoggerFactory.getLogger(ShuangseqiuServiceImplTest.class);
+
+    @Test
+    public void getRepeatProblem() throws Exception {
+        List<ShuangseqiuEntity> shuangseqiuEntities = new ArrayList<ShuangseqiuEntity>();
+        for (int i = 0; i < 3; i++) {
+            ShuangseqiuEntity shuangseqiuEntity = new ShuangseqiuEntity(true);
+            shuangseqiuEntities.add(shuangseqiuEntity);
+        }
+
+        Map<Integer, Map<String, Map<Integer, Integer>>> repeatProblem = new ShuangseqiuServiceImpl().getRepeatProblem(2, shuangseqiuEntities);
+        logger.info("===>oldList:"+JSON.toJSONString(shuangseqiuEntities));
+        logger.info("===>result:"+JSON.toJSONString(repeatProblem));
+    }
+
+}
