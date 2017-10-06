@@ -2,9 +2,9 @@ package com.bp.shuangseqiu;
 
 import com.bp.util.ParseUrl;
 import com.bp.util.all.CheckUtil;
+import com.bp.util.all.StreamUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,11 +19,29 @@ import java.util.List;
  */
 public class LoadShuangseqiu {
     private final static Logger logger = LoggerFactory.getLogger(LoadShuangseqiu.class);
+    //本地历史数据的文件路径
+    private String path = "E:\\ws\\idea_ws\\caiPiao\\20170913\\caiPiao\\src\\main\\resources\\shuangseqiu\\shuangseqiu_history.txt";
     /*
     双色球每年最多154期，
     从03年开始的
     每期的期号格式xxyyy：xx（年的后两位），yyy（从001累加到154）
      */
+
+    /**
+     * 加载本地的历史数据
+     *
+     * @param path 历史数据路径
+     * @return 双色球的列表:id从小到大
+     */
+    public List<ShuangseqiuEntity> loadAllShuangseqiuFromLocal(String path) {
+        List<String> fileContents = StreamUtil.readFile(CheckUtil.isEmpty(path) ? this.path : path);
+        List<ShuangseqiuEntity> shuangseqiuEntities = new ArrayList<ShuangseqiuEntity>();
+        for (String fileContent : fileContents) {
+            ShuangseqiuEntity shuangseqiuEntity = new ShuangseqiuEntity(fileContent);
+            shuangseqiuEntities.add(shuangseqiuEntity);
+        }
+        return shuangseqiuEntities;
+    }
 
     /**
      * 获取所有的双色球
@@ -43,9 +61,11 @@ public class LoadShuangseqiu {
     }
 
     /**
-     * @param from
-     * @param to
-     * @return
+     * 从网络中获取数据（下面两个参数必须有一个）
+     *
+     * @param from 起始点
+     * @param to   终止点
+     * @return 双色球的列表
      */
     public List<ShuangseqiuEntity> loadShuangseqiuFromTo(Integer from, Integer to) {
         if (CheckUtil.isEmpty(to)) {

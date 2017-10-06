@@ -1,5 +1,7 @@
 package com.bp.shuangseqiu;
 
+import com.bp.util.all.ListUtil;
+import com.bp.util.all.StringUtil;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,13 +16,37 @@ public class ShuangseqiuEntity {
     private Integer id;
     private Integer[] red = new Integer[6];
     private Integer blue = 0;
-    public ShuangseqiuEntity(){}
-    public ShuangseqiuEntity(int id,List<Integer> allNums){
+
+    public ShuangseqiuEntity() {
+    }
+
+    public ShuangseqiuEntity(int id, List<Integer> allNums) {
         this.id = id;
-        for(int i=0;i<6;i++){
+        for (int i = 0; i < 6; i++) {
             red[i] = allNums.get(i);
         }
         blue = allNums.get(6);
+    }
+
+    public ShuangseqiuEntity(String source) {
+        this.id = Integer.parseInt(source.split(":")[0]);
+
+        String allNumString = source.split(":")[1];
+        String[] allNumStrings = allNumString.split(",|;");
+        List<String> allNumList = Arrays.asList(allNumStrings);
+        List<Integer> allNums = new ListUtil().stringList2IntegerList(allNumList);
+
+        for (int i = 0; i < 6; i++) {
+            red[i] = allNums.get(i);
+        }
+        blue = allNums.get(6);
+    }
+
+    private List<Integer> getAllNumsBySource(String source) {
+        String allNumString = source.split(":")[1];
+        String[] allNumStrings = allNumString.split(",|;");
+        List<String> allNumList = Arrays.asList(allNumStrings);
+        return new ListUtil().stringList2IntegerList(allNumList);
     }
 
     public Integer getId() {
@@ -64,10 +90,6 @@ public class ShuangseqiuEntity {
 
     @Override
     public String toString() {
-        return "ShuangseqiuEntity{" +
-                "id='" + id + '\'' +
-                ", red=" + Arrays.toString(red) +
-                ", blue=" + blue +
-                '}';
+        return "" + this.id + ":" + StringUtil.array2String(this.red) + ";" + this.blue;
     }
 }

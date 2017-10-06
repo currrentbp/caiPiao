@@ -25,7 +25,7 @@ public class LoadShuangseqiuTest {
 
     @Test
     public void loadShuangseqiuFromTo() throws Exception {
-        List<ShuangseqiuEntity> shuangseqiuEntities = loadShuangseqiu.loadShuangseqiuFromTo(17001, null);
+        List<ShuangseqiuEntity> shuangseqiuEntities = loadShuangseqiu.loadShuangseqiuFromTo(3001, 18001);
         logger.info("===>shuangseqiuEntities:"+ JSON.toJSONString(shuangseqiuEntities));
     }
 
