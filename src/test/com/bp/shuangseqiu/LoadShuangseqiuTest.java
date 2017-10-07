@@ -1,13 +1,12 @@
 package com.bp.shuangseqiu;
 
 import com.alibaba.fastjson.JSON;
+import com.bp.shuangseqiu.service.LoadShuangseqiu;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * @author current_bp

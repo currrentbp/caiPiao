@@ -1,5 +1,6 @@
-package com.bp.shuangseqiu;
+package com.bp.shuangseqiu.service;
 
+import com.bp.shuangseqiu.ShuangseqiuEntity;
 import com.bp.util.ParseUrl;
 import com.bp.util.all.CheckUtil;
 import com.bp.util.all.StreamUtil;

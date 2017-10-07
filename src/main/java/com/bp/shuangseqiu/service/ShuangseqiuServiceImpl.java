@@ -29,7 +29,7 @@ public class ShuangseqiuServiceImpl {
      * @param shuangseqiuEntities 给定的列表
      * @return 重复数据的集合map《id，map《颜色，map《数字，数量》》》
      */
-    public Map<Integer, Map<String, Map<Integer, Integer>>> getRepeatProblem(int num, List<ShuangseqiuEntity> shuangseqiuEntities) {
+    public Map<Integer, Map<String, Map<Integer, Integer>>> getRepeatNums(int num, List<ShuangseqiuEntity> shuangseqiuEntities) {
         Map<Integer, Map<String, Map<Integer, Integer>>> result = new HashMap<Integer, Map<String, Map<Integer, Integer>>>();
 
         ConcurrentLinkedQueue<ShuangseqiuEntity> concurrentLinkedQueue = new ConcurrentLinkedQueue();
@@ -44,10 +44,62 @@ public class ShuangseqiuServiceImpl {
                 concurrentLinkedQueue.add(shuangseqiuEntities.get(i));
             }
         }
-
         return result;
     }
 
+
+    /**
+     * 获取历史数据的重复的数量
+     *
+     * @param num
+     * @param shuangseqiuEntities
+     * @param repeatSource
+     * @return 历史数据的重复数量：《id，《颜色，重复数量》》
+     */
+    public Map<Integer, Map<String, Integer>> getTotalRepeatProblem(int num, List<ShuangseqiuEntity> shuangseqiuEntities,
+                                                                    Map<Integer, Map<String, Map<Integer, Integer>>> repeatSource) {
+        Map<Integer, Map<String, Integer>> result = new HashMap<Integer, Map<String, Integer>>();
+        boolean start = false;
+        ShuangseqiuEntity before = null;
+        for (ShuangseqiuEntity shuangseqiuEntity : shuangseqiuEntities) {
+            if (!start) {//由于有些数据是无效的，例如前面N个数据是历史分析数据，去除这些数据
+                if (repeatSource.containsKey(shuangseqiuEntity.getId())) {
+                    start = true;
+                    before = shuangseqiuEntity;
+                    continue;//此处直接跳过的原因：从下一个数据开始做分析
+                } else {
+                    continue;
+                }
+            }
+
+            //上一期对应的前N期的历史数据综合
+            Map<String, Map<Integer, Integer>> repeat = repeatSource.get(before.getId());
+            //红色：本期与之前的重复数量
+            Map<Integer, Integer> repeatReds = repeat.get(Color.RED);
+            int redRepeatCount = 0;
+            for (Integer red : shuangseqiuEntity.getRed()) {
+                if (repeatReds.containsKey(red)) {
+                    redRepeatCount += repeatReds.get(red);
+                }
+            }
+            //蓝色：本期与之前的重复数量
+            Map<Integer, Integer> repeatBlue = repeat.get(Color.BLUE);
+            int blueRepeatCount = 0;
+            if (repeatBlue.containsKey(shuangseqiuEntity.getBlue())) {
+                blueRepeatCount += repeatBlue.get(shuangseqiuEntity.getBlue());
+            }
+
+            Map<String, Integer> repeatCount = new HashMap<String, Integer>();
+            repeatCount.put(Color.RED, redRepeatCount);
+            repeatCount.put(Color.BLUE, blueRepeatCount);
+
+            result.put(shuangseqiuEntity.getId(), repeatCount);
+        }
+        return result;
+    }
+
+
+    //=========        私有方法           ======================================//
 
     /**
      * 获取id对应的前N个数据的集合
@@ -79,7 +131,6 @@ public class ShuangseqiuServiceImpl {
                 blueMap.put(blue, 1);
             }
         }
-
         return result;
     }
 

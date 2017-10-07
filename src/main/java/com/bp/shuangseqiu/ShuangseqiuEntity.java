@@ -2,7 +2,6 @@ package com.bp.shuangseqiu;
 
 import com.bp.util.all.ListUtil;
 import com.bp.util.all.StringUtil;
-
 import java.util.*;
 
 /**
