@@ -1,10 +1,10 @@
 package com.bp.daletou;
 
 import com.alibaba.fastjson.JSON;
-import com.bp.util.all.CheckUtil;
-import com.bp.util.all.PropertiesUtil;
-import com.bp.util.all.RandomUtil;
-import com.bp.util.all.StreamUtil;
+import com.currentbp.util.all.CheckUtil;
+import com.currentbp.util.all.PropertiesUtil;
+import com.currentbp.util.all.RandomUtil;
+import com.currentbp.util.all.StreamUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

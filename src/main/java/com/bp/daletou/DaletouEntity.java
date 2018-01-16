@@ -1,6 +1,6 @@
 package com.bp.daletou;
 
-import com.bp.util.all.StreamUtil;
+import com.currentbp.util.all.StreamUtil;
 
 import java.util.List;
 

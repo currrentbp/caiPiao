@@ -2,7 +2,7 @@ package com.bp.shuangseqiu.service;
 
 import com.alibaba.fastjson.JSON;
 import com.bp.shuangseqiu.ShuangseqiuEntity;
-import com.bp.util.all.CheckUtil;
+import com.currentbp.util.all.CheckUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

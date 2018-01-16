@@ -1,9 +1,9 @@
 package com.bp.daletou;
 
 import com.alibaba.fastjson.JSON;
-import com.bp.util.all.CheckUtil;
-import com.bp.util.all.StreamUtil;
-import com.bp.util.all.StringUtil;
+import com.currentbp.util.all.CheckUtil;
+import com.currentbp.util.all.StreamUtil;
+import com.currentbp.util.all.StringUtil;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;

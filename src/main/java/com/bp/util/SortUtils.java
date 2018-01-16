@@ -1,10 +1,7 @@
 package com.bp.util;
 
 import com.bp.shuangseqiu.ShuangseqiuEntity;
-import com.bp.util.all.CheckUtil;
-import com.bp.util.all.ListUtil;
-import com.bp.util.all.MapUtil;
-import com.bp.util.all.SortUtil;
+import com.currentbp.util.all.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +17,8 @@ public class SortUtils {
             return null;
         }
         //todo not work
-        List<Integer> ids = ListUtil.getFieldListByObjectList(shuangseqiuEntities,"id",Integer.class);
-        Map<Integer, ShuangseqiuEntity> oldShuangseqius = MapUtil.getMapByList(shuangseqiuEntities,"id");
+        List<Integer> ids = CollectionUtil.getFieldListByObjectList(shuangseqiuEntities,"id",Integer.class);
+        Map<Integer, ShuangseqiuEntity> oldShuangseqius = CollectionUtil.getMapByList(shuangseqiuEntities,"id");
 
         List<Integer> newIds = new SortUtil().bubblSort(ids,false);
         List<ShuangseqiuEntity> result = new ArrayList<ShuangseqiuEntity>();

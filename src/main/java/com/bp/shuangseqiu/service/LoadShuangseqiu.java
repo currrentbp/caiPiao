@@ -2,8 +2,8 @@ package com.bp.shuangseqiu.service;
 
 import com.bp.shuangseqiu.ShuangseqiuEntity;
 import com.bp.util.ParseUrl;
-import com.bp.util.all.CheckUtil;
-import com.bp.util.all.StreamUtil;
+import com.currentbp.util.all.CheckUtil;
+import com.currentbp.util.all.StreamUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.ArrayList;

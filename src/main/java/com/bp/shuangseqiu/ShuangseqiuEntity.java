@@ -1,7 +1,7 @@
 package com.bp.shuangseqiu;
 
-import com.bp.util.all.ListUtil;
-import com.bp.util.all.StringUtil;
+import com.currentbp.util.all.ListUtil;
+import com.currentbp.util.all.StringUtil;
 import java.util.*;
 
 /**
