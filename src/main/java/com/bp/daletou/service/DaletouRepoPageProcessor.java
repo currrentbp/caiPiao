@@ -1,6 +1,7 @@
-package com.bp.daletou;
+package com.bp.daletou.service;
 
 import com.alibaba.fastjson.JSON;
+import com.bp.daletou.entity.DaletouEntity;
 import com.currentbp.util.all.CheckUtil;
 import com.currentbp.util.all.StreamUtil;
 import com.currentbp.util.all.StringUtil;
@@ -62,9 +63,9 @@ public class DaletouRepoPageProcessor implements PageProcessor {
     public void process(Page page) {
         List<String> historys = page.getHtml().css("table.historylist > tbody > tr").all();
         List<Integer> temp = new ArrayList<Integer>();
-        Daletou daletou = new Daletou();
-        daletou.initReadDaletouHistory();
-        oldDaletous = daletou.getLocalDaletouHistory();
+        DaletouServiceImpl daletou = new DaletouServiceImpl();
+//        daletou.initReadDaletouHistory();
+        oldDaletous = null;//daletou.getLocalDaletouHistory();
         for (String history : historys) {
             String aLabel = StringUtil.getALabel(history).get(0);
             String id = StringUtil.getLabelContent(aLabel, "a").get(0);
@@ -78,20 +79,20 @@ public class DaletouRepoPageProcessor implements PageProcessor {
 
             if (!oldDaletous.containsKey(id)) {//添加该条数据
                 DaletouEntity daletouEntity = new DaletouEntity();
-                daletouEntity.setId(id);
+                //daletouEntity.setId(id);
                 String[] result1 = rolls.subList(0, 5).toArray(new String[5]);
                 Integer[] result2 = new Integer[5];
                 for (int i = 0; i < 5; i++) {
                     result2[i] = Integer.parseInt(result1[i]);
                 }
-                daletouEntity.setRed(result2);
+                //daletouEntity.setRed(result2);
 
                 String[] result1_1 = rolls.subList(5, 7).toArray(new String[2]);
                 Integer[] result2_1 = new Integer[2];
                 for (int i = 0; i < 2; i++) {
                     result2_1[i] = Integer.parseInt(result1_1[i]);
                 }
-                daletouEntity.setBlue(result2_1);
+                //daletouEntity.setBlue(result2_1);
                 this.needAddDaletous.put(id, daletouEntity);
                 temp.add(Integer.parseInt(id));
             }
@@ -102,13 +103,13 @@ public class DaletouRepoPageProcessor implements PageProcessor {
         //将needAddDaletous写入文件
         for (Integer id : sortDaletouHistoryIds) {
             try {
-                String reds = array2String(needAddDaletous.get("" + id).getRed());
-                String blues = array2String(needAddDaletous.get("" + id).getBlue());
-                String content = "" + id + ":" + reds + ";" + blues + "\n";
-                System.out.println("===>content:" + content);
-                StreamUtil.writeSomethingToFile(content,
-                        "E:\\ws\\idea_ws\\myGenProject\\20161223_7\\myGenProject\\src\\main\\resources\\com.bp.daletou\\daletou_history.txt",
-                        true);
+                //String reds = array2String(needAddDaletous.get("" + id).getRed());
+               // String blues = array2String(needAddDaletous.get("" + id).getBlue());
+                //String content = "" + id + ":" + reds + ";" + blues + "\n";
+                //System.out.println("===>content:" + content);
+                //StreamUtil.writeSomethingToFile(content,
+                      //  "E:\\ws\\idea_ws\\myGenProject\\20161223_7\\myGenProject\\src\\main\\resources\\com.bp.daletou\\daletou_history.txt",
+                      //  true);
             } catch (Exception e) {
                 System.out.println("===>write into file error!! msg:" + e.getMessage());
             }

@@ -1,65 +1,28 @@
-http://kaijiang.500.com/shtml/dlt/17093.shtml
+1、初始化模块：初始化本地历史数据：1月24日-1月25日
+2、下载模块：下载最新的数据：1月26日-1月27日
+3、分析模块：分析历史数据，为预测模块获得基础数据：1月28日-1月30日
+4、预测模块：根据分析模块的数据，获取预测的数据：1月31日-2月2日
+5、结果分析模块：对预测的结果分析，获取中奖概率等相关信息：2月3日-2月7日
+6、账单模块：对个人、公司等的账单每期、每月进行总结：2月8日-2月12日
+7、对接微信公众号等平台
 
-<div style="margin:20px auto; width:500px;">
-				<table width="100%" border="1" cellpadding="0" cellspacing="0" bordercolor="#ADD3EF" class="kj_tablelist02">
-					<tr>
-						<td class="td_title01">
-							<span class="span_left"><a href="/shtml/dlt/17096.shtml">��������͸ �� <font class="cfont2"><strong>17096</strong></font>��</a></span>
-							<span class="span_right">�������ڣ�2017��8��19�� �ҽ���ֹ���ڣ�2017��10��17��</span></td>
-					</tr>
-					<tr align="center">
-						<td align="left">
-							<table width="100%" border="0" cellspacing="0" cellpadding="1">
-								<tr>
-									<td width="60">�������룺</td>
-									<td>
-										<div class="ball_box01">
-											<ul>
-												<li class="ball_red">03</li>
-												<li class="ball_red">07</li>
-												<li class="ball_red">09</li>
-												<li class="ball_red">17</li>
-												<li class="ball_red">28</li>
-												<li class="ball_blue">04</li>
-												<li class="ball_blue">12</li>
-											</ul>
-										</div>
-									</td>
-								</tr>
- 
-								<tr>
-									<td>����˳��</td>
-									<td>07 28 09 03 17|04 12</td>
-								</tr>
-							</table>
 
-							
-							
-<div style="margin:20px auto; width:500px;">
-				<table width="100%" border="1" cellpadding="0" cellspacing="0" bordercolor="#ADD3EF" class="kj_tablelist02">
-					<tr>
-						<td class="td_title01">
-							<span class="span_left"><a href="/shtml/dlt/17093.shtml">��������͸ �� <font class="cfont2"><strong>17093</strong></font>��</a></span>
-							<span class="span_right">�������ڣ�2017��8��12�� �ҽ���ֹ���ڣ�2017��10��10��</span></td>
-					</tr>
-					<tr align="center">
-						<td align="left">
-							<table width="100%" border="0" cellspacing="0" cellpadding="1">
-								<tr>
-									<td width="60">�������룺</td>
-									<td>
-										<div class="ball_box01">
-											<ul>
-												<li class="ball_red">05</li>
-												<li class="ball_red">06</li>
-												<li class="ball_red">17</li>
-												<li class="ball_red">21</li>
-												<li class="ball_red">29</li>
-												<li class="ball_blue">02</li>
-												<li class="ball_blue">04</li>
-											</ul>
-										</div>
-									</td>
-								</tr>
- 
-							
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
