@@ -24,7 +24,7 @@ import java.util.List;
  * @createTime 20180124
  */
 
-@Service
+@Service("initDaletouService")
 public class InitDaletouServiceImpl implements InitDaletouService {
     private final static Logger logger = LoggerFactory.getLogger(InitDaletouServiceImpl.class);
 

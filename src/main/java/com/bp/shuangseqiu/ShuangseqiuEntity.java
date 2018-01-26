@@ -106,6 +106,6 @@ public class ShuangseqiuEntity {
 
     @Override
     public String toString() {
-        return "" + this.id + ":" + StringUtil.array2String(this.red) + ";" + this.blue;
+        return "" + this.id + ":" ;//+ StringUtil.array2String(this.red) + ";" + this.blue;
     }
 }

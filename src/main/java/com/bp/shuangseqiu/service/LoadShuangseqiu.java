@@ -35,7 +35,7 @@ public class LoadShuangseqiu {
      * @return 双色球的列表:id从小到大
      */
     public List<ShuangseqiuEntity> loadAllShuangseqiuFromLocal(String path) {
-        List<String> fileContents = StreamUtil.readFile(CheckUtil.isEmpty(path) ? this.path : path);
+        List<String> fileContents = null;//StreamUtil.readFile(CheckUtil.isEmpty(path) ? this.path : path);
         List<ShuangseqiuEntity> shuangseqiuEntities = new ArrayList<ShuangseqiuEntity>();
         for (String fileContent : fileContents) {
             ShuangseqiuEntity shuangseqiuEntity = new ShuangseqiuEntity(fileContent);
