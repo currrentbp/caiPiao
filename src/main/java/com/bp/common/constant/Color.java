@@ -1,4 +1,4 @@
-package com.bp.constant.common;
+package com.bp.common.constant;
 
 /**
  * 颜色

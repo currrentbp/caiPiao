@@ -1,12 +1,9 @@
 package com.bp.daletou.service.impl;
 
-import com.alibaba.fastjson.JSON;
-import com.bp.daletou.entity.DaletouEntity;
-import com.bp.daletou.service.DaletouServiceImpl;
+import com.bp.common.entity.DaletouEntity;
 import com.bp.daletou.service.InitDaletouService;
 import com.currentbp.util.all.CollectionUtil;
 import com.currentbp.util.all.StreamUtil;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

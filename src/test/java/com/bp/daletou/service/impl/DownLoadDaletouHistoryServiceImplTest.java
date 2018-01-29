@@ -2,7 +2,7 @@ package com.bp.daletou.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.bp.BaseTest;
-import com.bp.daletou.entity.DaletouEntity;
+import com.bp.common.entity.DaletouEntity;
 import com.bp.daletou.service.DownLoadDaletouHistoryService;
 import com.currentbp.util.all.Assert;
 import org.junit.Test;
@@ -11,8 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * @author current_bp

@@ -1,10 +1,9 @@
 package com.bp.shuangseqiu.service;
 
 
-import com.bp.constant.common.Color;
+import com.bp.common.constant.Color;
 import com.bp.shuangseqiu.ShuangseqiuEntity;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

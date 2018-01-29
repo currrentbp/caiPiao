@@ -1,9 +1,8 @@
 package com.bp.daletou.service.impl;
 
-import com.bp.daletou.entity.DaletouEntity;
+import com.bp.common.entity.DaletouEntity;
 import com.bp.daletou.service.DownLoadDaletouHistoryService;
 import com.bp.util.ParseUrl;
-import com.currentbp.util.all.CheckUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

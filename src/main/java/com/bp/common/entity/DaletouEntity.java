@@ -1,4 +1,4 @@
-package com.bp.daletou.entity;
+package com.bp.common.entity;
 
 import com.currentbp.util.all.StringUtil;
 
