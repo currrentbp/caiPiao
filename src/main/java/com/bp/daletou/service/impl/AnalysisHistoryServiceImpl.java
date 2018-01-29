@@ -50,12 +50,11 @@ public class AnalysisHistoryServiceImpl implements AnalysisHistoryService {
                 HistoryDate historyDate = new HistoryDate();
                 historyDate.setId(currentDaletouEntity.getId());
                 while (iterator.hasNext()) {
-                    historyDate.addReds(iterator.next().getBlue());
-                    historyDate.addBlues(iterator.next().getRed());
+                    DaletouEntity next = iterator.next();
+                    historyDate.addReds(next.getBlue());
+                    historyDate.addBlues(next.getRed());
                 }
                 result.add(historyDate);
-                logger.debug("===>historyDate:" + JSON.toJSONString(historyDate));
-                logger.debug("===>linkedBlockingQueue:" + JSON.toJSONString(linkedBlockingQueue));
                 //从头部拿出一个元素
                 linkedBlockingQueue.poll();
             }
