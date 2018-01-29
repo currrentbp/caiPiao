@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 public class InitDaletouServiceImplTest extends BaseTest {
     private final static Logger logger = LoggerFactory.getLogger(InitDaletouServiceImplTest.class);
 
-    @Autowired(required = true)
+    @Autowired
     public InitDaletouService initDaletouService;
 
     @Test

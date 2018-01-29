@@ -19,6 +19,17 @@ public class DaletouEntity {
     public DaletouEntity() {
     }
 
+    public DaletouEntity(Integer id, List<String> daletouStrings) {
+        this.id = id;
+        for (int i = 0; i < daletouStrings.size(); i++) {
+            if (i < 5) {
+                red.add(Integer.parseInt(daletouStrings.get(i)));
+            } else {
+                blue.add(Integer.parseInt(daletouStrings.get(i)));
+            }
+        }
+    }
+
     public DaletouEntity(String source) {
         //17059:8,11,13,15,17;3,10
         List<String> strings = StringUtil.stringToList(source, ":");
