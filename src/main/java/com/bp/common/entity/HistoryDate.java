@@ -11,7 +11,9 @@ import java.util.List;
  * @createTime 20180128
  */
 public class HistoryDate {
+    //当前的ID
     private Integer id;
+    //包括当前的大乐透总的N期数据
     private List<Integer> reds = new ArrayList<Integer>();
     private List<Integer> blues = new ArrayList<Integer>();
 

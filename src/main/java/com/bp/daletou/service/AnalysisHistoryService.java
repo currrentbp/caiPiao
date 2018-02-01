@@ -22,6 +22,12 @@ public interface AnalysisHistoryService {
                     {blues,[1,2]}
                   }
     }
+
+    比较所有的第N期大乐透数据与前M期的历史重合度（不包括第N期）
+    结构：{daletouId:{
+                        {reds,M},{blues,K}
+                    }
+         }
      */
 
     /**
@@ -32,5 +38,7 @@ public interface AnalysisHistoryService {
      * @return 重复的数据
      */
     List<HistoryDate> getHistoryRepeatsFromHistory(int num, List<DaletouEntity> daletouEntities);
+
+
 
 }
