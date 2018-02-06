@@ -1,8 +1,10 @@
 package com.bp.daletou.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.bp.BaseTest;
 import com.bp.common.entity.DaletouEntity;
 import com.bp.common.entity.HistoryDate;
+import com.bp.common.entity.ProblemDate;
 import com.bp.daletou.service.AnalysisHistoryService;
 import com.bp.daletou.service.InitDaletouService;
 import com.currentbp.util.all.Assert;
@@ -32,6 +34,15 @@ public class AnalysisHistoryServiceImplTest extends BaseTest {
         List<DaletouEntity> daletouHistoryFromLocal = initDaletouService.getDaletouHistoryFromLocal();
         List<HistoryDate> historyRepeatsFromHistory = analysisHistoryService.getHistoryRepeatsFromHistory(5, daletouHistoryFromLocal);
         Assert.notEmpty(historyRepeatsFromHistory, "is empty");
+    }
+
+    @Test
+    public void getHistoryProblemDatesFromHistory() {
+        List<DaletouEntity> daletouHistoryFromLocal = initDaletouService.getDaletouHistoryFromLocal();
+        List<HistoryDate> historyRepeatsFromHistory = analysisHistoryService.getHistoryRepeatsFromHistory(5, daletouHistoryFromLocal);
+        List<ProblemDate> historyProblemDatesFromHistory = analysisHistoryService.getHistoryProblemDatesFromHistory(daletouHistoryFromLocal, historyRepeatsFromHistory);
+        logger.info("===>" + JSON.toJSONString(historyProblemDatesFromHistory));
+        Assert.notEmpty(historyProblemDatesFromHistory, "is empty");
     }
 
 }

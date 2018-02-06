@@ -3,6 +3,7 @@ package com.bp.daletou.service;
 
 import com.bp.common.entity.HistoryDate;
 import com.bp.common.entity.DaletouEntity;
+import com.bp.common.entity.ProblemDate;
 
 import java.util.List;
 
@@ -40,5 +41,12 @@ public interface AnalysisHistoryService {
     List<HistoryDate> getHistoryRepeatsFromHistory(int num, List<DaletouEntity> daletouEntities);
 
 
-
+    /**
+     * 从历史重复数据中获取每期大乐透与前N期的重复率
+     *
+     * @param daletouEntities 大乐透列表
+     * @param historyDates    历史重复数据
+     * @return
+     */
+    List<ProblemDate> getHistoryProblemDatesFromHistory(List<DaletouEntity> daletouEntities, List<HistoryDate> historyDates);
 }

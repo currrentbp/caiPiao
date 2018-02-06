@@ -9,7 +9,7 @@ import java.util.List;
  * @createTime 20180131
  */
 public class ProblemDate {
-    //todo not work:没有想好结构
+
     private Integer daletouId;
     //重复的概率
     private Float redProblem;

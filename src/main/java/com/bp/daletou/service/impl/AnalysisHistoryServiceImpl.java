@@ -4,6 +4,7 @@ package com.bp.daletou.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.bp.common.entity.HistoryDate;
 import com.bp.common.entity.DaletouEntity;
+import com.bp.common.entity.ProblemDate;
 import com.bp.daletou.service.AnalysisHistoryService;
 import com.currentbp.util.all.Assert;
 import com.currentbp.util.all.CollectionUtil;
@@ -51,8 +52,8 @@ public class AnalysisHistoryServiceImpl implements AnalysisHistoryService {
                 historyDate.setId(currentDaletouEntity.getId());
                 while (iterator.hasNext()) {
                     DaletouEntity next = iterator.next();
-                    historyDate.addReds(next.getBlue());
-                    historyDate.addBlues(next.getRed());
+                    historyDate.addReds(next.getRed());
+                    historyDate.addBlues(next.getBlue());
                 }
                 result.add(historyDate);
                 //从头部拿出一个元素
@@ -66,8 +67,57 @@ public class AnalysisHistoryServiceImpl implements AnalysisHistoryService {
         return result;
     }
 
+    /**
+     * 从历史重复数据中获取每期大乐透与前N期的重复率
+     *
+     * @param daletouEntities 大乐透列表
+     * @param historyDates    历史重复数据
+     * @return
+     */
+    public List<ProblemDate> getHistoryProblemDatesFromHistory(List<DaletouEntity> daletouEntities,
+                                                               List<HistoryDate> historyDates) {
+        Map<Object, HistoryDate> historyDateMap = CollectionUtil.getMapFromListByMethodName(historyDates, "getId");
+        List<ProblemDate> problemDates = new ArrayList<ProblemDate>();
+        for (DaletouEntity daletouEntity : daletouEntities) {
+            HistoryDate historyDate = historyDateMap.get(daletouEntity.getId() - 1);
+            if (null != historyDate) {
+                ProblemDate problemDate = doGetHistoryProblemDateFromHistory(daletouEntity, historyDate);
+                problemDates.add(problemDate);
+            }
+        }
+        return problemDates;
+    }
+
 
     //=====      private       ================================//
+
+    /**
+     * 根据大乐透的一个对象和大乐透历史数据获取一个大乐透的重复率
+     *
+     * @param daletouEntity 大乐透
+     * @param historyDate   大乐透历史数据
+     * @return 重复率
+     */
+    private ProblemDate doGetHistoryProblemDateFromHistory(DaletouEntity daletouEntity, HistoryDate historyDate) {
+        //todo value is not ok
+        ProblemDate problemDate = new ProblemDate();
+        problemDate.setDaletouId(daletouEntity.getId());
+        int redRepeat = 0;
+        for (Integer red : historyDate.getReds()) {
+            if (daletouEntity.getRed().contains(red)) {
+                redRepeat++;
+            }
+        }
+        problemDate.setRedProblem(1.0F * redRepeat / historyDate.getReds().size());
+        int blueRepeat = 0;
+        for (Integer blue : historyDate.getBlues()) {
+            if (daletouEntity.getBlue().contains(blue)) {
+                blueRepeat++;
+            }
+        }
+        problemDate.setBlueProblem(1.0F * blueRepeat / historyDate.getBlues().size());
+        return problemDate;
+    }
 
     /**
      * 获取一个倒序的大乐透历史列表
