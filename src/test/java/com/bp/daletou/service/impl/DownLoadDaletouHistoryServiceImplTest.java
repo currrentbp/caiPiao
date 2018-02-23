@@ -25,7 +25,7 @@ public class DownLoadDaletouHistoryServiceImplTest extends BaseTest {
 
     @Test
     public void downLoadNewDaletouHistory() throws Exception {
-        List<DaletouEntity> daletouEntities = daletouHistoryService.downLoadNewDaletouHistory(18001);
+        List<DaletouEntity> daletouEntities = daletouHistoryService.downLoadNewDaletouHistory(17068);
         logger.info(JSON.toJSONString(daletouEntities));
         Assert.notEmpty(daletouEntities, "is empty");
     }

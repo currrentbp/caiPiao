@@ -99,7 +99,7 @@ public class AnalysisHistoryServiceImpl implements AnalysisHistoryService {
      * @return 重复率
      */
     private ProblemDate doGetHistoryProblemDateFromHistory(DaletouEntity daletouEntity, HistoryDate historyDate) {
-        //todo value is not ok
+
         ProblemDate problemDate = new ProblemDate();
         problemDate.setDaletouId(daletouEntity.getId());
         int redRepeat = 0;

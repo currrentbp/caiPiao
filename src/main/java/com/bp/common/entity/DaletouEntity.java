@@ -92,7 +92,7 @@ public class DaletouEntity {
     public String toString() {
         final StringBuffer sb = new StringBuffer("");
         sb.append(id + ":" +
-                StringUtil.list2String(red) +
+                StringUtil.list2String(red) + " " +
                 StringUtil.list2String(blue));
         return sb.toString();
     }
