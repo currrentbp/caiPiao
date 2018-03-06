@@ -3,6 +3,8 @@ package com.bp.common.entity;
 import com.currentbp.util.all.StringUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -46,6 +48,24 @@ public class DaletouEntity {
         for (String blue : blues1) {
             this.blue.add(Integer.parseInt(blue));
         }
+    }
+
+    public DaletouEntity sort() {
+        Collections.sort(this.getBlue(), new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                // 返回值为int类型，大于0表示正序，小于0表示逆序
+                return o1 - o2;
+            }
+        });
+        Collections.sort(this.getRed(), new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                // 返回值为int类型，大于0表示正序，小于0表示逆序
+                return o1 - o2;
+            }
+        });
+        return this;
     }
 
     public Integer getId() {

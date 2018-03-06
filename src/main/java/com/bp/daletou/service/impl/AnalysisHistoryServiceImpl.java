@@ -102,10 +102,13 @@ public class AnalysisHistoryServiceImpl implements AnalysisHistoryService {
 
         ProblemDate problemDate = new ProblemDate();
         problemDate.setDaletouId(daletouEntity.getId());
+        problemDate.setBlueRepeats(new ArrayList<Integer>());
+        problemDate.setRedRepeats(new ArrayList<Integer>());
         int redRepeat = 0;
         for (Integer red : historyDate.getReds()) {
             if (daletouEntity.getRed().contains(red)) {
                 redRepeat++;
+                problemDate.getRedRepeats().add(red);
             }
         }
         problemDate.setRedProblem(1.0F * redRepeat / historyDate.getReds().size());
@@ -113,6 +116,7 @@ public class AnalysisHistoryServiceImpl implements AnalysisHistoryService {
         for (Integer blue : historyDate.getBlues()) {
             if (daletouEntity.getBlue().contains(blue)) {
                 blueRepeat++;
+                problemDate.getBlueRepeats().add(blue);
             }
         }
         problemDate.setBlueProblem(1.0F * blueRepeat / historyDate.getBlues().size());

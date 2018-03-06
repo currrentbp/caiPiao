@@ -1,6 +1,7 @@
 package com.bp.daletou.service;
 
 import com.bp.common.entity.DaletouEntity;
+import com.bp.common.entity.HistoryDate;
 import com.bp.common.entity.ProblemDate;
 
 import java.util.List;
@@ -16,19 +17,23 @@ public interface ForecastDaletouService {
     /**
      * 预测指定期号的大乐透
      *
-     * @param daletouId    指定的大乐透期号
-     * @param problemDates 历史概率
+     * @param num            获取样本的数量
+     * @param daletouId      指定的大乐透期号
+     * @param problemDates   历史概率
+     * @param historyRepeats 历史重复数
      * @return 预测的大乐透
      */
-    DaletouEntity forecastDaletou(int daletouId, List<ProblemDate> problemDates);
+    DaletouEntity forecastDaletou(int num, int daletouId, List<ProblemDate> problemDates, List<HistoryDate> historyRepeats);
 
     /**
      * 预测指定期号的大乐透列表
      *
-     * @param num          列表长度
-     * @param daletouId    指定的大乐透期号
-     * @param problemDates 历史概率
+     * @param count          大乐透的数量
+     * @param num            获取样本的数量
+     * @param daletouId      指定的大乐透期号
+     * @param problemDates   历史概率
+     * @param historyRepeats 历史重复数
      * @return 预测的大乐透
      */
-    List<DaletouEntity> forecastDaletou(int num, int daletouId, List<ProblemDate> problemDates);
+    List<DaletouEntity> forecastDaletou(int count, int num, int daletouId, List<ProblemDate> problemDates, List<HistoryDate> historyRepeats);
 }
