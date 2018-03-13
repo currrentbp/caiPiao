@@ -1,13 +1,12 @@
 package com.bp.daletou.service.impl;
 
 
-import com.alibaba.fastjson.JSON;
 import com.bp.common.entity.HistoryDate;
 import com.bp.common.entity.DaletouEntity;
 import com.bp.common.entity.ProblemDate;
 import com.bp.daletou.service.AnalysisHistoryService;
 import com.currentbp.util.all.Assert;
-import com.currentbp.util.all.CollectionUtil;
+import com.currentbp.util.all.CollectionCommonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -76,7 +75,7 @@ public class AnalysisHistoryServiceImpl implements AnalysisHistoryService {
      */
     public List<ProblemDate> getHistoryProblemDatesFromHistory(List<DaletouEntity> daletouEntities,
                                                                List<HistoryDate> historyDates) {
-        Map<Object, HistoryDate> historyDateMap = CollectionUtil.getMapFromListByMethodName(historyDates, "getId");
+        Map<Object, HistoryDate> historyDateMap = CollectionCommonUtil.getMapFromListByMethodName(historyDates, "getId");
         List<ProblemDate> problemDates = new ArrayList<ProblemDate>();
         for (DaletouEntity daletouEntity : daletouEntities) {
             HistoryDate historyDate = historyDateMap.get(daletouEntity.getId() - 1);
@@ -143,6 +142,6 @@ public class AnalysisHistoryServiceImpl implements AnalysisHistoryService {
                 return 0;
             }
         });
-        return CollectionUtil.asList(beforeSort, DaletouEntity.class);
+        return CollectionCommonUtil.asList(beforeSort, DaletouEntity.class);
     }
 }

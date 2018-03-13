@@ -9,7 +9,7 @@ import com.bp.common.entity.HistoryDate;
 import com.bp.common.entity.ProblemDate;
 import com.bp.daletou.service.ForecastDaletouService;
 import com.currentbp.util.all.Assert;
-import com.currentbp.util.all.CollectionUtil;
+import com.currentbp.util.all.CollectionCommonUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -33,7 +33,7 @@ public class ForecastDaletouServiceImpl implements ForecastDaletouService {
      * @return 预测的大乐透
      */
     public DaletouEntity forecastDaletou(int num, int daletouId, List<ProblemDate> problemDates, List<HistoryDate> historyRepeats) {
-        Map<Integer, ProblemDate> problemDateMap = CollectionUtil.getMapFromListByMethodName(problemDates, "getDaletouId");
+        Map<Integer, ProblemDate> problemDateMap = CollectionCommonUtil.getMapFromListByMethodName(problemDates, "getDaletouId");
         DaletouEntity daletouEntity = new DaletouEntity();
         daletouEntity.setId(daletouId);
         daletouEntity.setBlue(new ArrayList<Integer>());
@@ -211,6 +211,6 @@ public class ForecastDaletouServiceImpl implements ForecastDaletouService {
                 return 0;
             }
         });
-        return CollectionUtil.asList(beforeSort, ProblemDate.class);
+        return CollectionCommonUtil.asList(beforeSort, ProblemDate.class);
     }
 }

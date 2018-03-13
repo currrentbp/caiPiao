@@ -17,8 +17,8 @@ public class SortUtils {
             return null;
         }
         //todo not work
-        List<Integer> ids = CollectionUtil.getFieldListByObjectList(shuangseqiuEntities,"id",Integer.class);
-        Map<Integer, ShuangseqiuEntity> oldShuangseqius = CollectionUtil.getMapByList(shuangseqiuEntities,"id");
+        List<Integer> ids = CollectionCommonUtil.getFieldListByObjectList(shuangseqiuEntities,"id",Integer.class);
+        Map<Integer, ShuangseqiuEntity> oldShuangseqius = CollectionCommonUtil.getMapByList(shuangseqiuEntities,"id");
 
         List<Integer> newIds = new SortUtil().bubblSort(ids,false);
         List<ShuangseqiuEntity> result = new ArrayList<ShuangseqiuEntity>();

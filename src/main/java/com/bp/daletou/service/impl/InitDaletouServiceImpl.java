@@ -2,7 +2,7 @@ package com.bp.daletou.service.impl;
 
 import com.bp.common.entity.DaletouEntity;
 import com.bp.daletou.service.InitDaletouService;
-import com.currentbp.util.all.CollectionUtil;
+import com.currentbp.util.all.CollectionCommonUtil;
 import com.currentbp.util.all.StreamUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,7 +79,7 @@ public class InitDaletouServiceImpl implements InitDaletouService {
                 return 0;
             }
         });
-        return CollectionUtil.asList(beforeSort,DaletouEntity.class);
+        return CollectionCommonUtil.asList(beforeSort,DaletouEntity.class);
     }
 
 }
