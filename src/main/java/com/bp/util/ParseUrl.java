@@ -36,7 +36,6 @@ public class ParseUrl {
             for (Element element : elements) {
                 result.add(element.html());
             }
-            logger.info("===>getParseContents:" + result);
         } catch (Exception e) {
             logger.error("===>url: " + url + " parseBy:" + parseBy + " msg:" + e.getMessage(), e);
         }

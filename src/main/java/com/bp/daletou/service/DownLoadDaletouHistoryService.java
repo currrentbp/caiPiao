@@ -29,4 +29,11 @@ public interface DownLoadDaletouHistoryService {
      * @return 大乐透
      */
     DaletouEntity downLoadDaletouHistory(Integer daletouId);
+
+    /**
+     * 下载所有的大乐透
+     *
+     * @return 大乐透列表
+     */
+    List<DaletouEntity> downLoadAllDaletouHistory();
 }

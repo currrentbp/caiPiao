@@ -94,8 +94,12 @@ public class DaletouEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         DaletouEntity that = (DaletouEntity) o;
 
@@ -112,7 +116,7 @@ public class DaletouEntity {
     public String toString() {
         final StringBuffer sb = new StringBuffer("");
         sb.append(id + ":" +
-                StringUtil.list2String(red) + " " +
+                StringUtil.list2String(red) + ";" +
                 StringUtil.list2String(blue));
         return sb.toString();
     }

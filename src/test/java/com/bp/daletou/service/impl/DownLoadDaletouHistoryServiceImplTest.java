@@ -37,4 +37,10 @@ public class DownLoadDaletouHistoryServiceImplTest extends BaseTest {
         Assert.notNull(daletouEntity, "===>is null");
     }
 
+    @Test
+    public void downLoadAllDaletouHistory(){
+        List<DaletouEntity> daletouEntities = daletouHistoryService.downLoadAllDaletouHistory();
+        Assert.notNull(daletouEntities, "===>is null");
+    }
+
 }

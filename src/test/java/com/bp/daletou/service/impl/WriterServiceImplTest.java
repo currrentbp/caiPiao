@@ -1,24 +1,28 @@
 package com.bp.daletou.service.impl;
 
 import com.bp.BaseTest;
+import com.bp.common.entity.DaletouEntity;
+import com.bp.daletou.service.DownLoadDaletouHistoryService;
 import com.bp.daletou.service.WriterService;
-import com.currentbp.util.all.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.io.InputStream;
-import java.net.URL;
-
-import static org.junit.Assert.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WriterServiceImplTest extends BaseTest {
     private final static Logger logger = LoggerFactory.getLogger(WriterServiceImplTest.class);
+    @Autowired
+    private WriterService writerService;
+    @Autowired
+    private DownLoadDaletouHistoryService downLoadDaletouHistoryService;
 
     @Test
     public void writeDaletouHistory2Local() throws Exception {
-        InputStream resourceAsStream = ClassLoader.getSystemResourceAsStream("resources/daletou/daletou_history.txt");
-        Assert.notNull(resourceAsStream,"sssssss");
+        List<DaletouEntity> daletouEntities = downLoadDaletouHistoryService.downLoadAllDaletouHistory();
+        writerService.writeDaletouHistory2Local(daletouEntities);
     }
 
 }
