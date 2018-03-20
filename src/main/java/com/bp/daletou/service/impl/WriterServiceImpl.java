@@ -29,8 +29,7 @@ public class WriterServiceImpl implements WriterService {
         FileWriter fileWriter = StreamUtil.createFileWriter("/daletou/daletou_history.txt", false, true);
         try {
             for (DaletouEntity daletouEntity : daletouEntities) {
-                fileWriter.write(daletouEntity.toString());
-
+                fileWriter.write(daletouEntity.toString()+"\n");
             }
         } catch (IOException e) {
             e.printStackTrace();
