@@ -33,7 +33,6 @@ public class DownLoadDaletouHistoryServiceImpl implements DownLoadDaletouHistory
     @Override
     public List<DaletouEntity> downLoadNewDaletouHistory(Integer startDaletouId) {
         List<DaletouEntity> result = new ArrayList<DaletouEntity>();
-        logger.info("" + (startDaletouId % 100));
         int max = ((startDaletouId / 100) * 100) + 155;
         for (int i = startDaletouId; i <= max; i++) {
             DaletouEntity daletouEntity = downLoadDaletouHistory(i);

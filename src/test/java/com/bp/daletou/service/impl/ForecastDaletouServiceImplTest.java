@@ -37,7 +37,7 @@ public class ForecastDaletouServiceImplTest extends BaseTest {
         List<DaletouEntity> daletouHistoryFromLocal = initDaletouService.getDaletouHistoryFromLocal();
         List<HistoryDate> historyRepeatsFromHistory = analysisHistoryService.getHistoryRepeatsFromHistory(5, daletouHistoryFromLocal);
         List<ProblemDate> historyProblemDatesFromHistory = analysisHistoryService.getHistoryProblemDatesFromHistory(daletouHistoryFromLocal, historyRepeatsFromHistory);
-        List<DaletouEntity> daletouEntities = forecastDaletouService.forecastDaletou(5, 5, 18032, historyProblemDatesFromHistory, historyRepeatsFromHistory);
+        List<DaletouEntity> daletouEntities = forecastDaletouService.forecastDaletou(5, 5, 18034, historyProblemDatesFromHistory, historyRepeatsFromHistory);
         logger.info("===>result:"+JSON.toJSONString(daletouEntities));
         Assert.notEmpty(daletouEntities, "is empty");
     }

@@ -18,10 +18,18 @@ public class WriterServiceImplTest extends BaseTest {
     private WriterService writerService;
     @Autowired
     private DownLoadDaletouHistoryService downLoadDaletouHistoryService;
+    @Autowired
+    private DownLoadDaletouHistoryService daletouHistoryService;
 
     @Test
     public void writeDaletouHistory2Local() throws Exception {
         List<DaletouEntity> daletouEntities = downLoadDaletouHistoryService.downLoadAllDaletouHistory();
+        writerService.writeDaletouHistory2Local(daletouEntities);
+    }
+
+    @Test
+    public void writeDaletouHistory2Local2() throws Exception {
+        List<DaletouEntity> daletouEntities = daletouHistoryService.downLoadNewDaletouHistory(18031);
         writerService.writeDaletouHistory2Local(daletouEntities);
     }
 
