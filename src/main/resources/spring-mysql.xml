@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- 主库 -->
+    <bean id="dataSourceMaster" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+        <!-- Connection Info -->
+        <property name="driverClassName" value="${jdbc_driverClassName_master}"/>
+        <property name="jdbcUrl" value="${jdbc_url_master}"/>
+        <property name="username" value="${jdbc_username_master}"/>
+        <property name="password" value="${jdbc_password_master}"/>
+        <!-- Connection Pooling Info -->
+        <property name="minimumIdle" value="${dbcp_minIdle_master}"/>
+        <property name="maximumPoolSize" value="${dbcp_maxActive_master}"/>
+        <property name="connectionTestQuery" value="${hikaricp_connectionTestQuery_master}"/>
+    </bean>
+
+    <!-- 从库 -->
+    <bean id="dataSourceSlave" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+        <!-- Connection Info -->
+        <property name="driverClassName" value="${jdbc_driverClassName_slave}"/>
+        <property name="jdbcUrl" value="${jdbc_url_slave}"/>
+        <property name="username" value="${jdbc_username_slave}"/>
+        <property name="password" value="${jdbc_password_slave}"/>
+        <!-- Connection Pooling Info -->
+        <property name="minimumIdle" value="${dbcp_minIdle_slave}"/>
+        <property name="maximumPoolSize" value="${dbcp_maxActive_slave}"/>
+    </bean>
+
+    <bean id="transactionManagerMaster" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSourceMaster"/>
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManagerMaster"/>
+
+    <bean id="myJdbcTemplate" class="com.currentbp.jdbc.MyJdbcTemplate">
+        <property name="masterDataSource" ref="dataSourceMaster"/>
+        <property name="slaveDataSources">
+            <list>
+                <ref bean="dataSourceSlave"></ref>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 主库 -->
+    <bean id="masterMyJdbcTemplate" class="com.currentbp.jdbc.MyJdbcTemplate">
+        <constructor-arg name="masterDataSourceOnly" ref="dataSourceMaster"/>
+    </bean>
+</beans>
