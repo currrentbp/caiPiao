@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        ">
+
+    <dubbo:application name="caiPiao_dubbo_provider"/>
+    <dubbo:registry address="${dubbo.zookeeper.registry}" transporter="curator"/>
+    <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}"/>
+    <dubbo:provider timeout="5000" retries="0"/>
+
+
+    <bean id="forecastDaletouServiceFacade" class="com.currentbp.daletou.facade.ForecastDaletouServiceFacadeImpl"/>
+
+
+    <!-- 声明需要暴露的服务接口 -->
+    <dubbo:service interface="com.currentbp.api.daletou.facade.ForecastDaletouServiceFacade" ref="forecastDaletouServiceFacade"/>
+
+
+
+</beans>

@@ -4,9 +4,9 @@ import static com.currentbp.common.constant.DaletouConstant.DaletouCount;
 import static com.currentbp.common.constant.DaletouConstant.DaletouNumCount;
 
 import com.currentbp.common.constant.DaletouConstant;
-import com.currentbp.common.entity.DaletouEntity;
-import com.currentbp.common.entity.HistoryDate;
-import com.currentbp.common.entity.ProblemDate;
+import com.currentbp.entity.DaletouEntity;
+import com.currentbp.entity.HistoryDate;
+import com.currentbp.entity.ProblemDate;
 import com.currentbp.daletou.service.ForecastDaletouService;
 import com.currentbp.util.all.Assert;
 import com.currentbp.util.all.CollectionCommonUtil;

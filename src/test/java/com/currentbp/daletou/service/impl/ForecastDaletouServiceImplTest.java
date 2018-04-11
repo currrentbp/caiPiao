@@ -1,8 +1,8 @@
 package com.currentbp.daletou.service.impl;
 
-import com.currentbp.common.entity.DaletouEntity;
-import com.currentbp.common.entity.HistoryDate;
-import com.currentbp.common.entity.ProblemDate;
+import com.currentbp.entity.DaletouEntity;
+import com.currentbp.entity.HistoryDate;
+import com.currentbp.entity.ProblemDate;
 import com.currentbp.daletou.service.AnalysisHistoryService;
 import com.currentbp.daletou.service.ForecastDaletouService;
 import com.currentbp.daletou.service.InitDaletouService;

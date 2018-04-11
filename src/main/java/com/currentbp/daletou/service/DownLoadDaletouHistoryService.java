@@ -1,6 +1,6 @@
 package com.currentbp.daletou.service;
 
-import com.currentbp.common.entity.DaletouEntity;
+import com.currentbp.entity.DaletouEntity;
 
 import java.util.List;
 

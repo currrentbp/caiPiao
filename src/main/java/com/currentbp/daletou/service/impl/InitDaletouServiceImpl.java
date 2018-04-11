@@ -1,6 +1,6 @@
 package com.currentbp.daletou.service.impl;
 
-import com.currentbp.common.entity.DaletouEntity;
+import com.currentbp.entity.DaletouEntity;
 import com.currentbp.daletou.service.InitDaletouService;
 import com.currentbp.util.all.CollectionCommonUtil;
 import com.currentbp.util.all.StreamUtil;

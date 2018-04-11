@@ -1,7 +1,7 @@
 package com.currentbp.daletou.service.impl;
 
 import com.currentbp.BaseTest;
-import com.currentbp.common.entity.DaletouEntity;
+import com.currentbp.entity.DaletouEntity;
 import com.currentbp.daletou.service.DownLoadDaletouHistoryService;
 import com.currentbp.daletou.service.WriterService;
 import org.junit.Test;

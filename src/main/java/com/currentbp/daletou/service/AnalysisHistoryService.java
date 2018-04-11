@@ -1,9 +1,9 @@
 package com.currentbp.daletou.service;
 
 
-import com.currentbp.common.entity.HistoryDate;
-import com.currentbp.common.entity.DaletouEntity;
-import com.currentbp.common.entity.ProblemDate;
+import com.currentbp.entity.HistoryDate;
+import com.currentbp.entity.DaletouEntity;
+import com.currentbp.entity.ProblemDate;
 
 import java.util.List;
 
