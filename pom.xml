@@ -17,7 +17,7 @@
         <jackson-databind_version>2.4.3</jackson-databind_version>
         <druid.version>1.0.28</druid.version>
         <hikaricp.version>2.3.13</hikaricp.version>
-        <dubbo.version>2.8.3</dubbo.version>
+        <dubbo.version>2.6.0</dubbo.version>
         <zookeeper.version>3.4.9</zookeeper.version>
     </properties>
 
