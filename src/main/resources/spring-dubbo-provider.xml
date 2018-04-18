@@ -9,8 +9,8 @@
         ">
 
     <dubbo:application name="caiPiao_dubbo_provider"/>
-    <dubbo:registry address="${dubbo.zookeeper.registry}" transporter="curator"/>
-    <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}"/>
+    <dubbo:registry address="zookeeper://192.168.0.67:2181" transporter="curator"/>
+    <dubbo:protocol name="dubbo" port="20891"/>
     <dubbo:provider timeout="5000" retries="0"/>
 
 
