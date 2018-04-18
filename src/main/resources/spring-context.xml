@@ -14,8 +14,8 @@
     <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath:config.properties</value>
-                <value>classpath:dubbo.properties</value>
+                <value>config.properties</value>
+                <value>dubbo.properties</value>
             </list>
         </property>
     </bean>
