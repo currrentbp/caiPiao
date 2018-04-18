@@ -14,11 +14,13 @@
     <dubbo:provider timeout="5000" retries="0"/>
 
 
-    <bean id="forecastDaletouServiceFacade" class="com.currentbp.daletou.facade.ForecastDaletouServiceFacadeImpl"/>
+    <bean id="forecastDaletouServiceFacade" class="com.currentbp.daletou.facade.impl.ForecastDaletouServiceFacadeImpl"/>
+    <bean id="daletouServiceFacade" class="com.currentbp.daletou.facade.impl.DaletouServiceFacadeImpl"/>
 
 
     <!-- 声明需要暴露的服务接口 -->
     <dubbo:service interface="com.currentbp.api.daletou.facade.ForecastDaletouServiceFacade" ref="forecastDaletouServiceFacade"/>
+    <dubbo:service interface="com.currentbp.api.daletou.facade.DaletouServiceFacade" ref="daletouServiceFacade"/>
 
 
 

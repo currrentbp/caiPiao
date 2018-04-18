@@ -1,8 +1,8 @@
 package com.currentbp.daletou.service;
 
-import com.currentbp.entity.DaletouEntity;
-import com.currentbp.entity.HistoryDate;
-import com.currentbp.entity.ProblemDate;
+import com.currentbp.daletou.bo.entity.DaletouBo;
+import com.currentbp.daletou.bo.entity.HistoryDate;
+import com.currentbp.daletou.bo.entity.ProblemDate;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public interface ForecastDaletouService {
      * @param historyRepeats 历史重复数
      * @return 预测的大乐透
      */
-    DaletouEntity forecastDaletou(int num, int daletouId, List<ProblemDate> problemDates, List<HistoryDate> historyRepeats);
+    DaletouBo forecastDaletou(int num, int daletouId, List<ProblemDate> problemDates, List<HistoryDate> historyRepeats);
 
     /**
      * 预测指定期号的大乐透列表
@@ -35,5 +35,5 @@ public interface ForecastDaletouService {
      * @param historyRepeats 历史重复数
      * @return 预测的大乐透
      */
-    List<DaletouEntity> forecastDaletou(int count, int num, int daletouId, List<ProblemDate> problemDates, List<HistoryDate> historyRepeats);
+    List<DaletouBo> forecastDaletou(int count, int num, int daletouId, List<ProblemDate> problemDates, List<HistoryDate> historyRepeats);
 }

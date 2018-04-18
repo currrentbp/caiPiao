@@ -1,7 +1,7 @@
-package com.currentbp.daletou.facade;
+package com.currentbp.daletou.facade.impl;
 
 import com.currentbp.api.daletou.facade.ForecastDaletouServiceFacade;
-import com.currentbp.entity.DaletouEntity;
+import com.currentbp.daletou.bo.entity.DaletouBo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +17,7 @@ public class ForecastDaletouServiceFacadeImpl implements ForecastDaletouServiceF
     private final static Logger logger = LoggerFactory.getLogger(ForecastDaletouServiceFacadeImpl.class);
 
     @Override
-    public List<DaletouEntity> forecastDaletou(int count, int daletouId) {
+    public List<DaletouBo> forecastDaletou(int count, int daletouId) {
         logger.info("===>forecastDaletou :" + daletouId);
         return null;
     }

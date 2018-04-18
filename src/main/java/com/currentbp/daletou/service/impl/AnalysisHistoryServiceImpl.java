@@ -1,9 +1,9 @@
 package com.currentbp.daletou.service.impl;
 
 
-import com.currentbp.entity.HistoryDate;
-import com.currentbp.entity.DaletouEntity;
-import com.currentbp.entity.ProblemDate;
+import com.currentbp.daletou.bo.entity.DaletouBo;
+import com.currentbp.daletou.bo.entity.HistoryDate;
+import com.currentbp.daletou.bo.entity.ProblemDate;
 import com.currentbp.daletou.service.AnalysisHistoryService;
 import com.currentbp.util.all.Assert;
 import com.currentbp.util.all.CollectionCommonUtil;
@@ -28,29 +28,29 @@ public class AnalysisHistoryServiceImpl implements AnalysisHistoryService {
      * 从历史数据中获取重复的相关记录
      *
      * @param num             取样本的数量
-     * @param daletouEntities 历史数据
+     * @param daletouBoEntities 历史数据
      * @return 重复的数据
      */
-    public List<HistoryDate> getHistoryRepeatsFromHistory(int num, List<DaletouEntity> daletouEntities) {
-        Assert.notEmpty(daletouEntities, "历史数据为空");
+    public List<HistoryDate> getHistoryRepeatsFromHistory(int num, List<DaletouBo> daletouBoEntities) {
+        Assert.notEmpty(daletouBoEntities, "历史数据为空");
         Assert.isTrue(num > 0, "num 必须是正整数");
 
-        List<DaletouEntity> daletouEntities1 = getDescSortedDaletouList(daletouEntities);
-        LinkedBlockingQueue<DaletouEntity> linkedBlockingQueue = new LinkedBlockingQueue<DaletouEntity>();
+        List<DaletouBo> daletouBoEntities1 = getDescSortedDaletouList(daletouBoEntities);
+        LinkedBlockingQueue<DaletouBo> linkedBlockingQueue = new LinkedBlockingQueue<DaletouBo>();
         List<HistoryDate> result = new ArrayList<HistoryDate>();
 
-        DaletouEntity currentDaletouEntity = null;
-        for (DaletouEntity daletouEntity : daletouEntities1) {
+        DaletouBo currentDaletouBo = null;
+        for (DaletouBo daletouBo : daletouBoEntities1) {
             //如果队列中的数据少于num，就继续添加，否则就进行计算，获取重复的相关记录
             if (linkedBlockingQueue.size() < num) {
 
             } else {
-                Iterator<DaletouEntity> iterator = linkedBlockingQueue.iterator();
+                Iterator<DaletouBo> iterator = linkedBlockingQueue.iterator();
 
                 HistoryDate historyDate = new HistoryDate();
-                historyDate.setId(currentDaletouEntity.getId());
+                historyDate.setId(currentDaletouBo.getId());
                 while (iterator.hasNext()) {
-                    DaletouEntity next = iterator.next();
+                    DaletouBo next = iterator.next();
                     historyDate.addReds(next.getRed());
                     historyDate.addBlues(next.getBlue());
                 }
@@ -59,8 +59,8 @@ public class AnalysisHistoryServiceImpl implements AnalysisHistoryService {
                 linkedBlockingQueue.poll();
             }
             //添加一个元素
-            linkedBlockingQueue.offer(daletouEntity);
-            currentDaletouEntity = daletouEntity;
+            linkedBlockingQueue.offer(daletouBo);
+            currentDaletouBo = daletouBo;
         }
 
         return result;
@@ -69,18 +69,18 @@ public class AnalysisHistoryServiceImpl implements AnalysisHistoryService {
     /**
      * 从历史重复数据中获取每期大乐透与前N期的重复率
      *
-     * @param daletouEntities 大乐透列表
+     * @param daletouBoEntities 大乐透列表
      * @param historyDates    历史重复数据
      * @return
      */
-    public List<ProblemDate> getHistoryProblemDatesFromHistory(List<DaletouEntity> daletouEntities,
+    public List<ProblemDate> getHistoryProblemDatesFromHistory(List<DaletouBo> daletouBoEntities,
                                                                List<HistoryDate> historyDates) {
         Map<Object, HistoryDate> historyDateMap = CollectionCommonUtil.getMapFromListByMethodName(historyDates, "getId");
         List<ProblemDate> problemDates = new ArrayList<ProblemDate>();
-        for (DaletouEntity daletouEntity : daletouEntities) {
-            HistoryDate historyDate = historyDateMap.get(daletouEntity.getId() - 1);
+        for (DaletouBo daletouBo : daletouBoEntities) {
+            HistoryDate historyDate = historyDateMap.get(daletouBo.getId() - 1);
             if (null != historyDate) {
-                ProblemDate problemDate = doGetHistoryProblemDateFromHistory(daletouEntity, historyDate);
+                ProblemDate problemDate = doGetHistoryProblemDateFromHistory(daletouBo, historyDate);
                 problemDates.add(problemDate);
             }
         }
@@ -93,19 +93,19 @@ public class AnalysisHistoryServiceImpl implements AnalysisHistoryService {
     /**
      * 根据大乐透的一个对象和大乐透历史数据获取一个大乐透的重复率
      *
-     * @param daletouEntity 大乐透
+     * @param daletouBo 大乐透
      * @param historyDate   大乐透历史数据
      * @return 重复率
      */
-    private ProblemDate doGetHistoryProblemDateFromHistory(DaletouEntity daletouEntity, HistoryDate historyDate) {
+    private ProblemDate doGetHistoryProblemDateFromHistory(DaletouBo daletouBo, HistoryDate historyDate) {
 
         ProblemDate problemDate = new ProblemDate();
-        problemDate.setDaletouId(daletouEntity.getId());
+        problemDate.setDaletouId(daletouBo.getId());
         problemDate.setBlueRepeats(new ArrayList<Integer>());
         problemDate.setRedRepeats(new ArrayList<Integer>());
         int redRepeat = 0;
         for (Integer red : historyDate.getReds()) {
-            if (daletouEntity.getRed().contains(red)) {
+            if (daletouBo.getRed().contains(red)) {
                 redRepeat++;
                 problemDate.getRedRepeats().add(red);
             }
@@ -113,7 +113,7 @@ public class AnalysisHistoryServiceImpl implements AnalysisHistoryService {
         problemDate.setRedProblem(1.0F * redRepeat / historyDate.getReds().size());
         int blueRepeat = 0;
         for (Integer blue : historyDate.getBlues()) {
-            if (daletouEntity.getBlue().contains(blue)) {
+            if (daletouBo.getBlue().contains(blue)) {
                 blueRepeat++;
                 problemDate.getBlueRepeats().add(blue);
             }
@@ -125,15 +125,15 @@ public class AnalysisHistoryServiceImpl implements AnalysisHistoryService {
     /**
      * 获取一个倒序的大乐透历史列表
      *
-     * @param daletouEntities 大乐透列表
+     * @param daletouBoEntities 大乐透列表
      * @return 倒序列表
      */
-    private List<DaletouEntity> getDescSortedDaletouList(List<DaletouEntity> daletouEntities) {
-        Object[] beforeSort = daletouEntities.toArray();
+    private List<DaletouBo> getDescSortedDaletouList(List<DaletouBo> daletouBoEntities) {
+        Object[] beforeSort = daletouBoEntities.toArray();
         Arrays.sort(beforeSort, new Comparator<Object>() {
             public int compare(Object o, Object t1) {
-                DaletouEntity a = (DaletouEntity) o;
-                DaletouEntity b = (DaletouEntity) t1;
+                DaletouBo a = (DaletouBo) o;
+                DaletouBo b = (DaletouBo) t1;
                 if (a.getId() > b.getId()) {
                     return 1;
                 } else if (a.getId() < b.getId()) {
@@ -142,6 +142,6 @@ public class AnalysisHistoryServiceImpl implements AnalysisHistoryService {
                 return 0;
             }
         });
-        return CollectionCommonUtil.asList(beforeSort, DaletouEntity.class);
+        return CollectionCommonUtil.asList(beforeSort, DaletouBo.class);
     }
 }

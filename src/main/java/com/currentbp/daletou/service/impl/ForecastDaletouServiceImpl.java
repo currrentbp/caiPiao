@@ -4,9 +4,9 @@ import static com.currentbp.common.constant.DaletouConstant.DaletouCount;
 import static com.currentbp.common.constant.DaletouConstant.DaletouNumCount;
 
 import com.currentbp.common.constant.DaletouConstant;
-import com.currentbp.entity.DaletouEntity;
-import com.currentbp.entity.HistoryDate;
-import com.currentbp.entity.ProblemDate;
+import com.currentbp.daletou.bo.entity.DaletouBo;
+import com.currentbp.daletou.bo.entity.HistoryDate;
+import com.currentbp.daletou.bo.entity.ProblemDate;
 import com.currentbp.daletou.service.ForecastDaletouService;
 import com.currentbp.util.all.Assert;
 import com.currentbp.util.all.CollectionCommonUtil;
@@ -32,12 +32,12 @@ public class ForecastDaletouServiceImpl implements ForecastDaletouService {
      * @param historyRepeats 历史重复数
      * @return 预测的大乐透
      */
-    public DaletouEntity forecastDaletou(int num, int daletouId, List<ProblemDate> problemDates, List<HistoryDate> historyRepeats) {
+    public DaletouBo forecastDaletou(int num, int daletouId, List<ProblemDate> problemDates, List<HistoryDate> historyRepeats) {
         Map<Integer, ProblemDate> problemDateMap = CollectionCommonUtil.getMapFromListByMethodName(problemDates, "getDaletouId");
-        DaletouEntity daletouEntity = new DaletouEntity();
-        daletouEntity.setId(daletouId);
-        daletouEntity.setBlue(new ArrayList<Integer>());
-        daletouEntity.setRed(new ArrayList<Integer>());
+        DaletouBo daletouBo = new DaletouBo();
+        daletouBo.setId(daletouId);
+        daletouBo.setBlue(new ArrayList<Integer>());
+        daletouBo.setRed(new ArrayList<Integer>());
 
         //1、计算平均概率
         List<ProblemDate> descSortedProblemDateList = getDescSortedProblemDateList(problemDates);
@@ -79,13 +79,13 @@ public class ForecastDaletouServiceImpl implements ForecastDaletouService {
         List<Integer> redRandomRemains = getProblems(redRemainNums, redsRemain);
         List<Integer> blueRandomRemains = getProblems(blueRemainNums, bluesRemain);
 
-        daletouEntity.getRed().addAll(redRandomRepeats);
-        daletouEntity.getRed().addAll(redRandomRemains);
-        daletouEntity.getBlue().addAll(blueRandomRepeats);
-        daletouEntity.getBlue().addAll(blueRandomRemains);
-        daletouEntity.sort();
+        daletouBo.getRed().addAll(redRandomRepeats);
+        daletouBo.getRed().addAll(redRandomRemains);
+        daletouBo.getBlue().addAll(blueRandomRepeats);
+        daletouBo.getBlue().addAll(blueRandomRemains);
+        daletouBo.sort();
 
-        return daletouEntity;
+        return daletouBo;
     }
 
     /**
@@ -182,11 +182,11 @@ public class ForecastDaletouServiceImpl implements ForecastDaletouService {
      * @param historyRepeats 历史重复数
      * @return 预测的大乐透
      */
-    public List<DaletouEntity> forecastDaletou(int count, int num, int daletouId, List<ProblemDate> problemDates, List<HistoryDate> historyRepeats) {
-        List<DaletouEntity> result = new ArrayList<DaletouEntity>();
+    public List<DaletouBo> forecastDaletou(int count, int num, int daletouId, List<ProblemDate> problemDates, List<HistoryDate> historyRepeats) {
+        List<DaletouBo> result = new ArrayList<DaletouBo>();
         for (int i = 0; i < num; i++) {
-            DaletouEntity daletouEntity = forecastDaletou(num, daletouId, problemDates, historyRepeats);
-            result.add(daletouEntity);
+            DaletouBo daletouBo = forecastDaletou(num, daletouId, problemDates, historyRepeats);
+            result.add(daletouBo);
         }
         return result;
     }

@@ -1,6 +1,6 @@
 package com.currentbp.daletou.service;
 
-import com.currentbp.entity.DaletouEntity;
+import com.currentbp.daletou.bo.entity.DaletouBo;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public interface WriterService {
     /**
      * 将大乐透的历史数据追加写入历史文件中
      *
-     * @param daletouEntities 大乐透列表
+     * @param daletouBoEntities 大乐透列表
      */
-    void writeDaletouHistory2Local(List<DaletouEntity> daletouEntities);
+    void writeDaletouHistory2Local(List<DaletouBo> daletouBoEntities);
 }

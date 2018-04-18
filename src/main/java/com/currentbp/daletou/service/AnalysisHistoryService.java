@@ -1,9 +1,9 @@
 package com.currentbp.daletou.service;
 
 
-import com.currentbp.entity.HistoryDate;
-import com.currentbp.entity.DaletouEntity;
-import com.currentbp.entity.ProblemDate;
+import com.currentbp.daletou.bo.entity.HistoryDate;
+import com.currentbp.daletou.bo.entity.DaletouBo;
+import com.currentbp.daletou.bo.entity.ProblemDate;
 
 import java.util.List;
 
@@ -35,18 +35,18 @@ public interface AnalysisHistoryService {
      * 从历史数据中获取重复的相关记录
      *
      * @param num             取样本的数量
-     * @param daletouEntities 历史数据
+     * @param daletouBoEntities 历史数据
      * @return 重复的数据
      */
-    List<HistoryDate> getHistoryRepeatsFromHistory(int num, List<DaletouEntity> daletouEntities);
+    List<HistoryDate> getHistoryRepeatsFromHistory(int num, List<DaletouBo> daletouBoEntities);
 
 
     /**
      * 从历史重复数据中获取每期大乐透与前N期的重复率
      *
-     * @param daletouEntities 大乐透列表
+     * @param daletouBoEntities 大乐透列表
      * @param historyDates    历史重复数据
      * @return
      */
-    List<ProblemDate> getHistoryProblemDatesFromHistory(List<DaletouEntity> daletouEntities, List<HistoryDate> historyDates);
+    List<ProblemDate> getHistoryProblemDatesFromHistory(List<DaletouBo> daletouBoEntities, List<HistoryDate> historyDates);
 }

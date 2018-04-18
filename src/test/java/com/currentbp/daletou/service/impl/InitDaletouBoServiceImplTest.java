@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author current_bp
  * @createTime 20180125
  */
-public class InitDaletouServiceImplTest extends BaseTest {
-    private final static Logger logger = LoggerFactory.getLogger(InitDaletouServiceImplTest.class);
+public class InitDaletouBoServiceImplTest extends BaseTest {
+    private final static Logger logger = LoggerFactory.getLogger(InitDaletouBoServiceImplTest.class);
 
     @Autowired
     public InitDaletouService initDaletouService;

@@ -1,6 +1,6 @@
 package com.currentbp.daletou.service.impl;
 
-import com.currentbp.entity.DaletouEntity;
+import com.currentbp.daletou.bo.entity.DaletouBo;
 import com.currentbp.daletou.service.InitDaletouService;
 import com.currentbp.util.all.CollectionCommonUtil;
 import com.currentbp.util.all.StreamUtil;
@@ -30,15 +30,15 @@ public class InitDaletouServiceImpl implements InitDaletouService {
      *
      * @return 大乐透历史数据
      */
-    public List<DaletouEntity> getDaletouHistoryFromLocal() {
+    public List<DaletouBo> getDaletouHistoryFromLocal() {
         //TODO not test
         String local = "/daletou/daletou_history.txt";
         List<String> historyDaletous = StreamUtil.getListByFileSource(local);
 
-        List<DaletouEntity> daletouEntities = getDaletouListFromStringList(historyDaletous);
-        List<DaletouEntity> sortedDaletouEntities = getSortedDaletouList(daletouEntities);
+        List<DaletouBo> daletouBoEntities = getDaletouListFromStringList(historyDaletous);
+        List<DaletouBo> sortedDaletouBoEntities = getSortedDaletouList(daletouBoEntities);
 
-        return sortedDaletouEntities;
+        return sortedDaletouBoEntities;
     }
 
 
@@ -50,11 +50,11 @@ public class InitDaletouServiceImpl implements InitDaletouService {
      * @param historyDaletous 列表
      * @return 大乐透列表
      */
-    private List<DaletouEntity> getDaletouListFromStringList(List<String> historyDaletous) {
+    private List<DaletouBo> getDaletouListFromStringList(List<String> historyDaletous) {
 
-        List<DaletouEntity> result = new ArrayList<DaletouEntity>();
+        List<DaletouBo> result = new ArrayList<DaletouBo>();
         for (String historyDaletou : historyDaletous) {
-            result.add(new DaletouEntity(historyDaletou));
+            result.add(new DaletouBo(historyDaletou));
         }
         return result;
     }
@@ -62,15 +62,15 @@ public class InitDaletouServiceImpl implements InitDaletouService {
     /**
      * 获取排序好的大乐透列表
      *
-     * @param daletouEntities 大乐透列表
+     * @param daletouBoEntities 大乐透列表
      * @return 大乐透列表
      */
-    private List<DaletouEntity> getSortedDaletouList(List<DaletouEntity> daletouEntities) {
-        Object[] beforeSort = daletouEntities.toArray();
+    private List<DaletouBo> getSortedDaletouList(List<DaletouBo> daletouBoEntities) {
+        Object[] beforeSort = daletouBoEntities.toArray();
         Arrays.sort(beforeSort, new Comparator<Object>() {
             public int compare(Object o, Object t1) {
-                DaletouEntity a = (DaletouEntity) o;
-                DaletouEntity b = (DaletouEntity) t1;
+                DaletouBo a = (DaletouBo) o;
+                DaletouBo b = (DaletouBo) t1;
                 if (a.getId() > b.getId()) {
                     return -1;
                 } else if (a.getId() < b.getId()) {
@@ -79,7 +79,7 @@ public class InitDaletouServiceImpl implements InitDaletouService {
                 return 0;
             }
         });
-        return CollectionCommonUtil.asList(beforeSort,DaletouEntity.class);
+        return CollectionCommonUtil.asList(beforeSort,DaletouBo.class);
     }
 
 }

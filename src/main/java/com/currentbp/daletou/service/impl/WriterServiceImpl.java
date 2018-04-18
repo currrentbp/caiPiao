@@ -1,6 +1,6 @@
 package com.currentbp.daletou.service.impl;
 
-import com.currentbp.entity.DaletouEntity;
+import com.currentbp.daletou.bo.entity.DaletouBo;
 import com.currentbp.daletou.service.WriterService;
 import com.currentbp.util.all.StreamUtil;
 import org.springframework.stereotype.Service;
@@ -21,14 +21,14 @@ public class WriterServiceImpl implements WriterService {
     /**
      * 将大乐透的历史数据追加写入历史文件中
      *
-     * @param daletouEntities 大乐透列表
+     * @param daletouBoEntities 大乐透列表
      */
     @Override
-    public void writeDaletouHistory2Local(List<DaletouEntity> daletouEntities) {
+    public void writeDaletouHistory2Local(List<DaletouBo> daletouBoEntities) {
         FileWriter fileWriter = StreamUtil.createFileWriter("/daletou/daletou_history.txt", false, true);
         try {
-            for (DaletouEntity daletouEntity : daletouEntities) {
-                fileWriter.write(daletouEntity.toString()+"\n");
+            for (DaletouBo daletouBo : daletouBoEntities) {
+                fileWriter.write(daletouBo.toString()+"\n");
             }
         } catch (IOException e) {
             e.printStackTrace();

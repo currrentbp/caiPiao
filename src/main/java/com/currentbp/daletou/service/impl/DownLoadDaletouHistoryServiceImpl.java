@@ -1,6 +1,6 @@
 package com.currentbp.daletou.service.impl;
 
-import com.currentbp.entity.DaletouEntity;
+import com.currentbp.daletou.bo.entity.DaletouBo;
 import com.currentbp.daletou.service.DownLoadDaletouHistoryService;
 import com.currentbp.util.ParseUrl;
 import com.currentbp.util.all.TimeUtil;
@@ -30,13 +30,13 @@ public class DownLoadDaletouHistoryServiceImpl implements DownLoadDaletouHistory
      * @return 大乐透列表
      */
     @Override
-    public List<DaletouEntity> downLoadNewDaletouHistory(Integer startDaletouId) {
-        List<DaletouEntity> result = new ArrayList<DaletouEntity>();
+    public List<DaletouBo> downLoadNewDaletouHistory(Integer startDaletouId) {
+        List<DaletouBo> result = new ArrayList<DaletouBo>();
         int max = ((startDaletouId / 100) * 100) + 155;
         for (int i = startDaletouId; i <= max; i++) {
-            DaletouEntity daletouEntity = downLoadDaletouHistory(i);
-            if (null != daletouEntity) {
-                result.add(daletouEntity);
+            DaletouBo daletouBo = downLoadDaletouHistory(i);
+            if (null != daletouBo) {
+                result.add(daletouBo);
             }
         }
         return result;
@@ -49,19 +49,19 @@ public class DownLoadDaletouHistoryServiceImpl implements DownLoadDaletouHistory
      * @return 大乐透
      */
     @Override
-    public DaletouEntity downLoadDaletouHistory(Integer daletouId) {
+    public DaletouBo downLoadDaletouHistory(Integer daletouId) {
         String url = "http://kaijiang.500.com/shtml/dlt/" + String.format("%05d", daletouId) + ".shtml";
         String css = "table.kj_tablelist02 >tbody >tr>td>table>tbody>tr>td>div>ul>li";
         List<String> result = new ParseUrl().getParseContents(url, css);
 
-        DaletouEntity daletouEntity = null;
+        DaletouBo daletouBo = null;
         try {
-            daletouEntity = new DaletouEntity(daletouId, result);
+            daletouBo = new DaletouBo(daletouId, result);
         } catch (Exception e) {
-            logger.error("download daletou is error! id:" + daletouId);
-            daletouEntity  = null;
+            logger.error("download daletouBo is error! id:" + daletouId);
+            daletouBo = null;
         }
-        return daletouEntity;
+        return daletouBo;
     }
 
     /**
@@ -70,14 +70,14 @@ public class DownLoadDaletouHistoryServiceImpl implements DownLoadDaletouHistory
      * @return 大乐透列表
      */
     @Override
-    public List<DaletouEntity> downLoadAllDaletouHistory() {
+    public List<DaletouBo> downLoadAllDaletouHistory() {
         int start = 2007;//从07年开始有大乐透
         int endYear = TimeUtil.getCurrentYear();
 
-        List<DaletouEntity> result = new ArrayList<DaletouEntity>();
+        List<DaletouBo> result = new ArrayList<DaletouBo>();
         for (; start <= endYear; start++) {
-            List<DaletouEntity> daletouEntities = downLoadNewDaletouHistory((start % 2000) * 1000 + 1);
-            result.addAll(daletouEntities);
+            List<DaletouBo> daletouBoEntities = downLoadNewDaletouHistory((start % 2000) * 1000 + 1);
+            result.addAll(daletouBoEntities);
         }
 
 

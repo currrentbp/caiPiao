@@ -1,7 +1,7 @@
 package com.currentbp.daletou.service.impl;
 
 import com.currentbp.BaseTest;
-import com.currentbp.entity.DaletouEntity;
+import com.currentbp.daletou.bo.entity.DaletouBo;
 import com.currentbp.daletou.service.DownLoadDaletouHistoryService;
 import com.currentbp.daletou.service.WriterService;
 import org.junit.Test;
@@ -22,14 +22,14 @@ public class WriterServiceImplTest extends BaseTest {
 
     @Test
     public void writeDaletouHistory2Local() throws Exception {
-        List<DaletouEntity> daletouEntities = downLoadDaletouHistoryService.downLoadAllDaletouHistory();
-        writerService.writeDaletouHistory2Local(daletouEntities);
+        List<DaletouBo> daletouBoEntities = downLoadDaletouHistoryService.downLoadAllDaletouHistory();
+        writerService.writeDaletouHistory2Local(daletouBoEntities);
     }
 
     @Test
     public void writeDaletouHistory2Local2() throws Exception {
-        List<DaletouEntity> daletouEntities = daletouHistoryService.downLoadNewDaletouHistory(18031);
-        writerService.writeDaletouHistory2Local(daletouEntities);
+        List<DaletouBo> daletouBoEntities = daletouHistoryService.downLoadNewDaletouHistory(18031);
+        writerService.writeDaletouHistory2Local(daletouBoEntities);
     }
 
 }

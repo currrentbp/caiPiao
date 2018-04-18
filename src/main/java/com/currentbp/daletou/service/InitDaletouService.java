@@ -1,6 +1,6 @@
 package com.currentbp.daletou.service;
 
-import com.currentbp.entity.DaletouEntity;
+import com.currentbp.daletou.bo.entity.DaletouBo;
 
 import java.util.List;
 
@@ -21,5 +21,5 @@ public interface InitDaletouService {
      *
      * @return 大乐透历史数据
      */
-    List<DaletouEntity> getDaletouHistoryFromLocal();
+    List<DaletouBo> getDaletouHistoryFromLocal();
 }
