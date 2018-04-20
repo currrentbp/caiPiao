@@ -1,6 +1,7 @@
 package com.currentbp.daletou.dao;
 
 
+import com.currentbp.daletou.condition.DaletouCondition;
 import com.currentbp.daletou.entity.Daletou;
 import com.currentbp.jdbc.MyJdbcTemplate;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -14,6 +15,7 @@ import javax.annotation.Resource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -64,9 +66,27 @@ public class DaletouDao {
      * @return 大乐透列表
      */
     public List<Daletou> queryAll() {
-        final String sql = "select * from daletou order by id asc";
+        final String sql = "select * from daletou order by id desc";
         return myJdbcTemplate.query(sql, rowMapper);
     }
 
 
+    /**
+     * 根据条件查询大乐透列表
+     *
+     * @param daletouCondition 条件
+     * @return 列表
+     */
+    public List<Daletou> queryByCondition(DaletouCondition daletouCondition) {
+        StringBuilder sql = new StringBuilder("select * from daletou ");
+        sql.append(" where 1=1 ");
+        List<Object> parms = new ArrayList<>();
+
+        sql.append(" order by id desc ");
+
+        sql.append(" limit ?,?");
+        parms.add((daletouCondition.getPageNum() - 1) * daletouCondition.getPageSize());
+        parms.add(daletouCondition.getPageSize());
+        return myJdbcTemplate.query(sql.toString(),parms.toArray(), rowMapper);
+    }
 }

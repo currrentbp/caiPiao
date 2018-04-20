@@ -1,5 +1,6 @@
 package com.currentbp.daletou.service.impl;
 
+import com.currentbp.daletou.condition.DaletouCondition;
 import com.currentbp.daletou.dao.DaletouDao;
 import com.currentbp.daletou.entity.Daletou;
 import com.currentbp.daletou.service.DaletouService;
@@ -25,5 +26,10 @@ public class DaletouServiceImpl implements DaletouService{
     @Override
     public List<Daletou> queryDaletouAll() {
         return daletouDao.queryAll();
+    }
+
+    @Override
+    public List<Daletou> queryDaletouByCondition(DaletouCondition daletouCondition) {
+        return daletouDao.queryByCondition(daletouCondition);
     }
 }
