@@ -102,46 +102,6 @@ public class DaletouServiceImpl implements DaletouService {
      * @return 中奖结果
      */
     private WinType.DaletouWinType isDaletouWin(int reds, int blues) {
-        switch (blues){
-            case 0:
-                switch (reds){
-                    case 3:
-                        return WinType.DaletouWinType.getValueByType();
-                    case 4:
-                        return WinType.DaletouWinType.FIVE;
-                    case 5:
-                        return WinType.DaletouWinType.THREE;
-                        default:
-                            break;
-                }
-                break;
-            case 1:
-                switch (reds){
-                    case 3:
-                        return WinType.DaletouWinType.SIX;
-                    case 4:
-                        return WinType.DaletouWinType.FIVE;
-                    case 5:
-                        return WinType.DaletouWinType.THREE;
-                    default:
-                        break;
-                }
-                break;
-            case 2:
-                switch (reds){
-                    case 3:
-                        return WinType.DaletouWinType.SIX;
-                    case 4:
-                        return WinType.DaletouWinType.FIVE;
-                    case 5:
-                        return WinType.DaletouWinType.THREE;
-                    default:
-                        break;
-                }
-                break;
-            default:
-                    break;
-        }
         if (5 == reds && 2 == blues) {
             return WinType.DaletouWinType.ONE;
         } else if (5 == reds && 1 == blues) {
