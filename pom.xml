@@ -240,7 +240,7 @@
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-log4j12</artifactId>
+                    <artifactId>log4j</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -265,6 +265,15 @@
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>gsDev</id>
+            <properties>
+                <resource.path>src/main/resources_gsDev</resource.path>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
             </activation>
         </profile>
     </profiles>
