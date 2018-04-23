@@ -2,6 +2,7 @@ package com.currentbp.daletou.service;
 
 import com.currentbp.daletou.condition.DaletouCondition;
 import com.currentbp.daletou.entity.Daletou;
+import com.currentbp.vo.Win;
 
 import java.util.List;
 
@@ -32,4 +33,12 @@ public interface DaletouService {
      * @return 大乐透列表
      */
     List<Daletou> queryDaletouByCondition(DaletouCondition daletouCondition);
+
+    /**
+     * 检查中奖情况
+     *
+     * @param daletous 大乐透列表
+     * @return 中奖情况
+     */
+    List<Win> isWin(List<Daletou> daletous);
 }

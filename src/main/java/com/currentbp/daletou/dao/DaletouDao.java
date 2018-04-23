@@ -4,6 +4,7 @@ package com.currentbp.daletou.dao;
 import com.currentbp.daletou.condition.DaletouCondition;
 import com.currentbp.daletou.entity.Daletou;
 import com.currentbp.jdbc.MyJdbcTemplate;
+import com.currentbp.util.SqlUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
@@ -87,6 +88,19 @@ public class DaletouDao {
         sql.append(" limit ?,?");
         parms.add((daletouCondition.getPageNum() - 1) * daletouCondition.getPageSize());
         parms.add(daletouCondition.getPageSize());
-        return myJdbcTemplate.query(sql.toString(),parms.toArray(), rowMapper);
+        return myJdbcTemplate.query(sql.toString(), parms.toArray(), rowMapper);
+    }
+
+    /**
+     * 根据ids查询列表
+     *
+     * @param ids ids
+     * @return 大乐透列表
+     */
+    public List<Daletou> queryByIds(List<Integer> ids) {
+        StringBuilder sql = new StringBuilder("select * from daletou ");
+        sql.append(" where id in " ).append(SqlUtils.sqlInConditionLoad(ids));
+
+        return myJdbcTemplate.query(sql.toString(), ids.toArray(), rowMapper);
     }
 }
