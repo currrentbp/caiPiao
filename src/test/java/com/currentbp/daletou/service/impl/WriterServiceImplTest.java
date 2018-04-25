@@ -28,7 +28,7 @@ public class WriterServiceImplTest extends BaseTest {
 
     @Test
     public void writeDaletouHistory2Local2() throws Exception {
-        List<DaletouBo> daletouBoEntities = daletouHistoryService.downLoadNewDaletouHistory(18031);
+        List<DaletouBo> daletouBoEntities = daletouHistoryService.downLoadNewDaletouHistory(18044);
         writerService.writeDaletouHistory2Local(daletouBoEntities);
     }
 

@@ -30,4 +30,9 @@ public class DaletouServiceFacadeImpl implements DaletouServiceFacade {
     public List<Win> isWin(List<Daletou> daletous) {
         return daletouService.isWin(daletous);
     }
+
+    @Override
+    public List<Daletou> forecast(int num, int daletouId) {
+        return daletouService.forecast(num,daletouId);
+    }
 }

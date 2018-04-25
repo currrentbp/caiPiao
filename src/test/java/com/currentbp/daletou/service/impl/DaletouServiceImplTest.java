@@ -43,11 +43,17 @@ public class DaletouServiceImplTest extends BaseTest {
     }
 
     @Test
-    public void insertOne() throws Exception {
-        DaletouBo daletouBo = daletouHistoryService.downLoadDaletouHistory(11111);
-        Assert.notNull(daletouBo, "===>is null");
-        Daletou daletou = daletouBo.toDaletou();
-        daletouService.insert(daletou);
+    public void insertSome() throws Exception {
+        List<DaletouBo> daletouBos = daletouHistoryService.downLoadNewDaletouHistory(18044);
+        for (DaletouBo daletouBo : daletouBos) {
+            Daletou daletou = null;
+            try {
+                daletou = daletouBo.toDaletou();
+            } catch (Exception e) {
+                continue;
+            }
+            daletouService.insert(daletou);
+        }
     }
 
 

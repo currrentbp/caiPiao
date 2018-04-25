@@ -41,4 +41,13 @@ public interface DaletouService {
      * @return 中奖情况
      */
     List<Win> isWin(List<Daletou> daletous);
+
+    /**
+     * 预测大乐透
+     *
+     * @param num       预测数量
+     * @param daletouId 大乐透期号
+     * @return 大乐透列表
+     */
+    List<Daletou> forecast(int num, int daletouId);
 }

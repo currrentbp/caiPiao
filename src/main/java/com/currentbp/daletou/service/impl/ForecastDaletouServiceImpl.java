@@ -8,8 +8,11 @@ import com.currentbp.daletou.bo.entity.DaletouBo;
 import com.currentbp.daletou.bo.entity.HistoryDate;
 import com.currentbp.daletou.bo.entity.ProblemDate;
 import com.currentbp.daletou.service.ForecastDaletouService;
+import com.currentbp.util.MathUtils;
 import com.currentbp.util.all.Assert;
 import com.currentbp.util.all.CollectionCommonUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -23,6 +26,8 @@ import java.util.*;
  */
 @Service
 public class ForecastDaletouServiceImpl implements ForecastDaletouService {
+    private final static Logger logger = LoggerFactory.getLogger(ForecastDaletouServiceImpl.class);
+
     /**
      * 预测指定期号的大乐透
      *
@@ -32,8 +37,9 @@ public class ForecastDaletouServiceImpl implements ForecastDaletouService {
      * @param historyRepeats 历史重复数
      * @return 预测的大乐透
      */
+    @Override
     public DaletouBo forecastDaletou(int num, int daletouId, List<ProblemDate> problemDates, List<HistoryDate> historyRepeats) {
-        Map<Integer, ProblemDate> problemDateMap = CollectionCommonUtil.getMapFromListByMethodName(problemDates, "getDaletouId");
+        Map<Integer, ProblemDate> problemDateMap = CollectionCommonUtil.getMapFromListByMethodName(problemDates, "getDaletouId", Integer.class);
         DaletouBo daletouBo = new DaletouBo();
         daletouBo.setId(daletouId);
         daletouBo.setBlue(new ArrayList<Integer>());
@@ -63,8 +69,10 @@ public class ForecastDaletouServiceImpl implements ForecastDaletouService {
         ProblemDate nextProblemDate = getNextProblemDate(problemDateMap, daletouId - 1);
         List<Integer> redRepeats = nextProblemDate.getRedRepeats();
         List<Integer> blueRepeats = nextProblemDate.getBlueRepeats();
+        //红色不重复的历史数据
         List<Integer> redNotRepeats = new ArrayList(new HashSet(redRepeats));
         List<Integer> redRemainNums = getRedRemainNums(redNotRepeats);
+        //蓝色不重复的历史数据
         List<Integer> blueNotRepeats = new ArrayList(new HashSet(blueRepeats));
         List<Integer> blueRemainNums = getBlueRemainNums(blueNotRepeats);
         int reds = (int) Math.floor(redProblemAvg * redRepeats.size());
@@ -78,6 +86,13 @@ public class ForecastDaletouServiceImpl implements ForecastDaletouService {
         List<Integer> blueRandomRepeats = getProblems(blueNotRepeats, blues);
         List<Integer> redRandomRemains = getProblems(redRemainNums, redsRemain);
         List<Integer> blueRandomRemains = getProblems(blueRemainNums, bluesRemain);
+        logger.info("===>redsRemain:" + redNotRepeats.size() + " redsRandom:" + redRemainNums.size() + " remainNum:" + reds);
+        logger.info("===>bluesRemain:" + blueNotRepeats.size() + " bluesRandom:" + blueRemainNums.size() + " remainNum:" + blues);
+        logger.info("===>count:"+(MathUtils.c(reds,redNotRepeats.size())
+                                    *MathUtils.c(redsRemain,redRemainNums.size())
+                                    *MathUtils.c(blues,blueNotRepeats.size())
+                                    *MathUtils.c(bluesRemain,blueRemainNums.size())));
+
 
         daletouBo.getRed().addAll(redRandomRepeats);
         daletouBo.getRed().addAll(redRandomRemains);
@@ -182,6 +197,7 @@ public class ForecastDaletouServiceImpl implements ForecastDaletouService {
      * @param historyRepeats 历史重复数
      * @return 预测的大乐透
      */
+    @Override
     public List<DaletouBo> forecastDaletou(int count, int num, int daletouId, List<ProblemDate> problemDates, List<HistoryDate> historyRepeats) {
         List<DaletouBo> result = new ArrayList<DaletouBo>();
         for (int i = 0; i < num; i++) {
@@ -200,6 +216,7 @@ public class ForecastDaletouServiceImpl implements ForecastDaletouService {
     private List<ProblemDate> getDescSortedProblemDateList(List<ProblemDate> problemDates) {
         Object[] beforeSort = problemDates.toArray();
         Arrays.sort(beforeSort, new Comparator<Object>() {
+            @Override
             public int compare(Object o, Object t1) {
                 ProblemDate a = (ProblemDate) o;
                 ProblemDate b = (ProblemDate) t1;

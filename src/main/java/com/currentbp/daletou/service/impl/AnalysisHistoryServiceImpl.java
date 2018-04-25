@@ -1,6 +1,7 @@
 package com.currentbp.daletou.service.impl;
 
 
+import com.alibaba.fastjson.JSON;
 import com.currentbp.daletou.bo.entity.DaletouBo;
 import com.currentbp.daletou.bo.entity.HistoryDate;
 import com.currentbp.daletou.bo.entity.ProblemDate;
@@ -31,6 +32,7 @@ public class AnalysisHistoryServiceImpl implements AnalysisHistoryService {
      * @param daletouBoEntities 历史数据
      * @return 重复的数据
      */
+    @Override
     public List<HistoryDate> getHistoryRepeatsFromHistory(int num, List<DaletouBo> daletouBoEntities) {
         Assert.notEmpty(daletouBoEntities, "历史数据为空");
         Assert.isTrue(num > 0, "num 必须是正整数");
@@ -73,9 +75,10 @@ public class AnalysisHistoryServiceImpl implements AnalysisHistoryService {
      * @param historyDates    历史重复数据
      * @return
      */
+    @Override
     public List<ProblemDate> getHistoryProblemDatesFromHistory(List<DaletouBo> daletouBoEntities,
                                                                List<HistoryDate> historyDates) {
-        Map<Object, HistoryDate> historyDateMap = CollectionCommonUtil.getMapFromListByMethodName(historyDates, "getId");
+        Map<Integer, HistoryDate> historyDateMap = CollectionCommonUtil.getMapFromListByMethodName(historyDates, "getId",Integer.class);
         List<ProblemDate> problemDates = new ArrayList<ProblemDate>();
         for (DaletouBo daletouBo : daletouBoEntities) {
             HistoryDate historyDate = historyDateMap.get(daletouBo.getId() - 1);
@@ -131,6 +134,7 @@ public class AnalysisHistoryServiceImpl implements AnalysisHistoryService {
     private List<DaletouBo> getDescSortedDaletouList(List<DaletouBo> daletouBoEntities) {
         Object[] beforeSort = daletouBoEntities.toArray();
         Arrays.sort(beforeSort, new Comparator<Object>() {
+            @Override
             public int compare(Object o, Object t1) {
                 DaletouBo a = (DaletouBo) o;
                 DaletouBo b = (DaletouBo) t1;

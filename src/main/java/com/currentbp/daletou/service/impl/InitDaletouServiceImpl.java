@@ -30,6 +30,7 @@ public class InitDaletouServiceImpl implements InitDaletouService {
      *
      * @return 大乐透历史数据
      */
+    @Override
     public List<DaletouBo> getDaletouHistoryFromLocal() {
         //TODO not test
         String local = "/daletou/daletou_history.txt";
@@ -68,6 +69,7 @@ public class InitDaletouServiceImpl implements InitDaletouService {
     private List<DaletouBo> getSortedDaletouList(List<DaletouBo> daletouBoEntities) {
         Object[] beforeSort = daletouBoEntities.toArray();
         Arrays.sort(beforeSort, new Comparator<Object>() {
+            @Override
             public int compare(Object o, Object t1) {
                 DaletouBo a = (DaletouBo) o;
                 DaletouBo b = (DaletouBo) t1;

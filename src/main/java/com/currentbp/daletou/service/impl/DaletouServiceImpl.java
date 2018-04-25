@@ -2,22 +2,22 @@ package com.currentbp.daletou.service.impl;
 
 import com.currentbp.constant.WinType;
 import com.currentbp.daletou.bo.entity.DaletouBo;
+import com.currentbp.daletou.bo.entity.HistoryDate;
+import com.currentbp.daletou.bo.entity.ProblemDate;
 import com.currentbp.daletou.condition.DaletouCondition;
 import com.currentbp.daletou.dao.DaletouDao;
 import com.currentbp.daletou.entity.Daletou;
+import com.currentbp.daletou.service.AnalysisHistoryService;
 import com.currentbp.daletou.service.DaletouService;
+import com.currentbp.daletou.service.ForecastDaletouService;
 import com.currentbp.util.all.CollectionCommonUtil;
 import com.currentbp.vo.Win;
-import com.google.common.collect.Lists;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author current_bp
@@ -27,6 +27,12 @@ import java.util.stream.Stream;
 public class DaletouServiceImpl implements DaletouService {
     @Autowired
     private DaletouDao daletouDao;
+    @Autowired
+    private ForecastDaletouService forecastDaletouService;
+    @Autowired
+    private AnalysisHistoryService analysisHistoryService;
+
+    private static Integer SAMPLE_SIZE = 5;
 
     @Override
     public void insert(Daletou daletou) {
@@ -55,6 +61,25 @@ public class DaletouServiceImpl implements DaletouService {
         return result;
     }
 
+    @Override
+    public List<Daletou> forecast(int num, int daletouId) {
+        //获取大乐透列表
+        List<Daletou> daletous = daletouDao.queryAll();
+        List<DaletouBo> daletoBos = daletous.stream().map((daletou) -> {
+            return new DaletouBo(daletou);
+        }).collect(Collectors.toList());
+
+        //获取前N期的重复数据
+        List<HistoryDate> historyRepeatsFromHistory = analysisHistoryService.getHistoryRepeatsFromHistory(SAMPLE_SIZE, daletoBos);
+        //获取重复数据的概率
+        List<ProblemDate> historyProblemDatesFromHistory = analysisHistoryService.getHistoryProblemDatesFromHistory(daletoBos, historyRepeatsFromHistory);
+        //预测数据
+        List<DaletouBo> daletouBos = forecastDaletouService.forecastDaletou(num, SAMPLE_SIZE, daletouId, historyProblemDatesFromHistory, historyRepeatsFromHistory);
+        List<Daletou> result = daletouBos.stream().map(daletouBo -> {
+            return daletouBo.toDaletou();
+        }).collect(Collectors.toList());
+        return result;
+    }
 
     //=====================            private function                  =====================================================
 
@@ -102,21 +127,67 @@ public class DaletouServiceImpl implements DaletouService {
      * @return 中奖结果
      */
     private WinType.DaletouWinType isDaletouWin(int reds, int blues) {
-        if (5 == reds && 2 == blues) {
+        boolean redsIsFive = 5 == reds;
+        boolean redsIsFour = 4 == reds;
+        boolean redsIsThree = 3 == reds;
+        boolean bluesIsZero = 0 == blues;
+        boolean bluesIsOne = 1 == blues;
+        boolean bluesIsTwo = 2 == blues;
+        boolean redsIsOne = 1 == reds;
+        boolean redsIsTwo = 2 == reds;
+        boolean redsIsZero = 0 == reds;
+        if (redsIsFive && bluesIsTwo) {
             return WinType.DaletouWinType.ONE;
-        } else if (5 == reds && 1 == blues) {
+        } else if (redsIsFive && bluesIsOne) {
             return WinType.DaletouWinType.TWO;
-        } else if ((5 == reds && 0 == blues) || (4 == reds && 2 == blues)) {
+        } else if ((redsIsFive && bluesIsZero) || (redsIsFour && bluesIsTwo)) {
             return WinType.DaletouWinType.THREE;
-        } else if ((4 == reds && 1 == blues) || (3 == reds || 2 == blues)) {
+        } else if ((redsIsFour && bluesIsOne) || (redsIsThree || bluesIsTwo)) {
             return WinType.DaletouWinType.FOUR;
-        } else if ((4 == reds && 0 == blues) || (3 == reds && 1 == blues) || (2 == reds && 2 == blues)) {
+        } else if ((redsIsFour && bluesIsZero) || (redsIsThree && bluesIsOne) || (redsIsTwo && bluesIsTwo)) {
             return WinType.DaletouWinType.FIVE;
-        } else if ((3 == reds && 0 == blues) || (1 == reds && 2 == blues) || (2 == reds && 1 == blues) || (0 == reds && 2 == blues)) {
+        } else if ((redsIsThree && bluesIsZero) || (redsIsOne && bluesIsTwo) || (redsIsTwo && bluesIsOne) || (redsIsZero && bluesIsTwo)) {
             return WinType.DaletouWinType.SIX;
         }
         return WinType.DaletouWinType.ZERO;
     }
+    /*
+    可以优化的地方
+    enum DLT {
+ ZERO("", "未中奖"),
+ ONE("52", "一等奖"),
+ TWO("51", "二等奖"),
+ THREE("50|42", "三等奖"),
+ FOUR("41|32", "四等奖"),
+ FIVE("40|31|22", "五等奖"),
+ SIX("30|21|12|02", "六等奖"),
+ ;
+   private String pattern;
+ private String name;
+   DLT(String pattern, String name) {
+ this.pattern = pattern;
+ this.name = name;
+ }
+   public static DLT get(int reds, int blues){
+ if (reds<0 || reds>5 || blues<0 || blues>2){
+ throw new IllegalArgumentException("不符合大乐透中奖规则");
+ }
+ String s = ""+reds+blues;
+ for (DLT dlt : DLT.values()) {
+ if (dlt.getPattern().contains(s)){
+ return dlt;
+ }
+ }
+ return DLT.ZERO;
+ }
+   public String getPattern() {
+ return pattern;
+ }
+   public String getName() {
+ return name;
+ }
+ }
+     */
 
 
 }
