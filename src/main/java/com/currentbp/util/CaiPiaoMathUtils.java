@@ -7,7 +7,7 @@ import org.junit.Test;
  * @author current_bp
  * @createTime 20180424
  */
-public class MathUtils {
+public class CaiPiaoMathUtils {
 
     public static long c(int m, int n) {
         Assert.isTrue(m <= m, "数学表达式不正确，m<=m");
@@ -47,13 +47,13 @@ public class MathUtils {
 
     @Test
     public void f1() {
-        long factorial = MathUtils.factorial(5);
+        long factorial = CaiPiaoMathUtils.factorial(5);
         System.out.println(factorial);
     }
 
     @Test
     public void f() {
-        long factorial = MathUtils.factorial(2, 4);
+        long factorial = CaiPiaoMathUtils.factorial(2, 4);
         System.out.println(factorial);
     }
 

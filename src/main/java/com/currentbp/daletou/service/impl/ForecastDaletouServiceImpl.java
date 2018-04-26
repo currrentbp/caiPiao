@@ -7,12 +7,17 @@ import com.currentbp.common.constant.DaletouConstant;
 import com.currentbp.daletou.bo.entity.DaletouBo;
 import com.currentbp.daletou.bo.entity.HistoryDate;
 import com.currentbp.daletou.bo.entity.ProblemDate;
+import com.currentbp.daletou.entity.DaletouForecast;
+import com.currentbp.daletou.service.DaletouForecastService;
 import com.currentbp.daletou.service.ForecastDaletouService;
-import com.currentbp.util.MathUtils;
+import com.currentbp.util.CaiPiaoMathUtils;
 import com.currentbp.util.all.Assert;
 import com.currentbp.util.all.CollectionCommonUtil;
+import com.currentbp.util.all.ListUtil;
+import com.currentbp.util.all.MathUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -27,6 +32,8 @@ import java.util.*;
 @Service
 public class ForecastDaletouServiceImpl implements ForecastDaletouService {
     private final static Logger logger = LoggerFactory.getLogger(ForecastDaletouServiceImpl.class);
+    @Autowired
+    private DaletouForecastService daletouForecastService;
 
     /**
      * 预测指定期号的大乐透
@@ -88,10 +95,10 @@ public class ForecastDaletouServiceImpl implements ForecastDaletouService {
         List<Integer> blueRandomRemains = getProblems(blueRemainNums, bluesRemain);
         logger.info("===>redsRemain:" + redNotRepeats.size() + " redsRandom:" + redRemainNums.size() + " remainNum:" + reds);
         logger.info("===>bluesRemain:" + blueNotRepeats.size() + " bluesRandom:" + blueRemainNums.size() + " remainNum:" + blues);
-        logger.info("===>count:" + (MathUtils.c(reds, redNotRepeats.size())
-                * MathUtils.c(redsRemain, redRemainNums.size())
-                * MathUtils.c(blues, blueNotRepeats.size())
-                * MathUtils.c(bluesRemain, blueRemainNums.size())));
+        logger.info("===>count:" + (CaiPiaoMathUtils.c(reds, redNotRepeats.size())
+                * CaiPiaoMathUtils.c(redsRemain, redRemainNums.size())
+                * CaiPiaoMathUtils.c(blues, blueNotRepeats.size())
+                * CaiPiaoMathUtils.c(bluesRemain, blueRemainNums.size())));
 
 
         daletouBo.getRed().addAll(redRandomRepeats);
@@ -152,11 +159,55 @@ public class ForecastDaletouServiceImpl implements ForecastDaletouService {
 
         logger.info("===>redsRemain:" + redNotRepeats.size() + " redsRandom:" + redRemainNums.size() + " remainNum:" + reds);
         logger.info("===>bluesRemain:" + blueNotRepeats.size() + " bluesRandom:" + blueRemainNums.size() + " remainNum:" + blues);
-        logger.info("===>count:" + (MathUtils.c(reds, redNotRepeats.size())
-                * MathUtils.c(redsRemain, redRemainNums.size())
-                * MathUtils.c(blues, blueNotRepeats.size())
-                * MathUtils.c(bluesRemain, blueRemainNums.size())));
+        logger.info("===>count:" + (CaiPiaoMathUtils.c(reds, redNotRepeats.size())
+                * CaiPiaoMathUtils.c(redsRemain, redRemainNums.size())
+                * CaiPiaoMathUtils.c(blues, blueNotRepeats.size())
+                * CaiPiaoMathUtils.c(bluesRemain, blueRemainNums.size())));
 
+        //1、红1区：历史记录的结果
+        //2、红2区：不在历史记录的结果
+        //3、蓝1区：历史记录的结果
+        //4、蓝2区：不在历史记录的结果
+        //存在某些数据直接不存在：例如：蓝1区没有数据，直接使用蓝2区的
+        List<String> red1 = new ArrayList<>();
+        List<String> red2 = new ArrayList<>();
+        List<String> blue1 = new ArrayList<>();
+        List<String> blue2 = new ArrayList<>();
+        combination(red1, redNotRepeats, reds);
+        combination(red2, redRemainNums, DaletouCount.REDS.getValue() - reds);
+        combination(blue1, blueNotRepeats, blues);
+        combination(blue2, blueRemainNums, DaletouCount.BLUES.getValue() - blues);
+
+        int sum = 0;
+        List<String> result = new ArrayList<>();
+        for (String red1_1 : red1) {
+            for (String red2_1 : red2) {
+                for (String blue1_1 : blue1) {
+                    for (String blue2_1 : blue2) {
+                        if (sum % 50 == 0) {
+                            saveDaletouForecastUseThread(daletouId, result);
+                            result = new ArrayList<>();
+                        }
+                        String red = "";
+                        if (red1_1.equals("") || red2_1.equals("")) {
+                            red = red1_1 + red2_1;
+                        } else {
+                            red = red1_1 + "," + red2_1;
+                        }
+                        String blue = "";
+                        if (blue1_1.equals("") || blue2_1.equals("")) {
+                            blue = blue1_1 + blue2_1;
+                        } else {
+                            blue = blue1_1 + "," + blue2_1;
+                        }
+                        String red_blue = red + ";" + blue;
+                        result.add(red_blue);
+                        sum++;
+                    }
+                }
+            }
+        }
+        logger.info("===>sum:" + sum);
 
     }
 
@@ -290,5 +341,49 @@ public class ForecastDaletouServiceImpl implements ForecastDaletouService {
             }
         });
         return CollectionCommonUtil.asList(beforeSort, ProblemDate.class);
+    }
+
+    /**
+     * 使用多线程方式保存大乐透预测数据到数据库
+     *
+     * @param daletouId        大乐透ID
+     * @param daletouForecasts 预测数据
+     */
+    private void saveDaletouForecastUseThread(int daletouId, List<String> daletouForecasts) {
+        if (CollectionUtils.isEmpty(daletouForecasts)) {
+            return;
+        }
+        List<DaletouForecast> result = new ArrayList<>();
+        for (String daletouForecast : daletouForecasts) {
+            DaletouForecast daletouForecast1 = new DaletouForecast();
+            daletouForecast1.setForecast(daletouForecast);
+            daletouForecast1.setUsedCount(0);
+            result.add(daletouForecast1);
+        }
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                daletouForecastService.batchInsert(daletouId,result);
+            }
+        });
+        thread.start();
+    }
+
+    /**
+     * 组合
+     *
+     * @param results 结果
+     * @param nums    总的数据
+     * @param m       从中取出的量
+     */
+    private void combination(List<String> results, List<Integer> nums, int m) {
+        if(CollectionUtils.isEmpty(nums) || 0 == m){
+            results.add("");
+            return ;
+        }
+
+        List<String> combination = MathUtil.combination(ListUtil.list2intArray(nums), m);
+        results.addAll(combination);
     }
 }
