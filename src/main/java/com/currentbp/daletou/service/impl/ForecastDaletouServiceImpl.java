@@ -88,10 +88,10 @@ public class ForecastDaletouServiceImpl implements ForecastDaletouService {
         List<Integer> blueRandomRemains = getProblems(blueRemainNums, bluesRemain);
         logger.info("===>redsRemain:" + redNotRepeats.size() + " redsRandom:" + redRemainNums.size() + " remainNum:" + reds);
         logger.info("===>bluesRemain:" + blueNotRepeats.size() + " bluesRandom:" + blueRemainNums.size() + " remainNum:" + blues);
-        logger.info("===>count:"+(MathUtils.c(reds,redNotRepeats.size())
-                                    *MathUtils.c(redsRemain,redRemainNums.size())
-                                    *MathUtils.c(blues,blueNotRepeats.size())
-                                    *MathUtils.c(bluesRemain,blueRemainNums.size())));
+        logger.info("===>count:" + (MathUtils.c(reds, redNotRepeats.size())
+                * MathUtils.c(redsRemain, redRemainNums.size())
+                * MathUtils.c(blues, blueNotRepeats.size())
+                * MathUtils.c(bluesRemain, blueRemainNums.size())));
 
 
         daletouBo.getRed().addAll(redRandomRepeats);
@@ -102,6 +102,87 @@ public class ForecastDaletouServiceImpl implements ForecastDaletouService {
 
         return daletouBo;
     }
+
+
+    @Override
+    public void forecastDaletou4AllAndSave(int num, int daletouId, List<ProblemDate> problemDates, List<HistoryDate> historyRepeats) {
+        Map<Integer, ProblemDate> problemDateMap = CollectionCommonUtil.getMapFromListByMethodName(problemDates, "getDaletouId", Integer.class);
+        DaletouBo daletouBo = new DaletouBo();
+        daletouBo.setId(daletouId);
+        daletouBo.setBlue(new ArrayList<Integer>());
+        daletouBo.setRed(new ArrayList<Integer>());
+
+        //1、计算平均概率
+        List<ProblemDate> descSortedProblemDateList = getDescSortedProblemDateList(problemDates);
+        float redProblemAvg = 0;
+        float blueProblemAvg = 0;
+        for (int i = 0; i < num; i++) {
+            ProblemDate problemDate = descSortedProblemDateList.get(i);
+            if (null == problemDate) {//由于大乐透中间是断层的，可能遇到
+                num++;
+                if (num > descSortedProblemDateList.size()) {
+                    break;//超过列表长度，直接出来
+                }
+                continue;
+            }
+            Float redProblem = problemDate.getRedProblem();
+            Float blueProblem = problemDate.getBlueProblem();
+            redProblemAvg += redProblem;
+            blueProblemAvg += blueProblem;
+        }
+        blueProblemAvg = blueProblemAvg / num;
+        redProblemAvg = redProblemAvg / num;
+        //2、获取平均概率下红球和篮球各中的数量
+        ProblemDate nextProblemDate = getNextProblemDate(problemDateMap, daletouId - 1);
+        List<Integer> redRepeats = nextProblemDate.getRedRepeats();
+        List<Integer> blueRepeats = nextProblemDate.getBlueRepeats();
+        //红色不重复的历史数据
+        List<Integer> redNotRepeats = new ArrayList(new HashSet(redRepeats));
+        List<Integer> redRemainNums = getRedRemainNums(redNotRepeats);
+        //蓝色不重复的历史数据
+        List<Integer> blueNotRepeats = new ArrayList(new HashSet(blueRepeats));
+        List<Integer> blueRemainNums = getBlueRemainNums(blueNotRepeats);
+        int reds = (int) Math.floor(redProblemAvg * redRepeats.size());
+        int blues = (int) Math.floor(blueProblemAvg * blueRepeats.size());
+
+        //1、将红球的重复数字拿出，将篮球的重复数字拿出
+        //2、将红球非重复的数字拿出，将篮球的非重复数字拿出
+        int redsRemain = DaletouCount.REDS.getValue() - reds;
+        int bluesRemain = DaletouCount.BLUES.getValue() - blues;
+
+        logger.info("===>redsRemain:" + redNotRepeats.size() + " redsRandom:" + redRemainNums.size() + " remainNum:" + reds);
+        logger.info("===>bluesRemain:" + blueNotRepeats.size() + " bluesRandom:" + blueRemainNums.size() + " remainNum:" + blues);
+        logger.info("===>count:" + (MathUtils.c(reds, redNotRepeats.size())
+                * MathUtils.c(redsRemain, redRemainNums.size())
+                * MathUtils.c(blues, blueNotRepeats.size())
+                * MathUtils.c(bluesRemain, blueRemainNums.size())));
+
+
+    }
+
+
+    /**
+     * 预测指定期号的大乐透列表
+     *
+     * @param count          大乐透的数量
+     * @param num            获取样本的数量
+     * @param daletouId      指定的大乐透期号
+     * @param problemDates   历史概率
+     * @param historyRepeats 历史重复数
+     * @return 预测的大乐透
+     */
+    @Override
+    public List<DaletouBo> forecastDaletou(int count, int num, int daletouId, List<ProblemDate> problemDates, List<HistoryDate> historyRepeats) {
+        List<DaletouBo> result = new ArrayList<DaletouBo>();
+        for (int i = 0; i < num; i++) {
+            DaletouBo daletouBo = forecastDaletou(num, daletouId, problemDates, historyRepeats);
+            result.add(daletouBo);
+        }
+        return result;
+    }
+
+
+    //==========================           private function         =====================================
 
     /**
      * 获取蓝色的重复后余下的数字列表
@@ -186,26 +267,6 @@ public class ForecastDaletouServiceImpl implements ForecastDaletouService {
         return problemDate;
     }
 
-
-    /**
-     * 预测指定期号的大乐透列表
-     *
-     * @param count          大乐透的数量
-     * @param num            获取样本的数量
-     * @param daletouId      指定的大乐透期号
-     * @param problemDates   历史概率
-     * @param historyRepeats 历史重复数
-     * @return 预测的大乐透
-     */
-    @Override
-    public List<DaletouBo> forecastDaletou(int count, int num, int daletouId, List<ProblemDate> problemDates, List<HistoryDate> historyRepeats) {
-        List<DaletouBo> result = new ArrayList<DaletouBo>();
-        for (int i = 0; i < num; i++) {
-            DaletouBo daletouBo = forecastDaletou(num, daletouId, problemDates, historyRepeats);
-            result.add(daletouBo);
-        }
-        return result;
-    }
 
     /**
      * 获取大乐透的历史概率列表：降序
