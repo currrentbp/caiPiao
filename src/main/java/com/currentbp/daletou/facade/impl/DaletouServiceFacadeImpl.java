@@ -35,4 +35,9 @@ public class DaletouServiceFacadeImpl implements DaletouServiceFacade {
     public List<Daletou> forecast(int num, int daletouId) {
         return daletouService.forecast(num,daletouId);
     }
+
+    @Override
+    public void forecastAndSave(int daletouId) {
+        daletouService.forecastAndSave(daletouId);
+    }
 }

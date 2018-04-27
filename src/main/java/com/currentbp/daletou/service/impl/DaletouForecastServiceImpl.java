@@ -33,4 +33,9 @@ public class DaletouForecastServiceImpl implements DaletouForecastService {
     public List<DaletouForecast> queryByIds(Integer daletouId, List<Integer> ids) {
         return daletouForecastDao.queryByIds(daletouId, ids);
     }
+
+    @Override
+    public List<DaletouForecast> queryAll(Integer daletouId) {
+        return daletouForecastDao.queryAll(daletouId);
+    }
 }

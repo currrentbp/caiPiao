@@ -18,7 +18,7 @@ public interface ForecastDaletouService {
      * 预测指定期号的大乐透
      *
      * @param num            获取样本的数量
-     * @param daletouId      指定的大乐透期号
+     * @param daletouId      需要预测的大乐透期号
      * @param problemDates   历史概率
      * @param historyRepeats 历史重复数
      * @return 预测的大乐透
@@ -29,7 +29,7 @@ public interface ForecastDaletouService {
      * 预测出指定期号的大乐透，并存储到数据库中
      *
      * @param num            获取样本的数量
-     * @param daletouId      指定的大乐透期号
+     * @param daletouId      需要预测的大乐透期号
      * @param problemDates   历史概率
      * @param historyRepeats 历史重复数
      */

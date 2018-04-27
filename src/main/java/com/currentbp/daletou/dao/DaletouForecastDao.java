@@ -84,4 +84,14 @@ public class DaletouForecastDao {
         String sql = "select * from " + BASE_TABLE + daletouId + " where id in " + SqlUtils.sqlInConditionLoad(ids);
         return myJdbcTemplate.query(sql, ids.toArray(), rowMapper);
     }
+
+    /**
+     * 根据大乐透Id查询出所有的预测数据
+     * @param daletouId 大乐透ID
+     * @return 预测数据
+     */
+    public List<DaletouForecast> queryAll(Integer daletouId) {
+        String sql = "select * from " + BASE_TABLE + daletouId;
+        return myJdbcTemplate.query(sql, rowMapper);
+    }
 }

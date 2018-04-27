@@ -5,6 +5,7 @@ import com.currentbp.daletou.condition.DaletouCondition;
 import com.currentbp.daletou.entity.Daletou;
 import com.currentbp.jdbc.MyJdbcTemplate;
 import com.currentbp.util.SqlUtils;
+import com.google.common.collect.Lists;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
@@ -99,8 +100,21 @@ public class DaletouDao {
      */
     public List<Daletou> queryByIds(List<Integer> ids) {
         StringBuilder sql = new StringBuilder("select * from daletou ");
-        sql.append(" where id in " ).append(SqlUtils.sqlInConditionLoad(ids));
+        sql.append(" where id in ").append(SqlUtils.sqlInConditionLoad(ids));
 
         return myJdbcTemplate.query(sql.toString(), ids.toArray(), rowMapper);
+    }
+
+    /**
+     * 根据ids查询列表
+     *
+     * @param id id
+     * @return 大乐透
+     */
+    public Daletou queryById(Integer id) {
+        StringBuilder sql = new StringBuilder("select * from daletou ");
+        sql.append(" where id =? ");
+
+        return myJdbcTemplate.queryForObject(sql.toString(), Lists.newArrayList(id).toArray(), rowMapper);
     }
 }

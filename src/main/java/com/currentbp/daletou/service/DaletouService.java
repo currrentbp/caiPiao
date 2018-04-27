@@ -50,4 +50,20 @@ public interface DaletouService {
      * @return 大乐透列表
      */
     List<Daletou> forecast(int num, int daletouId);
+
+    /**
+     * 预测大乐透并保存
+     *
+     * @param daletouId 最新大乐透
+     */
+    void forecastAndSave(int daletouId);
+
+    /**
+     * 判断是否中奖，以及中奖情况
+     *
+     * @param daletou 需要预测的大乐透
+     * @param source  大乐透
+     * @return 是否中奖
+     */
+    public Win isWin(Daletou daletou, Daletou source);
 }

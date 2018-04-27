@@ -159,10 +159,6 @@ public class ForecastDaletouServiceImpl implements ForecastDaletouService {
 
         logger.info("===>redsRemain:" + redNotRepeats.size() + " redsRandom:" + redRemainNums.size() + " remainNum:" + reds);
         logger.info("===>bluesRemain:" + blueNotRepeats.size() + " bluesRandom:" + blueRemainNums.size() + " remainNum:" + blues);
-        logger.info("===>count:" + (CaiPiaoMathUtils.c(reds, redNotRepeats.size())
-                * CaiPiaoMathUtils.c(redsRemain, redRemainNums.size())
-                * CaiPiaoMathUtils.c(blues, blueNotRepeats.size())
-                * CaiPiaoMathUtils.c(bluesRemain, blueRemainNums.size())));
 
         //1、红1区：历史记录的结果
         //2、红2区：不在历史记录的结果

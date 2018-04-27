@@ -81,7 +81,22 @@ public class DaletouServiceImpl implements DaletouService {
         return result;
     }
 
-    //=====================            private function                  =====================================================
+    @Override
+    public void forecastAndSave(int daletouId) {
+        //获取大乐透列表
+        List<Daletou> daletous = daletouDao.queryAll();
+        List<DaletouBo> daletoBos = daletous.stream().map((daletou) -> {
+            return new DaletouBo(daletou);
+        }).collect(Collectors.toList());
+
+        //获取前N期的重复数据
+        List<HistoryDate> historyRepeatsFromHistory = analysisHistoryService.getHistoryRepeatsFromHistory(SAMPLE_SIZE, daletoBos);
+        //获取重复数据的概率
+        List<ProblemDate> historyProblemDatesFromHistory = analysisHistoryService.getHistoryProblemDatesFromHistory(daletoBos, historyRepeatsFromHistory);
+        //预测数据
+        forecastDaletouService.forecastDaletou4AllAndSave(SAMPLE_SIZE, daletouId, historyProblemDatesFromHistory, historyRepeatsFromHistory);
+
+    }
 
     /**
      * 判断是否中奖，以及中奖情况
@@ -90,7 +105,8 @@ public class DaletouServiceImpl implements DaletouService {
      * @param source  大乐透
      * @return 是否中奖
      */
-    private Win isWin(Daletou daletou, Daletou source) {
+    @Override
+    public Win isWin(Daletou daletou, Daletou source) {
         DaletouBo daletouBo = new DaletouBo(daletou);
         DaletouBo sourceDaletouBo = new DaletouBo(source);
 
@@ -105,8 +121,13 @@ public class DaletouServiceImpl implements DaletouService {
         win.setMsg(daletouWin.getValue());
         win.setWin(0 != daletouWin.getType());
         win.setSource(source);
+        win.setWinType(daletouWin.getType());
         return win;
     }
+
+    //=====================            private function                  =====================================================
+
+
 
     /**
      * 查询出相同的部分

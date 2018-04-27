@@ -27,7 +27,7 @@ public class DaletouForecastServiceImplTest extends BaseTest {
 
     @Test
     public void createTable() throws Exception {
-        daletouForecastService.createTable(18047);
+        daletouForecastService.createTable(18046);
     }
 
     @Test

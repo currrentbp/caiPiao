@@ -39,5 +39,14 @@ public class ForecastDaletouBoServiceImplTest extends BaseTest {
         Assert.notEmpty(daletouBoEntities, "is empty");
     }
 
+    @Test
+    public void forecastDaletou4AllAndSave() throws Exception {
+        List<DaletouBo> daletouBoHistoryFromLocal = initDaletouService.getDaletouHistoryFromLocal();
+        List<HistoryDate> historyRepeatsFromHistory = analysisHistoryService.getHistoryRepeatsFromHistory(5, daletouBoHistoryFromLocal);
+        List<ProblemDate> historyProblemDatesFromHistory = analysisHistoryService.getHistoryProblemDatesFromHistory(daletouBoHistoryFromLocal, historyRepeatsFromHistory);
+        forecastDaletouService.forecastDaletou4AllAndSave(5, 18047, historyProblemDatesFromHistory, historyRepeatsFromHistory);
+
+    }
+
 
 }

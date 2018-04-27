@@ -33,4 +33,12 @@ public interface DaletouForecastService {
      * @return 大乐透预测数据列表
      */
     List<DaletouForecast> queryByIds(Integer daletouId, List<Integer> ids);
+
+    /**
+     * 根据大乐透ID查询出所有的预测数据
+     *
+     * @param daletouId 大乐透ID
+     * @return 预测数据
+     */
+    List<DaletouForecast> queryAll(Integer daletouId);
 }
