@@ -44,8 +44,8 @@ public class ForecastDaletouBoServiceImplTest extends BaseTest {
         List<DaletouBo> daletouBoHistoryFromLocal = initDaletouService.getDaletouHistoryFromLocal();
         List<HistoryDate> historyRepeatsFromHistory = analysisHistoryService.getHistoryRepeatsFromHistory(5, daletouBoHistoryFromLocal);
         List<ProblemDate> historyProblemDatesFromHistory = analysisHistoryService.getHistoryProblemDatesFromHistory(daletouBoHistoryFromLocal, historyRepeatsFromHistory);
-        forecastDaletouService.forecastDaletou4AllAndSave(5, 18047, historyProblemDatesFromHistory, historyRepeatsFromHistory);
-
+        forecastDaletouService.forecastDaletou4AllAndSave(5, 18046, historyProblemDatesFromHistory, historyRepeatsFromHistory);
+        Thread.sleep(100000);
     }
 
 
