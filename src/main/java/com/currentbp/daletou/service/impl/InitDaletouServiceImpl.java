@@ -1,12 +1,16 @@
 package com.currentbp.daletou.service.impl;
 
 import com.currentbp.daletou.bo.entity.DaletouBo;
+import com.currentbp.daletou.dao.DaletouDao;
+import com.currentbp.daletou.entity.Daletou;
 import com.currentbp.daletou.service.InitDaletouService;
 import com.currentbp.util.all.CollectionCommonUtil;
 import com.currentbp.util.all.StreamUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +29,9 @@ import java.util.List;
 public class InitDaletouServiceImpl implements InitDaletouService {
     private final static Logger logger = LoggerFactory.getLogger(InitDaletouServiceImpl.class);
 
+    @Autowired
+    private DaletouDao daletouDao;
+
     /**
      * 从本地文本中获取大乐透历史数据
      *
@@ -42,6 +49,17 @@ public class InitDaletouServiceImpl implements InitDaletouService {
         return sortedDaletouBoEntities;
     }
 
+    @Override
+    public List<DaletouBo> getDaletouHistoryFromRepository() {
+        List<Daletou> daletous = daletouDao.queryAll();
+        List<DaletouBo> result = new ArrayList<>();
+        for (Daletou daletou : daletous) {
+            DaletouBo daletouBo = new DaletouBo(daletou);
+            result.add(daletouBo);
+        }
+
+        return getSortedDaletouList(result);
+    }
 
     //=======     私有方法          =================================//
 
@@ -67,6 +85,9 @@ public class InitDaletouServiceImpl implements InitDaletouService {
      * @return 大乐透列表
      */
     private List<DaletouBo> getSortedDaletouList(List<DaletouBo> daletouBoEntities) {
+        if(CollectionUtils.isEmpty(daletouBoEntities)){
+            return new ArrayList<>();
+        }
         Object[] beforeSort = daletouBoEntities.toArray();
         Arrays.sort(beforeSort, new Comparator<Object>() {
             @Override

@@ -22,4 +22,11 @@ public interface InitDaletouService {
      * @return 大乐透历史数据
      */
     List<DaletouBo> getDaletouHistoryFromLocal();
+
+    /**
+     * 从本地文本中获取大乐透历史数据
+     *
+     * @return 大乐透历史数据
+     */
+    List<DaletouBo> getDaletouHistoryFromRepository();
 }

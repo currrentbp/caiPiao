@@ -1,5 +1,6 @@
 package com.currentbp.daletou.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.currentbp.daletou.bo.entity.DaletouBo;
 import com.currentbp.daletou.bo.entity.HistoryDate;
 import com.currentbp.daletou.bo.entity.ProblemDate;
@@ -41,10 +42,11 @@ public class ForecastDaletouBoServiceImplTest extends BaseTest {
 
     @Test
     public void forecastDaletou4AllAndSave() throws Exception {
-        List<DaletouBo> daletouBoHistoryFromLocal = initDaletouService.getDaletouHistoryFromLocal();
+        List<DaletouBo> daletouBoHistoryFromLocal = initDaletouService.getDaletouHistoryFromRepository();
         List<HistoryDate> historyRepeatsFromHistory = analysisHistoryService.getHistoryRepeatsFromHistory(5, daletouBoHistoryFromLocal);
         List<ProblemDate> historyProblemDatesFromHistory = analysisHistoryService.getHistoryProblemDatesFromHistory(daletouBoHistoryFromLocal, historyRepeatsFromHistory);
-        forecastDaletouService.forecastDaletou4AllAndSave(5, 18046, historyProblemDatesFromHistory, historyRepeatsFromHistory);
+        logger.info("===>historyProblemDatesFromHistory:"+ JSON.toJSONString(historyProblemDatesFromHistory));
+        forecastDaletouService.forecastDaletou4AllAndSave(5, 18058, historyProblemDatesFromHistory, historyRepeatsFromHistory);
         Thread.sleep(100000);
     }
 
