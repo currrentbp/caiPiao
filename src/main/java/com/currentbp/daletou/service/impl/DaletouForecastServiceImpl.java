@@ -38,4 +38,9 @@ public class DaletouForecastServiceImpl implements DaletouForecastService {
     public List<DaletouForecast> queryAll(Integer daletouId) {
         return daletouForecastDao.queryAll(daletouId);
     }
+
+    @Override
+    public boolean isExitTable(Integer daletouId) {
+        return daletouForecastDao.isExitTable(daletouId);
+    }
 }

@@ -149,8 +149,11 @@ public class ForecastDaletouServiceImpl implements ForecastDaletouService {
         //蓝色不重复的历史数据
         List<Integer> blueNotRepeats = new ArrayList(new HashSet(blueRepeats));
         List<Integer> blueRemainNums = getBlueRemainNums(blueNotRepeats);
-        int reds = (int) Math.floor(redProblemAvg * redRepeats.size());
-        int blues = (int) Math.floor(blueProblemAvg * blueRepeats.size());
+
+
+        //红球、蓝球数量问题，先基于一定的概率算数量，
+        int reds = ((int) Math.floor(redProblemAvg * redRepeats.size())) >= 1 ? (int) Math.floor(redProblemAvg * redRepeats.size()) : redProblemAvg >= 0.12 ? 1 : 0;
+        int blues = ((int) Math.floor(blueProblemAvg * blueRepeats.size())) >= 1 ? (int) Math.floor(blueProblemAvg * blueRepeats.size()) : blueProblemAvg >= 0.1 ? 1 : 0;
 
         //1、将红球的重复数字拿出，将篮球的重复数字拿出
         //2、将红球非重复的数字拿出，将篮球的非重复数字拿出
@@ -349,6 +352,12 @@ public class ForecastDaletouServiceImpl implements ForecastDaletouService {
         if (CollectionUtils.isEmpty(daletouForecasts)) {
             return;
         }
+        //判断是否存在该表，如果不存在表，则新增一个
+        boolean exitTable = daletouForecastService.isExitTable(daletouId);
+        if (!exitTable) {
+            daletouForecastService.createTable(daletouId);
+        }
+
         List<DaletouForecast> result = new ArrayList<>();
         for (String daletouForecast : daletouForecasts) {
             DaletouForecast daletouForecast1 = new DaletouForecast();
@@ -360,7 +369,7 @@ public class ForecastDaletouServiceImpl implements ForecastDaletouService {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                daletouForecastService.batchInsert(daletouId,result);
+                daletouForecastService.batchInsert(daletouId, result);
             }
         });
         thread.start();
@@ -374,9 +383,9 @@ public class ForecastDaletouServiceImpl implements ForecastDaletouService {
      * @param m       从中取出的量
      */
     private void combination(List<String> results, List<Integer> nums, int m) {
-        if(CollectionUtils.isEmpty(nums) || 0 == m){
+        if (CollectionUtils.isEmpty(nums) || 0 == m) {
             results.add("");
-            return ;
+            return;
         }
 
         List<String> combination = MathUtil.combination(ListUtil.list2intArray(nums), m);

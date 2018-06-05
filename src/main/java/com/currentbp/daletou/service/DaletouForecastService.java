@@ -41,4 +41,12 @@ public interface DaletouForecastService {
      * @return 预测数据
      */
     List<DaletouForecast> queryAll(Integer daletouId);
+
+    /**
+     * 判断该id对应的分析表是否存在
+     *
+     * @param daletouId 大乐透ID
+     * @return 是否存在
+     */
+    boolean isExitTable(Integer daletouId);
 }

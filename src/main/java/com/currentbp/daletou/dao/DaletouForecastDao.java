@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.sql.PreparedStatement;
@@ -93,5 +94,16 @@ public class DaletouForecastDao {
     public List<DaletouForecast> queryAll(Integer daletouId) {
         String sql = "select * from " + BASE_TABLE + daletouId;
         return myJdbcTemplate.query(sql, rowMapper);
+    }
+
+    /**
+     * 是否存在该分析表
+     * @param daletouId 大乐透ID
+     * @return 是否存在
+     */
+    public boolean isExitTable(Integer daletouId) {
+        String sql = "SELECT table_name FROM information_schema.TABLES WHERE table_name ='"+ BASE_TABLE + daletouId +"'";
+        List<DaletouForecast> query = myJdbcTemplate.query(sql, rowMapper);
+        return !CollectionUtils.isEmpty(query);
     }
 }
