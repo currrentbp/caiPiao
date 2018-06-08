@@ -22,7 +22,7 @@ public class AnalysisDaletouForecastServiceImplTest extends BaseTest {
 
     @Test
     public void analysisDaletouForecast() throws Exception {
-        AnalysisDaletouForecast analysisDaletouForecast = analysisDaletouForecastService.analysisDaletouForecast(18046);
+        AnalysisDaletouForecast analysisDaletouForecast = analysisDaletouForecastService.analysisDaletouForecast(18064);
         logger.info("===>" + JSON.toJSONString(analysisDaletouForecast));
     }
 

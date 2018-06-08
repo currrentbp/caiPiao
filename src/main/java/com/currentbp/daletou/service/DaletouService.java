@@ -27,6 +27,14 @@ public interface DaletouService {
     List<Daletou> queryDaletouAll();
 
     /**
+     * 根据大乐透ID查询大乐透
+     *
+     * @param daletouId 大乐透ID
+     * @return 大乐透
+     */
+    Daletou queryById(Integer daletouId);
+
+    /**
      * 根据条件查询大乐透
      *
      * @param daletouCondition 条件
@@ -35,7 +43,7 @@ public interface DaletouService {
     List<Daletou> queryDaletouByCondition(DaletouCondition daletouCondition);
 
     /**
-     * 检查中奖情况
+     * 检查中奖情况，只能检查同一期的大乐透
      *
      * @param daletous 大乐透列表
      * @return 中奖情况
@@ -65,5 +73,6 @@ public interface DaletouService {
      * @param source  大乐透
      * @return 是否中奖
      */
-    public Win isWin(Daletou daletou, Daletou source);
+    Win isWin(Daletou daletou, Daletou source);
+
 }

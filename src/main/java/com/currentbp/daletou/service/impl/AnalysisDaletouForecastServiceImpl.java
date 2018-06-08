@@ -58,6 +58,7 @@ public class AnalysisDaletouForecastServiceImpl implements AnalysisDaletouForeca
                     int index = win.getWinType()-1;
                     Integer nowCount = analysisDaletouForecast.getWinCount().get(index);
                     analysisDaletouForecast.getWinCount().set(index, ++nowCount);
+                    sum = sum + win.getBaseMoney();
                 }
             } catch (Exception e) {
                 logger.error("daletouForecast:" + JSON.toJSONString(daletouForecast) + " msg:" + e.getMessage());
@@ -66,6 +67,7 @@ public class AnalysisDaletouForecastServiceImpl implements AnalysisDaletouForeca
         analysisDaletouForecast.setForecastCount(forecastCount);
         analysisDaletouForecast.setCount(count);
         analysisDaletouForecast.setPersonCount(personCount);
+        analysisDaletouForecast.setSum(sum);
 
         return analysisDaletouForecast;
     }

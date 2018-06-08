@@ -45,6 +45,11 @@ public class DaletouServiceImpl implements DaletouService {
     }
 
     @Override
+    public Daletou queryById(Integer daletouId) {
+        return daletouDao.queryById(daletouId);
+    }
+
+    @Override
     public List<Daletou> queryDaletouByCondition(DaletouCondition daletouCondition) {
         return daletouDao.queryByCondition(daletouCondition);
     }
