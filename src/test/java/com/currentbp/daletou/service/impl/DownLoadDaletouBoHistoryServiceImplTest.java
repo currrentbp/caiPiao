@@ -23,24 +23,24 @@ public class DownLoadDaletouBoHistoryServiceImplTest extends BaseTest {
     private DownLoadDaletouHistoryService daletouHistoryService;
 
 
-    @Test
-    public void downLoadNewDaletouHistory() throws Exception {
-        List<DaletouBo> daletouBoEntities = daletouHistoryService.downLoadNewDaletouHistory(18031);
-        logger.info(JSON.toJSONString(daletouBoEntities));
-        Assert.notEmpty(daletouBoEntities, "is empty");
-    }
-
-    @Test
-    public void downLoadDaletouHistory() throws Exception {
-        DaletouBo daletouBo = daletouHistoryService.downLoadDaletouHistory(18031);
-        logger.info(JSON.toJSONString(daletouBo));
-        Assert.notNull(daletouBo, "===>is null");
-    }
-
-    @Test
-    public void downLoadAllDaletouHistory(){
-        List<DaletouBo> daletouBoEntities = daletouHistoryService.downLoadAllDaletouHistory();
-        Assert.notNull(daletouBoEntities, "===>is null");
-    }
+//    @Test
+//    public void downLoadNewDaletouHistory() throws Exception {
+//        List<DaletouBo> daletouBoEntities = daletouHistoryService.downLoadNewDaletouHistory(18031);
+//        logger.info(JSON.toJSONString(daletouBoEntities));
+//        Assert.notEmpty(daletouBoEntities, "is empty");
+//    }
+//
+//    @Test
+//    public void downLoadDaletouHistory() throws Exception {
+//        DaletouBo daletouBo = daletouHistoryService.downLoadDaletouHistory(18031);
+//        logger.info(JSON.toJSONString(daletouBo));
+//        Assert.notNull(daletouBo, "===>is null");
+//    }
+//
+//    @Test
+//    public void downLoadAllDaletouHistory(){
+//        List<DaletouBo> daletouBoEntities = daletouHistoryService.downLoadAllDaletouHistory();
+//        Assert.notNull(daletouBoEntities, "===>is null");
+//    }
 
 }

@@ -25,26 +25,26 @@ public class DaletouForecastServiceImplTest extends BaseTest {
     private static Logger logger = LoggerFactory.getLogger(DaletouForecastServiceImplTest.class);
 
 
-    @Test
-    public void createTable() throws Exception {
-        daletouForecastService.createTable(18058);
-    }
-
-    @Test
-    public void batchInsert() throws Exception {
-        List<DaletouForecast> daletouForecasts = new ArrayList<>();
-        DaletouForecast daletouForecast = new DaletouForecast();
-        daletouForecast.setForecast("1,2,3,4,5;6,7");
-        daletouForecast.setUsedCount(0);
-        daletouForecasts.add(daletouForecast);
-        daletouForecastService.batchInsert(18047, daletouForecasts);
-    }
-
-    @Test
-    public void queryByIds() throws Exception {
-        List<Integer> ids = Lists.newArrayList(1);
-        List<DaletouForecast> daletouForecasts = daletouForecastService.queryByIds(18047, ids);
-        Assert.notEmpty(daletouForecasts, "为空");
-    }
+//    @Test
+//    public void createTable() throws Exception {
+//        daletouForecastService.createTable(18058);
+//    }
+//
+//    @Test
+//    public void batchInsert() throws Exception {
+//        List<DaletouForecast> daletouForecasts = new ArrayList<>();
+//        DaletouForecast daletouForecast = new DaletouForecast();
+//        daletouForecast.setForecast("1,2,3,4,5;6,7");
+//        daletouForecast.setUsedCount(0);
+//        daletouForecasts.add(daletouForecast);
+//        daletouForecastService.batchInsert(18047, daletouForecasts);
+//    }
+//
+//    @Test
+//    public void queryByIds() throws Exception {
+//        List<Integer> ids = Lists.newArrayList(1);
+//        List<DaletouForecast> daletouForecasts = daletouForecastService.queryByIds(18047, ids);
+//        Assert.notEmpty(daletouForecasts, "为空");
+//    }
 
 }

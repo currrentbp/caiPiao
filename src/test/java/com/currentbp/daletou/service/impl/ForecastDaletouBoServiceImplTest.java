@@ -30,15 +30,15 @@ public class ForecastDaletouBoServiceImplTest extends BaseTest {
     @Autowired
     public InitDaletouService initDaletouService;
 
-    @Test
-    public void forecastDaletou() throws Exception {
-        List<DaletouBo> daletouBoHistoryFromLocal = initDaletouService.getDaletouHistoryFromLocal();
-        List<HistoryDate> historyRepeatsFromHistory = analysisHistoryService.getHistoryRepeatsFromHistory(5, daletouBoHistoryFromLocal);
-        List<ProblemDate> historyProblemDatesFromHistory = analysisHistoryService.getHistoryProblemDatesFromHistory(daletouBoHistoryFromLocal, historyRepeatsFromHistory);
-        List<DaletouBo> daletouBoEntities = forecastDaletouService.forecastDaletou(5, 5, 18063, historyProblemDatesFromHistory, historyRepeatsFromHistory);
-        logger.info("===>result:" + daletouBoEntities);
-        Assert.notEmpty(daletouBoEntities, "is empty");
-    }
+//    @Test
+//    public void forecastDaletou() throws Exception {
+//        List<DaletouBo> daletouBoHistoryFromLocal = initDaletouService.getDaletouHistoryFromLocal();
+//        List<HistoryDate> historyRepeatsFromHistory = analysisHistoryService.getHistoryRepeatsFromHistory(5, daletouBoHistoryFromLocal);
+//        List<ProblemDate> historyProblemDatesFromHistory = analysisHistoryService.getHistoryProblemDatesFromHistory(daletouBoHistoryFromLocal, historyRepeatsFromHistory);
+//        List<DaletouBo> daletouBoEntities = forecastDaletouService.forecastDaletou(5, 5, 18063, historyProblemDatesFromHistory, historyRepeatsFromHistory);
+//        logger.info("===>result:" + daletouBoEntities);
+//        Assert.notEmpty(daletouBoEntities, "is empty");
+//    }
 
     @Test
     public void forecastDaletou4AllAndSave() throws Exception {

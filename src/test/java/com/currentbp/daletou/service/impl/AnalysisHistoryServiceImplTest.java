@@ -27,20 +27,20 @@ public class AnalysisHistoryServiceImplTest extends BaseTest {
     public InitDaletouService initDaletouService;
 
 
-    @Test
-    public void getHistoryRepeatsFromHistory() throws Exception {
-        List<DaletouBo> daletouBoHistoryFromLocal = initDaletouService.getDaletouHistoryFromLocal();
-        List<HistoryDate> historyRepeatsFromHistory = analysisHistoryService.getHistoryRepeatsFromHistory(5, daletouBoHistoryFromLocal);
-        Assert.notEmpty(historyRepeatsFromHistory, "is empty");
-    }
-
-    @Test
-    public void getHistoryProblemDatesFromHistory() {
-        List<DaletouBo> daletouBoHistoryFromLocal = initDaletouService.getDaletouHistoryFromLocal();
-        List<HistoryDate> historyRepeatsFromHistory = analysisHistoryService.getHistoryRepeatsFromHistory(5, daletouBoHistoryFromLocal);
-        List<ProblemDate> historyProblemDatesFromHistory = analysisHistoryService.getHistoryProblemDatesFromHistory(daletouBoHistoryFromLocal, historyRepeatsFromHistory);
-        logger.info("===>" + JSON.toJSONString(historyProblemDatesFromHistory));
-        Assert.notEmpty(historyProblemDatesFromHistory, "is empty");
-    }
+//    @Test
+//    public void getHistoryRepeatsFromHistory() throws Exception {
+//        List<DaletouBo> daletouBoHistoryFromLocal = initDaletouService.getDaletouHistoryFromLocal();
+//        List<HistoryDate> historyRepeatsFromHistory = analysisHistoryService.getHistoryRepeatsFromHistory(5, daletouBoHistoryFromLocal);
+//        Assert.notEmpty(historyRepeatsFromHistory, "is empty");
+//    }
+//
+//    @Test
+//    public void getHistoryProblemDatesFromHistory() {
+//        List<DaletouBo> daletouBoHistoryFromLocal = initDaletouService.getDaletouHistoryFromLocal();
+//        List<HistoryDate> historyRepeatsFromHistory = analysisHistoryService.getHistoryRepeatsFromHistory(5, daletouBoHistoryFromLocal);
+//        List<ProblemDate> historyProblemDatesFromHistory = analysisHistoryService.getHistoryProblemDatesFromHistory(daletouBoHistoryFromLocal, historyRepeatsFromHistory);
+//        logger.info("===>" + JSON.toJSONString(historyProblemDatesFromHistory));
+//        Assert.notEmpty(historyProblemDatesFromHistory, "is empty");
+//    }
 
 }

@@ -36,6 +36,10 @@ public class DaletouServiceImplTest extends BaseTest {
     @Autowired
     private DaletouForecastService daletouForecastService;
 
+    /***
+     * 适用于第一次插入数据
+     * @throws Exception
+     */
     @Test
     public void insertAll() throws Exception {
         List<DaletouBo> daletouBos = daletouHistoryService.downLoadAllDaletouHistory();
@@ -51,6 +55,10 @@ public class DaletouServiceImplTest extends BaseTest {
         }
     }
 
+    /**
+     * 适用于后续追加大乐透
+     * @throws Exception
+     */
     @Test
     public void insertSome() throws Exception {
         List<DaletouBo> daletouBos = daletouHistoryService.downLoadNewDaletouHistory(18064);
