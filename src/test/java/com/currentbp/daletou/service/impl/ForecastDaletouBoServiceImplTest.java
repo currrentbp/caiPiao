@@ -45,8 +45,24 @@ public class ForecastDaletouBoServiceImplTest extends BaseTest {
         List<DaletouBo> daletouBoHistoryFromLocal = initDaletouService.getDaletouHistoryFromRepository();
         List<HistoryDate> historyRepeatsFromHistory = analysisHistoryService.getHistoryRepeatsFromHistory(5, daletouBoHistoryFromLocal);
         List<ProblemDate> historyProblemDatesFromHistory = analysisHistoryService.getHistoryProblemDatesFromHistory(daletouBoHistoryFromLocal, historyRepeatsFromHistory);
-        logger.info("===>historyProblemDatesFromHistory:"+ JSON.toJSONString(historyProblemDatesFromHistory));
+        logger.info("===>historyProblemDatesFromHistory:" + JSON.toJSONString(historyProblemDatesFromHistory));
         forecastDaletouService.forecastDaletou4AllAndSave(5, 18064, historyProblemDatesFromHistory, historyRepeatsFromHistory);
+        Thread.sleep(100000);
+    }
+
+    /**
+     * 批量的将预测数据插入数据库，便于分析数据
+     * @throws Exception
+     */
+    @Test
+    public void forecastAllDaletou4AllAndSave() throws Exception {
+        List<DaletouBo> daletouBoHistoryFromLocal = initDaletouService.getDaletouHistoryFromRepository();
+        List<HistoryDate> historyRepeatsFromHistory = analysisHistoryService.getHistoryRepeatsFromHistory(5, daletouBoHistoryFromLocal);
+        List<ProblemDate> historyProblemDatesFromHistory = analysisHistoryService.getHistoryProblemDatesFromHistory(daletouBoHistoryFromLocal, historyRepeatsFromHistory);
+        logger.info("===>historyProblemDatesFromHistory:" + JSON.toJSONString(historyProblemDatesFromHistory));
+        for (DaletouBo daletouBo : daletouBoHistoryFromLocal) {
+            forecastDaletouService.forecastDaletou4AllAndSave(5, daletouBo.getId(), historyProblemDatesFromHistory, historyRepeatsFromHistory);
+        }
         Thread.sleep(100000);
     }
 

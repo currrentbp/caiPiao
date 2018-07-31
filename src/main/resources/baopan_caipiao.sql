@@ -32,3 +32,11 @@ CREATE TABLE IF NOT EXISTS `daletou` (
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+
+---批量删除预测数据的表
+select concat
+('drop table  ' , table_name,';')
+from
+information_schema.tables
+where table_name like 'daletou_forecast_%';
+
