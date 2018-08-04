@@ -35,4 +35,17 @@ public class AnalysisDaletouForecastServiceImplTest extends BaseTest {
         }
     }
 
+    @Test
+    public void analysisDaletouForecastAll(){
+        List<DaletouBo> daletouBoHistoryFromLocal = initDaletouService.getDaletouHistoryFromRepository();
+        for (DaletouBo daletouBo : daletouBoHistoryFromLocal) {
+            try {
+                AnalysisDaletouForecast analysisDaletouForecast = analysisDaletouForecastService.analysisDaletouForecast(daletouBo.getId());
+                System.out.println(JSON.toJSONString(analysisDaletouForecast));
+            }catch (Exception e){
+
+            }
+        }
+    }
+
 }

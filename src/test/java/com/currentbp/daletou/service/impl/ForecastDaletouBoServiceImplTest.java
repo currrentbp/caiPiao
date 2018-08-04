@@ -66,5 +66,4 @@ public class ForecastDaletouBoServiceImplTest extends BaseTest {
         Thread.sleep(100000);
     }
 
-
 }

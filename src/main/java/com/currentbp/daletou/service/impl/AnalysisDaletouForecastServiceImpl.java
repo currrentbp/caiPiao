@@ -61,7 +61,7 @@ public class AnalysisDaletouForecastServiceImpl implements AnalysisDaletouForeca
                     sum = sum + win.getBaseMoney();
                 }
             } catch (Exception e) {
-                logger.error("daletouForecast:" + JSON.toJSONString(daletouForecast) + " msg:" + e.getMessage());
+                //logger.error("daletouForecast:" + JSON.toJSONString(daletouForecast) + " msg:" + e.getMessage());
             }
         }
         analysisDaletouForecast.setForecastCount(forecastCount);
