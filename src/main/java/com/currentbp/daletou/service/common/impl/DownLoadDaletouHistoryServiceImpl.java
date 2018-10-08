@@ -1,6 +1,7 @@
-package com.currentbp.daletou.service;
+package com.currentbp.daletou.service.common.impl;
 
 import com.currentbp.daletou.bo.entity.DaletouBo;
+import com.currentbp.daletou.service.common.DownLoadDaletouHistoryService;
 import com.currentbp.util.ParseUrl;
 import com.currentbp.util.all.TimeUtil;
 import org.slf4j.Logger;

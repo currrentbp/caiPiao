@@ -1,7 +1,7 @@
 package com.currentbp.daletou.service.v1.impl;
 
 import com.currentbp.BaseTest;
-import com.currentbp.daletou.service.DownLoadDaletouHistoryService;
+import com.currentbp.daletou.service.common.DownLoadDaletouHistoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.currentbp.daletou.service;
+package com.currentbp.daletou.service.common;
 
 import com.currentbp.daletou.bo.entity.DaletouBo;
 

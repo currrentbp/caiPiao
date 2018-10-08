@@ -6,7 +6,7 @@ import com.currentbp.daletou.bo.entity.DaletouBo;
 import com.currentbp.daletou.entity.Daletou;
 import com.currentbp.daletou.service.v1.DaletouForecastService;
 import com.currentbp.daletou.service.v1.DaletouService;
-import com.currentbp.daletou.service.DownLoadDaletouHistoryService;
+import com.currentbp.daletou.service.common.DownLoadDaletouHistoryService;
 import com.currentbp.util.all.Assert;
 import com.currentbp.vo.Win;
 import org.junit.Test;
