@@ -3,7 +3,7 @@ package com.currentbp.daletou.facade.impl;
 import com.currentbp.api.daletou.facade.DaletouServiceFacade;
 import com.currentbp.daletou.condition.DaletouCondition;
 import com.currentbp.daletou.entity.Daletou;
-import com.currentbp.daletou.service.DaletouService;
+import com.currentbp.daletou.service.v1.DaletouService;
 import com.currentbp.vo.Win;
 import org.springframework.beans.factory.annotation.Autowired;
 

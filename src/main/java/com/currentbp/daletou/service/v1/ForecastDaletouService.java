@@ -1,4 +1,4 @@
-package com.currentbp.daletou.service;
+package com.currentbp.daletou.service.v1;
 
 import com.currentbp.daletou.bo.entity.DaletouBo;
 import com.currentbp.daletou.bo.entity.HistoryDate;

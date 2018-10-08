@@ -1,8 +1,8 @@
-package com.currentbp.daletou.service.impl;
+package com.currentbp.daletou.service.v1.impl;
 
 import com.currentbp.daletou.dao.DaletouForecastDao;
 import com.currentbp.daletou.entity.DaletouForecast;
-import com.currentbp.daletou.service.DaletouForecastService;
+import com.currentbp.daletou.service.v1.DaletouForecastService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

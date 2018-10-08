@@ -1,4 +1,4 @@
-package com.currentbp.daletou.service.impl;
+package com.currentbp.daletou.service.v1.impl;
 
 import static com.currentbp.common.constant.DaletouConstant.DaletouCount;
 import static com.currentbp.common.constant.DaletouConstant.DaletouNumCount;
@@ -8,8 +8,8 @@ import com.currentbp.daletou.bo.entity.DaletouBo;
 import com.currentbp.daletou.bo.entity.HistoryDate;
 import com.currentbp.daletou.bo.entity.ProblemDate;
 import com.currentbp.daletou.entity.DaletouForecast;
-import com.currentbp.daletou.service.DaletouForecastService;
-import com.currentbp.daletou.service.ForecastDaletouService;
+import com.currentbp.daletou.service.v1.DaletouForecastService;
+import com.currentbp.daletou.service.v1.ForecastDaletouService;
 import com.currentbp.util.CaiPiaoMathUtils;
 import com.currentbp.util.all.Assert;
 import com.currentbp.util.all.CollectionCommonUtil;

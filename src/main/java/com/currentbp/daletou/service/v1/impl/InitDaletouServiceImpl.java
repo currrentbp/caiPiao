@@ -1,9 +1,9 @@
-package com.currentbp.daletou.service.impl;
+package com.currentbp.daletou.service.v1.impl;
 
 import com.currentbp.daletou.bo.entity.DaletouBo;
 import com.currentbp.daletou.dao.DaletouDao;
 import com.currentbp.daletou.entity.Daletou;
-import com.currentbp.daletou.service.InitDaletouService;
+import com.currentbp.daletou.service.v1.InitDaletouService;
 import com.currentbp.util.all.CollectionCommonUtil;
 import com.currentbp.util.all.StreamUtil;
 import org.slf4j.Logger;

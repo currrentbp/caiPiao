@@ -1,16 +1,13 @@
-package com.currentbp.daletou.service.impl;
+package com.currentbp.daletou.service.v1.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.currentbp.BaseTest;
 import com.currentbp.daletou.bo.entity.DaletouBo;
-import com.currentbp.daletou.condition.DaletouCondition;
 import com.currentbp.daletou.entity.Daletou;
-import com.currentbp.daletou.entity.DaletouForecast;
-import com.currentbp.daletou.service.DaletouForecastService;
-import com.currentbp.daletou.service.DaletouService;
+import com.currentbp.daletou.service.v1.DaletouForecastService;
+import com.currentbp.daletou.service.v1.DaletouService;
 import com.currentbp.daletou.service.DownLoadDaletouHistoryService;
 import com.currentbp.util.all.Assert;
-import com.currentbp.util.all.CollectionCommonUtil;
 import com.currentbp.vo.Win;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -19,9 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import static org.junit.Assert.*;
 
 /**
  * @author current_bp

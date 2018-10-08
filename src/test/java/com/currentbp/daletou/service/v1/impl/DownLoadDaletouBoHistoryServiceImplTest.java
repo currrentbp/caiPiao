@@ -1,16 +1,10 @@
-package com.currentbp.daletou.service.impl;
+package com.currentbp.daletou.service.v1.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.currentbp.BaseTest;
-import com.currentbp.daletou.bo.entity.DaletouBo;
 import com.currentbp.daletou.service.DownLoadDaletouHistoryService;
-import com.currentbp.util.all.Assert;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
 
 /**
  * @author current_bp

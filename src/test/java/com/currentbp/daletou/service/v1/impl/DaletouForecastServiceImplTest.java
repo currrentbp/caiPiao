@@ -1,19 +1,10 @@
-package com.currentbp.daletou.service.impl;
+package com.currentbp.daletou.service.v1.impl;
 
 import com.currentbp.BaseTest;
-import com.currentbp.daletou.entity.DaletouForecast;
-import com.currentbp.daletou.service.DaletouForecastService;
-import com.currentbp.util.all.Assert;
-import com.google.common.collect.Lists;
-import org.junit.Test;
+import com.currentbp.daletou.service.v1.DaletouForecastService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * @author current_bp

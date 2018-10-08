@@ -1,4 +1,4 @@
-package com.currentbp.daletou.service.impl;
+package com.currentbp.daletou.service.v1.impl;
 
 import com.currentbp.constant.WinType;
 import com.currentbp.daletou.bo.entity.DaletouBo;
@@ -7,9 +7,9 @@ import com.currentbp.daletou.bo.entity.ProblemDate;
 import com.currentbp.daletou.condition.DaletouCondition;
 import com.currentbp.daletou.dao.DaletouDao;
 import com.currentbp.daletou.entity.Daletou;
-import com.currentbp.daletou.service.AnalysisHistoryService;
-import com.currentbp.daletou.service.DaletouService;
-import com.currentbp.daletou.service.ForecastDaletouService;
+import com.currentbp.daletou.service.v1.AnalysisHistoryService;
+import com.currentbp.daletou.service.v1.DaletouService;
+import com.currentbp.daletou.service.v1.ForecastDaletouService;
 import com.currentbp.util.all.CollectionCommonUtil;
 import com.currentbp.vo.Win;
 import org.springframework.beans.factory.annotation.Autowired;
