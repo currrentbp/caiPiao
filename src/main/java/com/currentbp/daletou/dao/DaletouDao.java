@@ -5,7 +5,7 @@ import com.currentbp.daletou.condition.DaletouCondition;
 import com.currentbp.daletou.entity.Daletou;
 import com.currentbp.jdbc.MyJdbcTemplate;
 import com.currentbp.util.SqlUtils;
-import com.google.common.collect.Lists;
+import org.assertj.core.util.Lists;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
