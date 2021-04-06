@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 /**
  * @author current_bp
  * @createTime 20170913
@@ -17,14 +19,16 @@ public class ParseUrlTest {
     @Test
     public void getNewDaletouSources() throws Exception {
         //shuangseqiu
-        String url = "http://kaijiang.500.com/shtml/ssq/17106.shtml";
+        String url = "http://kaijiang.500.com/shtml/ssq/20098.shtml";
         String css = "table.kj_tablelist02 >tbody >tr>td>table>tbody>tr>td>div>ul>li";
-        parseUrl.getParseContents(url,css);
+        List<String> parseContents = parseUrl.getParseContents(url, css);
+        System.out.println(parseContents);
 
         //daletou
-        String url2 = "http://kaijiang.500.com/shtml/dlt/17093.shtml";
+        String url2 = "http://kaijiang.500.com/shtml/dlt/20098.shtml";
         String css2 = "table.kj_tablelist02 >tbody >tr>td>table>tbody>tr>td>div>ul>li";
-        parseUrl.getParseContents(url2,css2);
+        List<String> parseContents1 = parseUrl.getParseContents(url2, css2);
+        System.out.println(parseContents1);
     }
 
 }

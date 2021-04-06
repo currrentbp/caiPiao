@@ -59,7 +59,6 @@ public class DownLoadDaletouHistoryServiceImpl implements DownLoadDaletouHistory
             daletouBo = new DaletouBo(daletouId, result);
         } catch (Exception e) {
             logger.error("download daletouBo is error! id:" + daletouId);
-            daletouBo = null;
         }
         return daletouBo;
     }

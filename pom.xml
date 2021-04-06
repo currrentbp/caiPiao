@@ -17,8 +17,8 @@
         <jackson-databind_version>2.4.3</jackson-databind_version>
         <druid.version>1.0.28</druid.version>
         <hikaricp.version>2.3.13</hikaricp.version>
-        <mysqlDriver.version>5.1.40</mysqlDriver.version>
-        <dubbo.version>2.6.9</dubbo.version>
+        <mysqlDriver.version>8.0.20</mysqlDriver.version>
+        <dubbo.version>2.8.4</dubbo.version>
         <zookeeper.version>3.4.9</zookeeper.version>
     </properties>
 
@@ -156,7 +156,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.4</version>
+            <version>1.2.31</version>
         </dependency>
 
 
@@ -227,9 +227,9 @@
 
         <!-- dubbo -->
         <dependency>
-        <groupId>com.alibaba</groupId>
-        <artifactId>dubbo</artifactId>
-        <version>${dubbo.version}</version>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>${dubbo.version}</version>
         </dependency>
 
         <!-- zookeeper -->
@@ -267,15 +267,15 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
         </profile>
-        <profile>
-            <id>gsDev</id>
-            <properties>
-                <resource.path>src/main/resources_gsDev</resource.path>
-            </properties>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-        </profile>
+<!--        <profile>-->
+<!--            <id>gsDev</id>-->
+<!--            <properties>-->
+<!--                <resource.path>src/main/resources_gsDev</resource.path>-->
+<!--            </properties>-->
+<!--            <activation>-->
+<!--                <activeByDefault>false</activeByDefault>-->
+<!--            </activation>-->
+<!--        </profile>-->
     </profiles>
 
     <build>
@@ -298,10 +298,10 @@
                 </configuration>
             </plugin>
 
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.0.0</version>
-            </plugin>
+<!--            <plugin>-->
+<!--                <artifactId>maven-assembly-plugin</artifactId>-->
+<!--                <version>3.0.0</version>-->
+<!--            </plugin>-->
         </plugins>
         <resources>
             <resource>

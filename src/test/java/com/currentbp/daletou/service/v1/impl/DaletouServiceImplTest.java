@@ -58,7 +58,7 @@ public class DaletouServiceImplTest extends BaseTest {
      */
     @Test
     public void insertSome() throws Exception {
-        List<DaletouBo> daletouBos = daletouHistoryService.downLoadNewDaletouHistory(18089);
+        List<DaletouBo> daletouBos = daletouHistoryService.downLoadNewDaletouHistory(20098);
         for (DaletouBo daletouBo : daletouBos) {
             Daletou daletou = null;
             try {
@@ -68,6 +68,14 @@ public class DaletouServiceImplTest extends BaseTest {
                 continue;
             }
         }
+    }
+
+    @Test
+    public void insertCurrent(){
+        DaletouBo daletouBo = daletouHistoryService.downLoadDaletouHistory(20098);
+        Daletou daletou = daletouBo.toDaletou();
+        daletouService.insert(daletou);
+
     }
 
 
