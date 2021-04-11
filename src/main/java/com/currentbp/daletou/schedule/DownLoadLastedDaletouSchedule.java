@@ -3,8 +3,7 @@ package com.currentbp.daletou.schedule;
 import com.currentbp.daletou.bo.entity.DaletouBo;
 import com.currentbp.daletou.dao.DaletouDao;
 import com.currentbp.daletou.service.common.DownLoadDaletouHistoryService;
-import com.currentbp.daletou.service.common.impl.DownLoadDaletouHistoryServiceImpl;
-import com.currentbp.daletou.service.v1.DaletouService;
+import com.currentbp.daletou.service.v1.DaletouServiceVOne;
 import com.currentbp.util.all.TimeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +25,7 @@ public class DownLoadLastedDaletouSchedule {
     @Autowired
     private DownLoadDaletouHistoryService downLoadDaletouHistoryService;
     @Autowired
-    private DaletouService daletouService;
+    private DaletouServiceVOne daletouServiceVOne;
 
 
     @Scheduled(cron = "0 0 * * * ? *") // 间隔1小时执行
@@ -35,7 +34,7 @@ public class DownLoadLastedDaletouSchedule {
         int lastedId = getLastedId();
         logger.info("downloadDaletou, lastedId:{}", lastedId);
         DaletouBo daletouBo = downLoadDaletouHistoryService.downLoadDaletouHistory(lastedId);
-        daletouService.insert(daletouBo.toDaletou());
+        daletouServiceVOne.insert(daletouBo.toDaletou());
 
         logger.info("===>task is end.....");
     }

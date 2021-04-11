@@ -1,6 +1,5 @@
 package com.currentbp.daletou.service.v1.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.currentbp.daletou.bo.entity.AnalysisDaletouForecast;
 import com.currentbp.daletou.bo.entity.DaletouBo;
 import com.currentbp.daletou.dao.DaletouDao;
@@ -8,7 +7,7 @@ import com.currentbp.daletou.entity.Daletou;
 import com.currentbp.daletou.entity.DaletouForecast;
 import com.currentbp.daletou.service.v1.AnalysisDaletouForecastService;
 import com.currentbp.daletou.service.v1.DaletouForecastService;
-import com.currentbp.daletou.service.v1.DaletouService;
+import com.currentbp.daletou.service.v1.DaletouServiceVOne;
 import com.currentbp.vo.Win;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +30,7 @@ public class AnalysisDaletouForecastServiceImpl implements AnalysisDaletouForeca
     @Autowired
     private DaletouForecastService daletouForecastService;
     @Autowired
-    private DaletouService daletouService;
+    private DaletouServiceVOne daletouServiceVOne;
 
 
     @Override
@@ -50,7 +49,7 @@ public class AnalysisDaletouForecastServiceImpl implements AnalysisDaletouForeca
         for (DaletouForecast daletouForecast : daletouForecasts) {
             try {
                 Daletou forecastDaletou = new DaletouBo(daletouId, daletouForecast.getForecast()).toDaletou();
-                Win win = daletouService.isWin(forecastDaletou, daletou);
+                Win win = daletouServiceVOne.isWin(forecastDaletou, daletou);
 
                 if (win.isWin()) {
                     count++;

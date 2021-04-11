@@ -1,9 +1,10 @@
 package com.currentbp.daletou.facade.impl;
 
 import com.currentbp.api.daletou.facade.DaletouServiceFacade;
-import com.currentbp.daletou.condition.DaletouCondition;
+import com.currentbp.daletou.condition.DaletouPageCondition;
 import com.currentbp.daletou.entity.Daletou;
-import com.currentbp.daletou.service.v1.DaletouService;
+import com.currentbp.daletou.service.v1.DaletouServiceVOne;
+import com.currentbp.daletou.service.v2.DaletouServiceVTwo;
 import com.currentbp.vo.Win;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,29 +16,40 @@ import java.util.List;
  */
 public class DaletouServiceFacadeImpl implements DaletouServiceFacade {
     @Autowired
-    private DaletouService daletouService;
+    private DaletouServiceVOne daletouServiceVOne;
+    @Autowired
+    private DaletouServiceVTwo daletouServiceVTwo;
+
     @Override
     public List<Daletou> queryDaletouAll() {
-        return daletouService.queryDaletouAll();
+        return daletouServiceVOne.queryDaletouAll();
     }
 
     @Override
-    public List<Daletou> queryDaletouByCondition(DaletouCondition daletouCondition) {
-        return daletouService.queryDaletouByCondition(daletouCondition);
+    public List<Daletou> queryDaletouByCondition(DaletouPageCondition daletouPageCondition) {
+        return daletouServiceVOne.queryDaletouByCondition(daletouPageCondition);
     }
 
     @Override
     public List<Win> isWin(List<Daletou> daletous) {
-        return daletouService.isWin(daletous);
+        return daletouServiceVOne.isWin(daletous);
     }
 
     @Override
-    public List<Daletou> forecast(int num, int daletouId) {
-        return daletouService.forecast(num,daletouId);
+    public List<Daletou> forecastV1(int num, int daletouId) {
+        List<Daletou> daletous = daletouServiceVOne.forecastV1(num, daletouId);
+        daletous.forEach(daletou -> {
+            daletouServiceVOne.insert(daletou);
+        });
+        return daletous;
     }
 
     @Override
-    public void forecastAndSave(int daletouId) {
-        daletouService.forecastAndSave(daletouId);
+    public List<Daletou> forecastV2(int num, List<Daletou> daletous) {
+        List<Daletou> newDaletous = daletouServiceVTwo.forecastV2(num, daletous);
+        newDaletous.forEach(daletou -> {
+            daletouServiceVOne.insert(daletou);
+        });
+        return newDaletous;
     }
 }

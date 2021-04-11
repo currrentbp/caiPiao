@@ -5,7 +5,7 @@ import com.currentbp.BaseTest;
 import com.currentbp.daletou.bo.entity.DaletouBo;
 import com.currentbp.daletou.entity.Daletou;
 import com.currentbp.daletou.service.v1.DaletouForecastService;
-import com.currentbp.daletou.service.v1.DaletouService;
+import com.currentbp.daletou.service.v1.DaletouServiceVOne;
 import com.currentbp.daletou.service.common.DownLoadDaletouHistoryService;
 import com.currentbp.util.all.Assert;
 import com.currentbp.vo.Win;
@@ -21,15 +21,15 @@ import java.util.List;
  * @author current_bp
  * @createTime 20180418
  */
-public class DaletouServiceImplTest extends BaseTest {
+public class DaletouServiceVOneImplTest extends BaseTest {
 
 
-    private final static Logger logger = LoggerFactory.getLogger(DaletouServiceImplTest.class);
+    private final static Logger logger = LoggerFactory.getLogger(DaletouServiceVOneImplTest.class);
 
     @Autowired
     private DownLoadDaletouHistoryService daletouHistoryService;
     @Autowired
-    private DaletouService daletouService;
+    private DaletouServiceVOne daletouServiceVOne;
     @Autowired
     private DaletouForecastService daletouForecastService;
 
@@ -45,7 +45,7 @@ public class DaletouServiceImplTest extends BaseTest {
             Daletou daletou = null;
             try {
                 daletou = daletouBo.toDaletou();
-                daletouService.insert(daletou);
+                daletouServiceVOne.insert(daletou);
             } catch (Exception e) {
                 continue;
             }
@@ -64,7 +64,7 @@ public class DaletouServiceImplTest extends BaseTest {
             Daletou daletou = null;
             try {
                 daletou = daletouBo.toDaletou();
-                daletouService.insert(daletou);
+                daletouServiceVOne.insert(daletou);
             } catch (Exception e) {
                 continue;
             }
@@ -75,7 +75,7 @@ public class DaletouServiceImplTest extends BaseTest {
     public void insertCurrent() {
         DaletouBo daletouBo = daletouHistoryService.downLoadDaletouHistory(20098);
         Daletou daletou = daletouBo.toDaletou();
-        daletouService.insert(daletou);
+        daletouServiceVOne.insert(daletou);
 
     }
 
@@ -104,7 +104,7 @@ public class DaletouServiceImplTest extends BaseTest {
         daletous.add(daletou4);
         daletous.add(daletou5);
         daletous.add(daletou6);
-        List<Win> win = daletouService.isWin(daletous);
+        List<Win> win = daletouServiceVOne.isWin(daletous);
         logger.info(JSON.toJSONString(win));
     }
 

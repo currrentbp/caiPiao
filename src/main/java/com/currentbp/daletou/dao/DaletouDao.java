@@ -1,7 +1,7 @@
 package com.currentbp.daletou.dao;
 
 
-import com.currentbp.daletou.condition.DaletouCondition;
+import com.currentbp.daletou.condition.DaletouPageCondition;
 import com.currentbp.daletou.entity.Daletou;
 import com.currentbp.jdbc.MyJdbcTemplate;
 import com.currentbp.util.SqlUtils;
@@ -76,10 +76,10 @@ public class DaletouDao {
     /**
      * 根据条件查询大乐透列表
      *
-     * @param daletouCondition 条件
+     * @param daletouPageCondition 条件
      * @return 列表
      */
-    public List<Daletou> queryByCondition(DaletouCondition daletouCondition) {
+    public List<Daletou> queryByCondition(DaletouPageCondition daletouPageCondition) {
         StringBuilder sql = new StringBuilder("select * from daletou ");
         sql.append(" where 1=1 ");
         List<Object> parms = new ArrayList<>();
@@ -87,8 +87,8 @@ public class DaletouDao {
         sql.append(" order by id desc ");
 
         sql.append(" limit ?,?");
-        parms.add((daletouCondition.getPageNum() - 1) * daletouCondition.getPageSize());
-        parms.add(daletouCondition.getPageSize());
+        parms.add((daletouPageCondition.getPageNum() - 1) * daletouPageCondition.getPageSize());
+        parms.add(daletouPageCondition.getPageSize());
         return myJdbcTemplate.query(sql.toString(), parms.toArray(), rowMapper);
     }
 

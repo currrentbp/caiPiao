@@ -1,6 +1,6 @@
 package com.currentbp.daletou.service.v1;
 
-import com.currentbp.daletou.condition.DaletouCondition;
+import com.currentbp.daletou.condition.DaletouPageCondition;
 import com.currentbp.daletou.entity.Daletou;
 import com.currentbp.vo.Win;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * @author current_bp
  * @createTime 20180418
  */
-public interface DaletouService {
+public interface DaletouServiceVOne {
 
     /**
      * 插入一个大乐透
@@ -37,10 +37,10 @@ public interface DaletouService {
     /**
      * 根据条件查询大乐透
      *
-     * @param daletouCondition 条件
+     * @param daletouPageCondition 条件
      * @return 大乐透列表
      */
-    List<Daletou> queryDaletouByCondition(DaletouCondition daletouCondition);
+    List<Daletou> queryDaletouByCondition(DaletouPageCondition daletouPageCondition);
 
     /**
      * 检查中奖情况，只能检查同一期的大乐透
@@ -57,14 +57,8 @@ public interface DaletouService {
      * @param daletouId 大乐透期号
      * @return 大乐透列表
      */
-    List<Daletou> forecast(int num, int daletouId);
+    List<Daletou> forecastV1(int num, int daletouId);
 
-    /**
-     * 预测大乐透并保存
-     *
-     * @param daletouId 最新大乐透
-     */
-    void forecastAndSave(int daletouId);
 
     /**
      * 判断是否中奖，以及中奖情况

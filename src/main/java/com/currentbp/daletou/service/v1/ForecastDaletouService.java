@@ -25,15 +25,6 @@ public interface ForecastDaletouService {
      */
     DaletouBo forecastDaletou(int num, int daletouId, List<ProblemDate> problemDates, List<HistoryRepeatDate> historyRepeats);
 
-    /**
-     * 预测出指定期号的大乐透，并存储到数据库中
-     *
-     * @param num            获取样本的数量
-     * @param daletouId      需要预测的大乐透期号
-     * @param problemDates   历史概率
-     * @param historyRepeats 历史重复数
-     */
-    void forecastDaletou4AllAndSave(int num, int daletouId, List<ProblemDate> problemDates, List<HistoryRepeatDate> historyRepeats);
 
     /**
      * 预测指定期号的大乐透列表
