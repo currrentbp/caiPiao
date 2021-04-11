@@ -2,7 +2,7 @@ package com.currentbp.daletou.service.v1.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.currentbp.daletou.bo.entity.DaletouBo;
-import com.currentbp.daletou.bo.entity.HistoryDate;
+import com.currentbp.daletou.bo.entity.HistoryRepeatDate;
 import com.currentbp.daletou.bo.entity.ProblemDate;
 import com.currentbp.daletou.service.v1.AnalysisHistoryService;
 import com.currentbp.daletou.service.v1.ForecastDaletouService;
@@ -42,7 +42,7 @@ public class ForecastDaletouBoServiceImplTest extends BaseTest {
     @Test
     public void forecastDaletou4AllAndSave() throws Exception {
         List<DaletouBo> daletouBoHistoryFromLocal = initDaletouService.getDaletouHistoryFromRepository();
-        List<HistoryDate> historyRepeatsFromHistory = analysisHistoryService.getHistoryRepeatsFromHistory(5, daletouBoHistoryFromLocal);
+        List<HistoryRepeatDate> historyRepeatsFromHistory = analysisHistoryService.getHistoryRepeatsFromHistory(5, daletouBoHistoryFromLocal);
         List<ProblemDate> historyProblemDatesFromHistory = analysisHistoryService.getHistoryProblemDatesFromHistory(daletouBoHistoryFromLocal, historyRepeatsFromHistory);
         logger.info("===>historyProblemDatesFromHistory:" + JSON.toJSONString(historyProblemDatesFromHistory));
         forecastDaletouService.forecastDaletou4AllAndSave(5, 18064, historyProblemDatesFromHistory, historyRepeatsFromHistory);
@@ -56,7 +56,7 @@ public class ForecastDaletouBoServiceImplTest extends BaseTest {
     @Test
     public void forecastAllDaletou4AllAndSave() throws Exception {
         List<DaletouBo> daletouBoHistoryFromLocal = initDaletouService.getDaletouHistoryFromRepository();
-        List<HistoryDate> historyRepeatsFromHistory = analysisHistoryService.getHistoryRepeatsFromHistory(5, daletouBoHistoryFromLocal);
+        List<HistoryRepeatDate> historyRepeatsFromHistory = analysisHistoryService.getHistoryRepeatsFromHistory(5, daletouBoHistoryFromLocal);
         List<ProblemDate> historyProblemDatesFromHistory = analysisHistoryService.getHistoryProblemDatesFromHistory(daletouBoHistoryFromLocal, historyRepeatsFromHistory);
         logger.info("===>historyProblemDatesFromHistory:" + JSON.toJSONString(historyProblemDatesFromHistory));
         for (DaletouBo daletouBo : daletouBoHistoryFromLocal) {

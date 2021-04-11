@@ -31,7 +31,7 @@ public class DownLoadDaletouHistoryServiceImpl implements DownLoadDaletouHistory
      */
     @Override
     public List<DaletouBo> downLoadNewDaletouHistory(Integer startDaletouId) {
-        List<DaletouBo> result = new ArrayList<DaletouBo>();
+        List<DaletouBo> result = new ArrayList<>();
         int max = ((startDaletouId / 100) * 100) + 155;
         for (int i = startDaletouId; i <= max; i++) {
             DaletouBo daletouBo = downLoadDaletouHistory(i);

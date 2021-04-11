@@ -1,7 +1,7 @@
 package com.currentbp.daletou.service.v1;
 
 
-import com.currentbp.daletou.bo.entity.HistoryDate;
+import com.currentbp.daletou.bo.entity.HistoryRepeatDate;
 import com.currentbp.daletou.bo.entity.DaletouBo;
 import com.currentbp.daletou.bo.entity.ProblemDate;
 
@@ -38,7 +38,7 @@ public interface AnalysisHistoryService {
      * @param daletouBoEntities 历史数据
      * @return 重复的数据
      */
-    List<HistoryDate> getHistoryRepeatsFromHistory(int num, List<DaletouBo> daletouBoEntities);
+    List<HistoryRepeatDate> getHistoryRepeatsFromHistory(int num, List<DaletouBo> daletouBoEntities);
 
 
     /**
@@ -48,5 +48,5 @@ public interface AnalysisHistoryService {
      * @param historyDates    历史重复数据
      * @return
      */
-    List<ProblemDate> getHistoryProblemDatesFromHistory(List<DaletouBo> daletouBoEntities, List<HistoryDate> historyDates);
+    List<ProblemDate> getHistoryProblemDatesFromHistory(List<DaletouBo> daletouBoEntities, List<HistoryRepeatDate> historyDates);
 }

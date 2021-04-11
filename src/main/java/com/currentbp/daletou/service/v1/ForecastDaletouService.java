@@ -1,7 +1,7 @@
 package com.currentbp.daletou.service.v1;
 
 import com.currentbp.daletou.bo.entity.DaletouBo;
-import com.currentbp.daletou.bo.entity.HistoryDate;
+import com.currentbp.daletou.bo.entity.HistoryRepeatDate;
 import com.currentbp.daletou.bo.entity.ProblemDate;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public interface ForecastDaletouService {
      * @param historyRepeats 历史重复数
      * @return 预测的大乐透
      */
-    DaletouBo forecastDaletou(int num, int daletouId, List<ProblemDate> problemDates, List<HistoryDate> historyRepeats);
+    DaletouBo forecastDaletou(int num, int daletouId, List<ProblemDate> problemDates, List<HistoryRepeatDate> historyRepeats);
 
     /**
      * 预测出指定期号的大乐透，并存储到数据库中
@@ -33,7 +33,7 @@ public interface ForecastDaletouService {
      * @param problemDates   历史概率
      * @param historyRepeats 历史重复数
      */
-    void forecastDaletou4AllAndSave(int num, int daletouId, List<ProblemDate> problemDates, List<HistoryDate> historyRepeats);
+    void forecastDaletou4AllAndSave(int num, int daletouId, List<ProblemDate> problemDates, List<HistoryRepeatDate> historyRepeats);
 
     /**
      * 预测指定期号的大乐透列表
@@ -45,5 +45,5 @@ public interface ForecastDaletouService {
      * @param historyRepeats 历史重复数
      * @return 预测的大乐透
      */
-    List<DaletouBo> forecastDaletou(int count, int num, int daletouId, List<ProblemDate> problemDates, List<HistoryDate> historyRepeats);
+    List<DaletouBo> forecastDaletou(int count, int num, int daletouId, List<ProblemDate> problemDates, List<HistoryRepeatDate> historyRepeats);
 }

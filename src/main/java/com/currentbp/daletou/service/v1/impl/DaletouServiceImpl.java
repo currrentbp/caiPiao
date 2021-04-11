@@ -2,7 +2,7 @@ package com.currentbp.daletou.service.v1.impl;
 
 import com.currentbp.constant.WinType;
 import com.currentbp.daletou.bo.entity.DaletouBo;
-import com.currentbp.daletou.bo.entity.HistoryDate;
+import com.currentbp.daletou.bo.entity.HistoryRepeatDate;
 import com.currentbp.daletou.bo.entity.ProblemDate;
 import com.currentbp.daletou.condition.DaletouCondition;
 import com.currentbp.daletou.dao.DaletouDao;
@@ -60,9 +60,8 @@ public class DaletouServiceImpl implements DaletouService {
         List<Daletou> source = daletouDao.queryByIds(daletouIds);
         Map<Integer, Daletou> sourceMap = CollectionCommonUtil.getMapFromListByMethodName(source, "getId", Integer.class);
 
-        List<Win> result = daletous.stream().map(daletou -> {
-            return isWin(daletou, sourceMap.get(daletou.getId()));
-        }).collect(Collectors.toList());
+        List<Win> result = daletous.stream()
+                .map(daletou -> isWin(daletou, sourceMap.get(daletou.getId()))).collect(Collectors.toList());
         return result;
     }
 
@@ -70,19 +69,15 @@ public class DaletouServiceImpl implements DaletouService {
     public List<Daletou> forecast(int num, int daletouId) {
         //获取大乐透列表
         List<Daletou> daletous = daletouDao.queryAll();
-        List<DaletouBo> daletoBos = daletous.stream().map((daletou) -> {
-            return new DaletouBo(daletou);
-        }).collect(Collectors.toList());
+        List<DaletouBo> daletoBos = daletous.stream().map(DaletouBo::new).collect(Collectors.toList());
 
         //获取前N期的重复数据
-        List<HistoryDate> historyRepeatsFromHistory = analysisHistoryService.getHistoryRepeatsFromHistory(SAMPLE_SIZE, daletoBos);
+        List<HistoryRepeatDate> historyRepeatsFromHistory = analysisHistoryService.getHistoryRepeatsFromHistory(SAMPLE_SIZE, daletoBos);
         //获取重复数据的概率
         List<ProblemDate> historyProblemDatesFromHistory = analysisHistoryService.getHistoryProblemDatesFromHistory(daletoBos, historyRepeatsFromHistory);
         //预测数据
         List<DaletouBo> daletouBos = forecastDaletouService.forecastDaletou(num, SAMPLE_SIZE, daletouId, historyProblemDatesFromHistory, historyRepeatsFromHistory);
-        List<Daletou> result = daletouBos.stream().map(daletouBo -> {
-            return daletouBo.toDaletou();
-        }).collect(Collectors.toList());
+        List<Daletou> result = daletouBos.stream().map(DaletouBo::toDaletou).collect(Collectors.toList());
         return result;
     }
 
@@ -90,12 +85,10 @@ public class DaletouServiceImpl implements DaletouService {
     public void forecastAndSave(int daletouId) {
         //获取大乐透列表
         List<Daletou> daletous = daletouDao.queryAll();
-        List<DaletouBo> daletoBos = daletous.stream().map((daletou) -> {
-            return new DaletouBo(daletou);
-        }).collect(Collectors.toList());
+        List<DaletouBo> daletoBos = daletous.stream().map(DaletouBo::new).collect(Collectors.toList());
 
         //获取前N期的重复数据
-        List<HistoryDate> historyRepeatsFromHistory = analysisHistoryService.getHistoryRepeatsFromHistory(SAMPLE_SIZE, daletoBos);
+        List<HistoryRepeatDate> historyRepeatsFromHistory = analysisHistoryService.getHistoryRepeatsFromHistory(SAMPLE_SIZE, daletoBos);
         //获取重复数据的概率
         List<ProblemDate> historyProblemDatesFromHistory = analysisHistoryService.getHistoryProblemDatesFromHistory(daletoBos, historyRepeatsFromHistory);
         //预测数据

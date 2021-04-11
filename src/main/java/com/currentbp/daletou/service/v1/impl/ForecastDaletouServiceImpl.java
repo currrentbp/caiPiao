@@ -5,7 +5,7 @@ import static com.currentbp.common.constant.DaletouConstant.DaletouNumCount;
 
 import com.currentbp.common.constant.DaletouConstant;
 import com.currentbp.daletou.bo.entity.DaletouBo;
-import com.currentbp.daletou.bo.entity.HistoryDate;
+import com.currentbp.daletou.bo.entity.HistoryRepeatDate;
 import com.currentbp.daletou.bo.entity.ProblemDate;
 import com.currentbp.daletou.entity.DaletouForecast;
 import com.currentbp.daletou.service.v1.DaletouForecastService;
@@ -45,7 +45,7 @@ public class ForecastDaletouServiceImpl implements ForecastDaletouService {
      * @return 预测的大乐透
      */
     @Override
-    public DaletouBo forecastDaletou(int num, int daletouId, List<ProblemDate> problemDates, List<HistoryDate> historyRepeats) {
+    public DaletouBo forecastDaletou(int num, int daletouId, List<ProblemDate> problemDates, List<HistoryRepeatDate> historyRepeats) {
         Map<Integer, ProblemDate> problemDateMap = CollectionCommonUtil.getMapFromListByMethodName(problemDates, "getDaletouId", Integer.class);
         DaletouBo daletouBo = new DaletouBo();
         daletouBo.setId(daletouId);
@@ -112,7 +112,7 @@ public class ForecastDaletouServiceImpl implements ForecastDaletouService {
 
 
     @Override
-    public void forecastDaletou4AllAndSave(int num, int daletouId, List<ProblemDate> problemDates, List<HistoryDate> historyRepeats) {
+    public void forecastDaletou4AllAndSave(int num, int daletouId, List<ProblemDate> problemDates, List<HistoryRepeatDate> historyRepeats) {
         Map<Integer, ProblemDate> problemDateMap = CollectionCommonUtil.getMapFromListByMethodName(problemDates, "getDaletouId", Integer.class);
         DaletouBo daletouBo = new DaletouBo();
         daletouBo.setId(daletouId);
@@ -222,7 +222,7 @@ public class ForecastDaletouServiceImpl implements ForecastDaletouService {
      * @return 预测的大乐透
      */
     @Override
-    public List<DaletouBo> forecastDaletou(int count, int num, int daletouId, List<ProblemDate> problemDates, List<HistoryDate> historyRepeats) {
+    public List<DaletouBo> forecastDaletou(int count, int num, int daletouId, List<ProblemDate> problemDates, List<HistoryRepeatDate> historyRepeats) {
         List<DaletouBo> result = new ArrayList<DaletouBo>();
         for (int i = 0; i < num; i++) {
             DaletouBo daletouBo = forecastDaletou(num, daletouId, problemDates, historyRepeats);

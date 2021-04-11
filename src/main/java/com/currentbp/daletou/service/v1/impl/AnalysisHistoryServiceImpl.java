@@ -2,7 +2,7 @@ package com.currentbp.daletou.service.v1.impl;
 
 
 import com.currentbp.daletou.bo.entity.DaletouBo;
-import com.currentbp.daletou.bo.entity.HistoryDate;
+import com.currentbp.daletou.bo.entity.HistoryRepeatDate;
 import com.currentbp.daletou.bo.entity.ProblemDate;
 import com.currentbp.daletou.service.v1.AnalysisHistoryService;
 import com.currentbp.util.all.Assert;
@@ -32,13 +32,13 @@ public class AnalysisHistoryServiceImpl implements AnalysisHistoryService {
      * @return 重复的数据
      */
     @Override
-    public List<HistoryDate> getHistoryRepeatsFromHistory(int num, List<DaletouBo> daletouBoEntities) {
+    public List<HistoryRepeatDate> getHistoryRepeatsFromHistory(int num, List<DaletouBo> daletouBoEntities) {
         Assert.notEmpty(daletouBoEntities, "历史数据为空");
         Assert.isTrue(num > 0, "num 必须是正整数");
 
         List<DaletouBo> daletouBoEntities1 = getDescSortedDaletouList(daletouBoEntities);
         LinkedBlockingQueue<DaletouBo> linkedBlockingQueue = new LinkedBlockingQueue<DaletouBo>();
-        List<HistoryDate> result = new ArrayList<HistoryDate>();
+        List<HistoryRepeatDate> result = new ArrayList<HistoryRepeatDate>();
 
         DaletouBo currentDaletouBo = null;
         for (DaletouBo daletouBo : daletouBoEntities1) {
@@ -48,7 +48,7 @@ public class AnalysisHistoryServiceImpl implements AnalysisHistoryService {
             } else {
                 Iterator<DaletouBo> iterator = linkedBlockingQueue.iterator();
 
-                HistoryDate historyDate = new HistoryDate();
+                HistoryRepeatDate historyDate = new HistoryRepeatDate();
                 historyDate.setId(currentDaletouBo.getId());
                 while (iterator.hasNext()) {
                     DaletouBo next = iterator.next();
@@ -76,11 +76,11 @@ public class AnalysisHistoryServiceImpl implements AnalysisHistoryService {
      */
     @Override
     public List<ProblemDate> getHistoryProblemDatesFromHistory(List<DaletouBo> daletouBoEntities,
-                                                               List<HistoryDate> historyDates) {
-        Map<Integer, HistoryDate> historyDateMap = CollectionCommonUtil.getMapFromListByMethodName(historyDates, "getId",Integer.class);
+                                                               List<HistoryRepeatDate> historyDates) {
+        Map<Integer, HistoryRepeatDate> historyDateMap = CollectionCommonUtil.getMapFromListByMethodName(historyDates, "getId",Integer.class);
         List<ProblemDate> problemDates = new ArrayList<ProblemDate>();
         for (DaletouBo daletouBo : daletouBoEntities) {
-            HistoryDate historyDate = historyDateMap.get(daletouBo.getId() - 1);
+            HistoryRepeatDate historyDate = historyDateMap.get(daletouBo.getId() - 1);
             if (null != historyDate) {
                 ProblemDate problemDate = doGetHistoryProblemDateFromHistory(daletouBo, historyDate);
                 problemDates.add(problemDate);
@@ -99,7 +99,7 @@ public class AnalysisHistoryServiceImpl implements AnalysisHistoryService {
      * @param historyDate   大乐透历史数据
      * @return 重复率
      */
-    private ProblemDate doGetHistoryProblemDateFromHistory(DaletouBo daletouBo, HistoryDate historyDate) {
+    private ProblemDate doGetHistoryProblemDateFromHistory(DaletouBo daletouBo, HistoryRepeatDate historyDate) {
 
         ProblemDate problemDate = new ProblemDate();
         problemDate.setDaletouId(daletouBo.getId());

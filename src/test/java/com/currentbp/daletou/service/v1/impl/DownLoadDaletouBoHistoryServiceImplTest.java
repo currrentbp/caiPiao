@@ -23,12 +23,12 @@ public class DownLoadDaletouBoHistoryServiceImplTest extends BaseTest {
     private DownLoadDaletouHistoryService daletouHistoryService;
 
 
-//    @Test
-//    public void downLoadNewDaletouHistory() throws Exception {
-//        List<DaletouBo> daletouBoEntities = daletouHistoryService.downLoadNewDaletouHistory(20098);
-//        logger.info(JSON.toJSONString(daletouBoEntities));
-//        Assert.notEmpty(daletouBoEntities, "is empty");
-//    }
+    @Test
+    public void downLoadNewDaletouHistory() throws Exception {
+        List<DaletouBo> daletouBoEntities = daletouHistoryService.downLoadNewDaletouHistory(7001);
+        logger.info("===>result:"+JSON.toJSONString(daletouBoEntities));
+        Assert.notEmpty(daletouBoEntities, "===>is empty");
+    }
 //
 //    @Test
 //    public void downLoadDaletouHistory() throws Exception {

@@ -45,15 +45,16 @@ public class DaletouServiceImplTest extends BaseTest {
             Daletou daletou = null;
             try {
                 daletou = daletouBo.toDaletou();
+                daletouService.insert(daletou);
             } catch (Exception e) {
                 continue;
             }
-            daletouService.insert(daletou);
         }
     }
 
     /**
      * 适用于后续追加大乐透
+     *
      * @throws Exception
      */
     @Test
@@ -71,7 +72,7 @@ public class DaletouServiceImplTest extends BaseTest {
     }
 
     @Test
-    public void insertCurrent(){
+    public void insertCurrent() {
         DaletouBo daletouBo = daletouHistoryService.downLoadDaletouHistory(20098);
         Daletou daletou = daletouBo.toDaletou();
         daletouService.insert(daletou);
@@ -91,12 +92,12 @@ public class DaletouServiceImplTest extends BaseTest {
     @Test
     public void isWin() throws Exception {
         List<Daletou> daletous = new ArrayList<>();
-        Daletou daletou1 = new DaletouBo(18073,"1,12,21,34,35;2,7").toDaletou();
-        Daletou daletou2 = new DaletouBo(18073,"12,32,33,34,35;2,12").toDaletou();
-        Daletou daletou3 = new DaletouBo(18073,"1,2,3,5,34;2,12").toDaletou();
-        Daletou daletou4 = new DaletouBo(18073,"1,2,6,26,35;1,2").toDaletou();
-        Daletou daletou5 = new DaletouBo(18073,"1,2,8,24,35;2,10").toDaletou();
-        Daletou daletou6 = new DaletouBo(18073,"1,2,5,23,35;2,12").toDaletou();
+        Daletou daletou1 = new DaletouBo(18073, "1,12,21,34,35;2,7").toDaletou();
+        Daletou daletou2 = new DaletouBo(18073, "12,32,33,34,35;2,12").toDaletou();
+        Daletou daletou3 = new DaletouBo(18073, "1,2,3,5,34;2,12").toDaletou();
+        Daletou daletou4 = new DaletouBo(18073, "1,2,6,26,35;1,2").toDaletou();
+        Daletou daletou5 = new DaletouBo(18073, "1,2,8,24,35;2,10").toDaletou();
+        Daletou daletou6 = new DaletouBo(18073, "1,2,5,23,35;2,12").toDaletou();
         daletous.add(daletou1);
         daletous.add(daletou2);
         daletous.add(daletou3);
