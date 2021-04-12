@@ -14,6 +14,20 @@ CREATE TABLE IF NOT EXISTS `daletou` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='大乐透';
 
+CREATE TABLE IF NOT EXISTS `user_daletou` (
+	`id` BIGINT NOT NULL AUTO_INCREMENT,
+	`user_id` BIGINT NOT NULL DEFAULT '0',
+	`daletou_id` INT NOT NULL DEFAULT '0' COMMENT '大乐透id',
+	`forcecast_version` INT NOT NULL DEFAULT '1' COMMENT '大乐透预测的版本，1：版本1,2：预测版本2',
+	`daletou` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '大乐透结果，格式就是彩票的格式',
+	`create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+;
+
+
 INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (7001, 22, 24, 29, 31, 35, 4, 11);
 INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (7002, 15, 22, 31, 34, 35, 5, 12);
 INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (7003, 3, 4, 18, 23, 32, 1, 6);

@@ -3,11 +3,13 @@ package com.currentbp.daletou.service.v2.impl;
 import com.currentbp.daletou.bo.entity.DaletouConstant;
 import com.currentbp.daletou.entity.Daletou;
 import com.currentbp.daletou.service.v2.DaletouServiceVTwo;
+import com.currentbp.util.all.RandomUtil;
 import com.google.common.collect.Sets;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -22,14 +24,44 @@ public class DaletouServiceVTwoImpl implements DaletouServiceVTwo {
     public List<Daletou> forecastV2(int count, List<Daletou> oldDaletous) {
         List<Integer> oldReds = getOldReds(oldDaletous);
         List<Integer> oldBlues = getOldBlues(oldDaletous);
-        List<Daletou> newDaletous = forecast(count, oldReds, oldBlues);
-        return newDaletous;
+        return forecast(count, oldReds, oldBlues);
     }
 
     private List<Daletou> forecast(int count, List<Integer> oldReds, List<Integer> oldBlues) {
         List<Integer> remainReds = getRemainReds(oldReds);
         List<Integer> remainBlues = getRemainBlues(oldBlues);
-        return null;
+        if(remainReds.size()<DaletouConstant.RED_CHOICE_NUM || remainBlues.size()<DaletouConstant.BLUE_CHOICE_NUM){
+            return new ArrayList<>();
+        }
+        List<Daletou> result = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            result.add(getEach(remainReds,remainBlues));
+        }
+        return result;
+    }
+
+    private Daletou getEach(List<Integer> remainReds, List<Integer> remainBlues){
+        Daletou daletou = new Daletou();
+        Set<Integer> contains = new HashSet<>();
+        while(DaletouConstant.RED_CHOICE_NUM !=contains.size()){
+            contains.add(remainReds.get(RandomUtil.getRandomNum(remainReds.size())));
+        }
+        List<Integer> reds = new ArrayList<>(contains);
+        daletou.setRed1(reds.get(0));
+        daletou.setRed2(reds.get(1));
+        daletou.setRed3(reds.get(2));
+        daletou.setRed4(reds.get(3));
+        daletou.setRed5(reds.get(4));
+
+        contains.clear();
+        while(DaletouConstant.BLUE_CHOICE_NUM != contains.size()){
+            contains.add(remainBlues.get(RandomUtil.getRandomNum(remainBlues.size())));
+        }
+        List<Integer> blues = new ArrayList<>(contains);
+        daletou.setBlue1(blues.get(0));
+        daletou.setBlue2(blues.get(1));
+
+        return daletou;
     }
 
     private List<Integer> getRemainBlues(List<Integer> oldBlues) {
