@@ -118,9 +118,15 @@ public class DaletouDao {
         return myJdbcTemplate.queryForObject(sql.toString(), Lists.newArrayList(id).toArray(), rowMapper);
     }
 
-    public Integer queryMaxId(int minNum, int maxNum) {
+    public Integer queryMaxIdFromMinIdAndMaxId(int minId, int maxId) {
         String sql = "select max(id) as 'id' from daletou where id>=? and id<=? ";
-        Daletou daletou = myJdbcTemplate.queryForObject(sql, Lists.newArrayList(minNum, maxNum).toArray(), rowMapper);
+        Daletou daletou = myJdbcTemplate.queryForObject(sql, Lists.newArrayList(minId, maxId).toArray(), rowMapper);
+        return null == daletou ? null : daletou.getId();
+    }
+
+    public Integer queryMaxId() {
+        String sql = "select max(id) as 'id' from daletou ";
+        Daletou daletou = myJdbcTemplate.queryForObject(sql, rowMapper);
         return null == daletou ? null : daletou.getId();
     }
 }

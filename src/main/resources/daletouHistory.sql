@@ -15,17 +15,22 @@ CREATE TABLE IF NOT EXISTS `daletou` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='大乐透';
 
 CREATE TABLE IF NOT EXISTS `user_daletou` (
-	`id` BIGINT NOT NULL AUTO_INCREMENT,
-	`user_id` BIGINT NOT NULL DEFAULT '0',
-	`daletou_id` INT NOT NULL DEFAULT '0' COMMENT '大乐透id',
-	`forcecast_version` INT NOT NULL DEFAULT '1' COMMENT '大乐透预测的版本，1：版本1,2：预测版本2',
+	`id` BIGINT(19,0) NOT NULL AUTO_INCREMENT,
+	`user_id` BIGINT(19,0) NOT NULL DEFAULT '0',
+	`daletou_id` INT(10,0) NOT NULL DEFAULT '0' COMMENT '大乐透id',
+	`forecast_version` INT(10,0) NOT NULL DEFAULT '1' COMMENT '大乐透预测的版本，1：版本1,2：预测版本2',
 	`daletou` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '大乐透结果，格式就是彩票的格式',
-	`create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	`update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-	PRIMARY KEY (`id`)
+	`create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`) USING BTREE
 )
+COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
+ALTER TABLE `user_daletou`
+	ADD COLUMN `win` INT(4) NOT NULL DEFAULT 0 COMMENT '是否赢了，0：初始化状态，1，中奖了，2，没有中奖' AFTER `update_time`;
+
+
 
 
 INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (7001, 22, 24, 29, 31, 35, 4, 11);

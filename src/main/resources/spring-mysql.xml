@@ -45,8 +45,8 @@
         </property>
     </bean>
 
-    <!-- 主库 -->
-    <bean id="masterMyJdbcTemplate" class="com.currentbp.jdbc.MyJdbcTemplate">
-        <constructor-arg type="javax.sql.DataSource" ref="dataSourceMaster"/>
-    </bean>
+<!--    &lt;!&ndash; 主库 &ndash;&gt;-->
+<!--    <bean id="masterMyJdbcTemplate" class="com.currentbp.jdbc.MyJdbcTemplate">-->
+<!--        <constructor-arg type="javax.sql.DataSource" ref="dataSourceMaster"/>-->
+<!--    </bean>-->
 </beans>

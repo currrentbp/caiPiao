@@ -48,8 +48,10 @@ public class DaletouServiceFacadeImpl implements DaletouServiceFacade {
             userDaletou.setDaletouId(daletouId);
             DaletouBo daletouBo = new DaletouBo(daletou);
             userDaletou.setDaletou(daletouBo.toString());
-            userDaletou.setUserId(0L);
+            userDaletou.setUserId(1L);
             userDaletou.setForecastVersion(1);
+
+            userDaletouService.insert(userDaletou);
         });
         return daletous;
     }
@@ -58,12 +60,15 @@ public class DaletouServiceFacadeImpl implements DaletouServiceFacade {
     public List<Daletou> forecastV2(int num, List<Daletou> daletous,Integer daletouId) {
         List<Daletou> newDaletous = daletouServiceVTwo.forecastV2(num, daletous);
         newDaletous.forEach(daletou -> {
+            daletou.setId(daletouId);
             UserDaletou userDaletou = new UserDaletou();
             userDaletou.setDaletouId(daletouId);
             DaletouBo daletouBo = new DaletouBo(daletou);
             userDaletou.setDaletou(daletouBo.toString());
-            userDaletou.setUserId(0L);
-            userDaletou.setForecastVersion(1);
+            userDaletou.setUserId(1L);
+            userDaletou.setForecastVersion(2);
+
+            userDaletouService.insert(userDaletou);
         });
         return newDaletous;
     }

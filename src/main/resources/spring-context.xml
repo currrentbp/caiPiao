@@ -11,7 +11,7 @@
         http://www.springframework.org/schema/task/spring-task-3.2.xsd ">
 
 
-    <context:component-scan base-package="com.currentbp.daletou">
+    <context:component-scan base-package="com.currentbp">
     </context:component-scan>
     <task:annotation-driven />
 
