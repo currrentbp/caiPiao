@@ -3,8 +3,10 @@ package com.currentbp.daletou.schedule;
 import com.currentbp.daletou.bo.entity.DaletouBo;
 import com.currentbp.daletou.dao.DaletouDao;
 import com.currentbp.daletou.dao.UserDaletouDao;
+import com.currentbp.daletou.dao.UserForecastResultDao;
 import com.currentbp.daletou.entity.Daletou;
 import com.currentbp.daletou.entity.UserDaletou;
+import com.currentbp.daletou.entity.UserForecastResult;
 import com.currentbp.daletou.service.common.DownLoadDaletouHistoryService;
 import com.currentbp.daletou.service.v1.DaletouServiceVOne;
 import com.currentbp.vo.Win;
@@ -31,6 +33,8 @@ public class CheckUserDaletouSchedule {
     @Autowired
     private UserDaletouDao userDaletouDao;
     @Autowired
+    private UserForecastResultDao userForecastResultDao;
+    @Autowired
     private DownLoadDaletouHistoryService downLoadDaletouHistoryService;
     @Autowired
     private DaletouServiceVOne daletouServiceVOne;
@@ -55,10 +59,18 @@ public class CheckUserDaletouSchedule {
         List<Daletou> lists = new ArrayList<>();
         lists.add(daletouBo.toDaletou());
         List<Win> wins = daletouServiceVOne.isWin(lists);
-        logger.info("checkUserDaletouTask, wins:{}",wins);
+        logger.info("checkUserDaletouTask, wins:{}", wins);
         Win win = wins.get(0);
 
         userDaletouDao.update(userDaletou.getId(), win.isWin());
+
+        UserForecastResult userForecastResult = new UserForecastResult();
+        userForecastResult.setUserForecastId(userDaletou.getId());
+        userForecastResult.setCaipiaoType(1);//大乐透
+        userForecastResult.setWin(win.isWin() ? 1 : 2);
+        userForecastResult.setWinLevel(win.getWinType());
+        userForecastResult.setBonus(win.getBaseMoney().longValue());
+        userForecastResultDao.insert(userForecastResult);
     }
 
 
