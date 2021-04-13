@@ -2138,3 +2138,14 @@ INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `b
 INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (21037, 10, 21, 27, 29, 33, 4, 12);
 INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (21038, 9, 11, 20, 29, 32, 1, 7);
 INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (21039, 4, 12, 14, 21, 35, 2, 11);
+
+
+INSERT INTO `user_daletou` (`id`, `user_id`, `daletou_id`, `forecast_version`, `daletou`, `create_time`, `update_time`, `win`) VALUES (131, 0, 21041, 0, '21041:02,03,08,14,20;01,08', '2021-04-13 14:31:01', '2021-04-13 14:31:02', 0);
+INSERT INTO `user_daletou` (`id`, `user_id`, `daletou_id`, `forecast_version`, `daletou`, `create_time`, `update_time`, `win`) VALUES (132, 0, 21041, 0, '21041:01,21,22,25,27;06,11', '2021-04-13 14:31:01', '2021-04-13 14:31:02', 0);
+INSERT INTO `user_daletou` (`id`, `user_id`, `daletou_id`, `forecast_version`, `daletou`, `create_time`, `update_time`, `win`) VALUES (133, 1, 21039, 2, '21039:4,23,9,10,29;10,12', '2021-04-13 06:47:53', '2021-04-13 06:47:53', 0);
+INSERT INTO `user_daletou` (`id`, `user_id`, `daletou_id`, `forecast_version`, `daletou`, `create_time`, `update_time`, `win`) VALUES (134, 1, 21039, 2, '21039:18,19,10,29,31;7,10', '2021-04-13 06:47:53', '2021-04-13 06:47:53', 0);
+INSERT INTO `user_daletou` (`id`, `user_id`, `daletou_id`, `forecast_version`, `daletou`, `create_time`, `update_time`, `win`) VALUES (135, 1, 21039, 2, '21039:32,17,35,10,31;2,9', '2021-04-13 06:47:53', '2021-04-13 06:47:53', 0);
+INSERT INTO `user_daletou` (`id`, `user_id`, `daletou_id`, `forecast_version`, `daletou`, `create_time`, `update_time`, `win`) VALUES (136, 1, 21039, 2, '21039:18,9,10,28,13;3,9', '2021-04-13 06:47:53', '2021-04-13 06:47:53', 0);
+INSERT INTO `user_daletou` (`id`, `user_id`, `daletou_id`, `forecast_version`, `daletou`, `create_time`, `update_time`, `win`) VALUES (137, 1, 21039, 2, '21039:16,4,5,12,13;3,5', '2021-04-13 06:47:53', '2021-04-13 06:47:53', 0);
+
+
