@@ -129,4 +129,11 @@ public class DaletouDao {
         Daletou daletou = myJdbcTemplate.queryForObject(sql, rowMapper);
         return null == daletou ? null : daletou.getId();
     }
+
+    public boolean queryByRedAndBlue(Daletou daletou) {
+        String sql = "select * from daletou where red1=? and red2=? and red3=? and red4=? and red5=? and blue1=? and blue2=? ";
+        Daletou daletou1 = myJdbcTemplate.queryForObject(sql, Lists.newArrayList(daletou.getRed1(),daletou.getRed2(),
+                daletou.getRed3(),daletou.getRed4(),daletou.getRed5(),daletou.getBlue1(),daletou.getBlue2()).toArray(), rowMapper);
+        return null != daletou1;
+    }
 }
