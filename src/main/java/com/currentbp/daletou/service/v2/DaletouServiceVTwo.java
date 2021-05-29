@@ -12,5 +12,5 @@ public interface DaletouServiceVTwo {
     /**
      * 预测大乐透：第二版
      */
-    List<Daletou> forecastV2(int count,List<Daletou> oldDaletous);
+    List<Daletou> forecastV2(int daletouId, int count,List<Daletou> oldDaletous);
 }

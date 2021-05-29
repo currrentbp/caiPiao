@@ -8,6 +8,7 @@ import com.currentbp.util.all.TimeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
@@ -27,13 +28,15 @@ public class DownLoadLastedDaletouSchedule {
     private DaletouServiceVOne daletouServiceVOne;
 
 
-//    @Scheduled(cron = "0 0 * * * ?") // 间隔1小时执行
+    //    @Scheduled(cron = "0 0 * * * ?") // 间隔1小时执行
     public void downloadDaletouTask() {
         logger.info("===>task is start.....");
         int lastedId = getLastedId();
         logger.info("downloadDaletou, lastedId:{}", lastedId);
         DaletouBo daletouBo = downLoadDaletouHistoryService.downLoadDaletouHistory(lastedId);
-        daletouServiceVOne.insert(daletouBo.toDaletou());
+        if (null != daletouBo) {
+            daletouServiceVOne.insert(daletouBo.toDaletou());
+        }
 
         logger.info("===>task is end.....");
     }
