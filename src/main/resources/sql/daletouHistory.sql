@@ -2138,6 +2138,24 @@ INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `b
 INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (21037, 10, 21, 27, 29, 33, 4, 12);
 INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (21038, 9, 11, 20, 29, 32, 1, 7);
 INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (21039, 4, 12, 14, 21, 35, 2, 11);
+INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (21040, 2, 3, 9, 16, 19, 3, 7);
+INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (21041, 2, 5, 9, 11, 32, 4, 9);
+INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (21042, 9, 15, 20, 23, 29, 4, 5);
+INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (21043, 7, 12, 17, 19, 34, 1, 10);
+INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (21044, 6, 18, 31, 33, 35, 10, 11);
+INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (21045, 1, 4, 6, 11, 19, 7, 9);
+INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (21046, 6, 8, 12, 14, 18, 6, 8);
+INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (21047, 1, 6, 9, 25, 33, 4, 8);
+INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (21048, 4, 7, 17, 21, 27, 10, 12);
+INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (21049, 1, 10, 22, 23, 25, 2, 12);
+INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (21050, 9, 22, 32, 33, 35, 5, 10);
+INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (21051, 1, 4, 14, 16, 19, 3, 4);
+INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (21052, 2, 11, 13, 14, 30, 9, 12);
+INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (21053, 3, 6, 15, 17, 35, 7, 11);
+INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (21054, 3, 6, 17, 20, 25, 3, 9);
+INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (21055, 3, 6, 10, 11, 24, 10, 11);
+INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (21056, 3, 11, 16, 21, 26, 9, 10);
+INSERT INTO `daletou` (`id`, `red1`, `red2`, `red3`, `red4`, `red5`, `blue1`, `blue2`) VALUES (21057, 5, 7, 19, 20, 28, 5, 7);
 
 
 INSERT INTO `user_daletou` (`id`, `user_id`, `daletou_id`, `forecast_version`, `daletou`, `create_time`, `update_time`, `win`) VALUES (131, 0, 21041, 0, '21041:02,03,08,14,20;01,08', '2021-04-13 14:31:01', '2021-04-13 14:31:02', 0);

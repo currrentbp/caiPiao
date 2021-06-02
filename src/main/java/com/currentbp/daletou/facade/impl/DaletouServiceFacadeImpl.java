@@ -58,7 +58,7 @@ public class DaletouServiceFacadeImpl implements DaletouServiceFacade {
 
     @Override
     public List<Daletou> forecastV2(int num, List<Daletou> daletous,Integer daletouId) {
-        List<Daletou> newDaletous = daletouServiceVTwo.forecastV2(num, daletous);
+        List<Daletou> newDaletous = daletouServiceVTwo.forecastV2(daletouId, num, daletous);
         newDaletous.forEach(daletou -> {
             daletou.setId(daletouId);
             UserDaletou userDaletou = new UserDaletou();
@@ -68,7 +68,7 @@ public class DaletouServiceFacadeImpl implements DaletouServiceFacade {
             userDaletou.setUserId(1L);
             userDaletou.setForecastVersion(2);
 
-            userDaletouService.insert(userDaletou);
+//            userDaletouService.insert(userDaletou);
         });
         return newDaletous;
     }

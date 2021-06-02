@@ -2,6 +2,7 @@ package com.currentbp.daletou.service.v2.impl;
 
 import com.currentbp.daletou.bo.entity.DaletouBo;
 import com.currentbp.daletou.bo.entity.DaletouConstant;
+import com.currentbp.daletou.dao.DaletouDao;
 import com.currentbp.daletou.entity.Daletou;
 import com.currentbp.daletou.service.common.DaletouHistoryService;
 import com.currentbp.daletou.service.v2.DaletouServiceVTwo;
@@ -11,10 +12,12 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author baopan
@@ -24,15 +27,27 @@ import java.util.Set;
 public class DaletouServiceVTwoImpl implements DaletouServiceVTwo {
     @Autowired
     private DaletouHistoryService daletouHistoryService;
+    @Autowired
+    private DaletouDao daletouDao;
+    private int diffNum = 500;
 
-    @Override
-    public List<Daletou> forecastV2(int count, List<Daletou> oldDaletous) {
-        List<Integer> oldReds = getOldReds(oldDaletous);
-        List<Integer> oldBlues = getOldBlues(oldDaletous);
-        return forecast(count, oldReds, oldBlues);
+    private List<DaletouBo> allDaletouBos = new ArrayList<>();
+
+    @PostConstruct
+    public void init() {
+        List<Daletou> daletous = daletouDao.queryAll();
+        allDaletouBos = daletous.stream().map(DaletouBo::new).collect(Collectors.toList());
     }
 
-    private List<Daletou> forecast(int count, List<Integer> oldReds, List<Integer> oldBlues) {
+
+    @Override
+    public List<Daletou> forecastV2(int daletouId, int count, List<Daletou> oldDaletous) {
+        List<Integer> oldReds = getOldReds(oldDaletous);
+        List<Integer> oldBlues = getOldBlues(oldDaletous);
+        return forecast(daletouId, count, oldReds, oldBlues);
+    }
+
+    private List<Daletou> forecast(int daletouId, int count, List<Integer> oldReds, List<Integer> oldBlues) {
         List<Integer> remainReds = getRemainReds(oldReds);
         List<Integer> remainBlues = getRemainBlues(oldBlues);
         if (remainReds.size() < DaletouConstant.RED_CHOICE_NUM || remainBlues.size() < DaletouConstant.BLUE_CHOICE_NUM) {
@@ -41,6 +56,7 @@ public class DaletouServiceVTwoImpl implements DaletouServiceVTwo {
         List<Daletou> result = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             Daletou each = getEach(remainReds, remainBlues);
+            each.setId(daletouId);
             boolean isSame = hasSame(result, each);
             if (isSame) {
                 i--;
@@ -51,9 +67,27 @@ public class DaletouServiceVTwoImpl implements DaletouServiceVTwo {
                 i--;
                 continue;
             }
+            if (!isDiff(each)) {
+                i--;
+                continue;
+            }
             result.add(each);
         }
         return result;
+    }
+
+    private boolean isDiff(Daletou daletou) {
+        DaletouBo daletouBo = new DaletouBo(daletou);
+        for (int i = 0; i < diffNum; i++) {
+            //过滤比现在要新的大乐透数据
+            if (daletou.getId() <= allDaletouBos.get(i).getId()) {
+                continue;
+            }
+            if (!(daletouBo.diffNum(allDaletouBos.get(i)) > 6)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private boolean hasSame(List<Daletou> allDaletous, Daletou currentDaletou) {
