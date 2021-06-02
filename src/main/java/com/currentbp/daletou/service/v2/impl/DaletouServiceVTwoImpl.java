@@ -69,9 +69,9 @@ public class DaletouServiceVTwoImpl implements DaletouServiceVTwo {
             if (inHistory) {
                 return;
             }
-            if (!isDiff(e)) {
-                return;
-            }
+//            if (!isDiff(e)) {
+//                return;
+//            }
             result.add(e);
         });
         System.out.println("===>allResultCount:"+result.size());

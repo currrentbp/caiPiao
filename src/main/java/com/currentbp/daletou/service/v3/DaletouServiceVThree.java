@@ -11,5 +11,5 @@ public interface DaletouServiceVThree {
      * @param count 数量
      * @return
      */
-    List<Daletou> forecastV2(int daletouId, int count);
+    List<Daletou> forecastV3(int daletouId, int count);
 }
