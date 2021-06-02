@@ -72,4 +72,9 @@ public class DaletouServiceFacadeImpl implements DaletouServiceFacade {
         });
         return newDaletous;
     }
+
+    @Override
+    public List<Daletou> forecastV3(int num, Integer daletouId) {
+        return null;
+    }
 }
