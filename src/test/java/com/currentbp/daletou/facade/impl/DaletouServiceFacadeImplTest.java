@@ -21,9 +21,9 @@ public class DaletouServiceFacadeImplTest extends BaseTest {
     @Test
     public void testForecastV2() {
         List<Daletou> daletous = new ArrayList<>();
-        daletous.add(new Daletou(1,6,12,24,34,7,9));
-        daletous.add(new Daletou(6,11,14,33,35,2,4));
-        List<Daletou> daletous1 = daletouServiceFacade.forecastV2(5, daletous, 21057);
+//        daletous.add(new Daletou(13,15,17,23,34,1,11));
+        daletous.add(new Daletou(4,16,27,28,35,2,9));
+        List<Daletou> daletous1 = daletouServiceFacade.forecastV2(5, daletous, 21060);
         logger.info("===>result :"+ daletous1.toString());
     }
 }

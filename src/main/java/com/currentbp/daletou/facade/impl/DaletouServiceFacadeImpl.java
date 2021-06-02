@@ -68,7 +68,7 @@ public class DaletouServiceFacadeImpl implements DaletouServiceFacade {
             userDaletou.setUserId(1L);
             userDaletou.setForecastVersion(2);
 
-//            userDaletouService.insert(userDaletou);
+            userDaletouService.insert(userDaletou);
         });
         return newDaletous;
     }

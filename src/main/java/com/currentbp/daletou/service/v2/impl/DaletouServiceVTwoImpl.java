@@ -6,9 +6,12 @@ import com.currentbp.daletou.dao.DaletouDao;
 import com.currentbp.daletou.entity.Daletou;
 import com.currentbp.daletou.service.common.DaletouHistoryService;
 import com.currentbp.daletou.service.v2.DaletouServiceVTwo;
+import com.currentbp.util.all.MathUtil;
 import com.currentbp.util.all.RandomUtil;
+import com.currentbp.util.all.StringUtil;
 import com.google.common.collect.Sets;
 import org.apache.commons.collections4.CollectionUtils;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,26 +57,36 @@ public class DaletouServiceVTwoImpl implements DaletouServiceVTwo {
             return new ArrayList<>();
         }
         List<Daletou> result = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            Daletou each = getEach(remainReds, remainBlues);
-            each.setId(daletouId);
-            boolean isSame = hasSame(result, each);
-            if (isSame) {
-                i--;
-                continue;
+        List<Daletou> each2 = getEach2(remainReds, remainBlues);
+
+        each2.forEach(e->{
+            e.setId(daletouId);
+            boolean isSame = hasSame(result, e);
+            if(isSame){
+                return;
             }
-            boolean inHistory = daletouHistoryService.inHistory(each);
+            boolean inHistory = daletouHistoryService.inHistory(e);
             if (inHistory) {
-                i--;
-                continue;
+                return;
             }
-            if (!isDiff(each)) {
-                i--;
-                continue;
+            if (!isDiff(e)) {
+                return;
             }
-            result.add(each);
+            result.add(e);
+        });
+        System.out.println("===>allResultCount:"+result.size());
+
+        List<Daletou> temp = new ArrayList<>();
+        for(int i=0;i<count;i++){
+            if(result.size()==0){
+                return new ArrayList<>();
+            }
+            int randomNum = RandomUtil.getRandomNum(result.size()-1);
+            temp.add(result.get(randomNum));
+            result.remove(randomNum);
         }
-        return result;
+
+        return temp;
     }
 
     private boolean isDiff(Daletou daletou) {
@@ -127,6 +140,105 @@ public class DaletouServiceVTwoImpl implements DaletouServiceVTwo {
         daletou.setBlue2(blues.get(1));
 
         return daletou;
+    }
+
+//    @Test
+//    public void t1() {
+//        List<Integer> remainReds = new ArrayList<>();
+//        List<Integer> remainBlues = new ArrayList<>();
+//        remainReds.add(1);
+//        remainReds.add(2);
+//        remainReds.add(3);
+//        remainReds.add(4);
+//        remainReds.add(5);
+//        remainReds.add(6);
+//        remainReds.add(7);
+//        remainBlues.add(1);
+//        remainBlues.add(2);
+//        remainBlues.add(3);
+//        remainBlues.add(4);
+//        getEach2(remainReds, remainBlues);
+//    }
+
+
+    private List<Daletou> getEach2(List<Integer> remainReds, List<Integer> remainBlues) {
+        List<Daletou> daletous = new ArrayList<>();
+        int[] redIndexs = new int[]{0, 1, 2, 3, 4};
+        int[] blueIndex = new int[]{0, 1};
+
+        List<List<Integer>> reds = getSource(remainReds, redIndexs, 5);
+        List<List<Integer>> blues = getSource(remainBlues, blueIndex, 2);
+
+        reds.forEach(red->{
+            blues.forEach(blue->{
+                daletous.add(new Daletou(null,red,blue));
+            });
+        });
+
+        return daletous;
+    }
+
+    private List<List<Integer>> getSource(List<Integer> sources, int[] redIndexs, int sum) {
+        List<List<Integer>> result = new ArrayList<>();
+
+        int count = 0;
+        while (true) {
+            result.add(getEachReds(sources, redIndexs));
+            if (complit(redIndexs, sources.size())) {
+                break;
+            }
+            redIndexs = changeRedIndexs(redIndexs, sources, sum);
+            if (null == redIndexs) {
+                break;
+            }
+        }
+
+        count = result.size();
+        System.out.println("===>redscount:" + count);
+        return result;
+    }
+
+    private int[] changeRedIndexs(int[] redIndexs, List<Integer> sources, int sum) {
+        int size = sources.size() - 1;
+        int redSum = 0;
+        for (int i = redIndexs.length - 1; i >= 0; i--) {
+            if (redIndexs[i] + (redIndexs.length - i - 1) == size) {
+                redSum++;
+                continue;
+            } else {
+                redIndexs[i] = redIndexs[i] + 1;
+                break;
+            }
+        }
+        if (sum == redSum) {
+            return null;
+        }
+        return redIndexs;
+    }
+
+    private List<Integer> getEachReds(List<Integer> sources, int[] redIndexs) {
+        List<Integer> result = new ArrayList<>();
+        for (int redIndex : redIndexs) {
+            result.add(sources.get(redIndex));
+        }
+        return result;
+    }
+
+    private boolean complit(int[] indexs, int size) {
+        if (null == indexs) {
+            return true;
+        }
+
+
+        if (indexs.length == 5) {
+            return indexs[4] == size - 1
+                    && indexs[4] == indexs[3] + 1
+                    && indexs[3] == indexs[2] + 1
+                    && indexs[2] == indexs[1] + 1
+                    && indexs[1] == indexs[0] + 1;
+        } else {
+            return indexs[1] == size - 1 && indexs[1] == indexs[0] + 1;
+        }
     }
 
     private List<Integer> getRemainBlues(List<Integer> oldBlues) {
