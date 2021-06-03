@@ -3,8 +3,8 @@ package com.currentbp.daletou.service.v3.impl;
 import com.currentbp.daletou.bo.entity.DaletouBo;
 import com.currentbp.daletou.dao.DaletouDao;
 import com.currentbp.daletou.entity.Daletou;
-import com.currentbp.daletou.service.v3.DaletouServiceVThree;
-import com.currentbp.util.all.MathUtil;
+import com.currentbp.daletou.service.v3.DaletouServiceVThreeAndTwo;
+import com.currentbp.util.DaletouUtil;
 import com.currentbp.util.all.RandomUtil;
 import com.currentbp.util.all.StringUtil;
 import org.apache.commons.collections4.CollectionUtils;
@@ -17,7 +17,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class DaletouServiceVThreeImpl implements DaletouServiceVThree {
+public class DaletouServiceVThreeAndTwoImpl implements DaletouServiceVThreeAndTwo {
+
     private int diffNum = 50;
     @Autowired
     private DaletouDao daletouDao;
@@ -29,17 +30,18 @@ public class DaletouServiceVThreeImpl implements DaletouServiceVThree {
         allDaletouBos = daletous.stream().map(DaletouBo::new).collect(Collectors.toList());
     }
 
-
-
     @Override
-    public List<Daletou> forecastV3(int daletouId, int count) {
+    public List<Daletou> forecastV3_2(int daletouId, int count, List<Daletou> oldDaletous) {
+        List<Integer> allReds = DaletouUtil.getAllReds(oldDaletous);
+        List<Integer> allBlues = DaletouUtil.getAllBlues(oldDaletous);
+        List<Integer> remainReds = DaletouUtil.getRemainReds(allReds);
+        List<Integer> remainBlues = DaletouUtil.getRemainBlues(allBlues);
 
-        combination2(0,2,new int[]{1,2,3,4,5,6,7,8,9,10,11,12});
+        combination2(0,2,getArr(remainBlues));
         List<int[]> blueCombinations = combinationArr;
         combinationArr = new ArrayList<>();
         tmpArr = new ArrayList<>();
-        combination2(0,5,new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,
-                20,21,22,23,24,25,26,27,28,29,30,31,32});
+        combination2(0,5,getArr(remainReds));
         List<int[]> redCombinations = combinationArr;
 
         List<Daletou> allForecastResult  = new ArrayList<>();

@@ -15,7 +15,7 @@ public class DaletouServiceVThreeImplTest extends BaseTest {
 
     @Test
     public void t1(){
-        List<Daletou> daletous = daletouServiceVThree.forecastV3(21060, 5);
+        List<Daletou> daletous = daletouServiceVThree.forecastV3(21063, 5);
         System.out.println(daletous.toString());
     }
 }

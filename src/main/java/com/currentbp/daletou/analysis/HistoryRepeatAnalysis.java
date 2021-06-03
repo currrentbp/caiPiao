@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class HistoryRepeatAnalysis {
     @Autowired
     private DaletouDao daletouDao;
-    private int diffMaxLength = 6;
+    private int diffMaxLength = 4;
 
     public void diffLength() {
         List<Daletou> daletous = daletouDao.queryAll();
@@ -27,6 +27,8 @@ public class HistoryRepeatAnalysis {
             for (int nextIndex = currentIndex + 1; nextIndex < daletouBos.size(); nextIndex++) {
                 if (diff(daletouBos.get(currentIndex), daletouBos.get(nextIndex))) {
                     maxLen++;
+                }else{
+                    break;
                 }
             }
             maxLengths.add(maxLen);
