@@ -49,7 +49,7 @@ public class DaletouServiceVThreeAndTwoImpl implements DaletouServiceVThreeAndTw
             blueCombinations.forEach(blues->{
                 Daletou daletou = new Daletou(daletouId, reds, blues);
                 if(isDiff(daletou)){
-                    StringUtil.printObject(daletou);
+//                    StringUtil.printObject(daletou);
                     allForecastResult.add(daletou);
                 }
             });
