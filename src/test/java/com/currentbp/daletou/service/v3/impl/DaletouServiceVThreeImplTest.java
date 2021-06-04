@@ -22,13 +22,13 @@ public class DaletouServiceVThreeImplTest extends BaseTest {
     private DaletouServiceVThreeAndTwo daletouServiceVThreeAndTwo;
 
     @Test
-    public void t1() {
+    public void forecastV3() {
         List<Daletou> daletous = daletouServiceVThree.forecastV3(21063, 5);
         System.out.println(daletous.toString());
     }
 
     @Test
-    public void t2() {
+    public void forecastV3_2() {
         List<Daletou> daletous = new ArrayList<>();
         daletous.add(new Daletou(2,4,9,26,27,7,9));
         daletous.add(new Daletou(10,14,17,20,32,1,11));
