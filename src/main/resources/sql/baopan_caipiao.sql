@@ -5,11 +5,6 @@
 -- HeidiSQL 版本:                  9.3.0.4984
 -- --------------------------------------------------------
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8mb4 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-
 -- 导出 caipiao 的数据库结构
 CREATE DATABASE IF NOT EXISTS `caipiao` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `caipiao`;
@@ -29,9 +24,6 @@ CREATE TABLE IF NOT EXISTS `daletou` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='大乐透';
 
 -- 数据导出被取消选择。
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 
 ---批量删除预测数据的表
 select concat
@@ -39,4 +31,19 @@ select concat
 from
 information_schema.tables
 where table_name like 'daletou_forecast_%';
+
+CREATE TABLE `daletou_forecast_result` (
+	`id` BIGINT NOT NULL AUTO_INCREMENT,
+	`daletou_id` BIGINT NOT NULL DEFAULT '0' COMMENT '大乐透id',
+	`daletou` VARCHAR(100) NOT NULL DEFAULT '0' COMMENT '大乐透号码',
+	`forecast_version` INT NOT NULL DEFAULT '0' COMMENT '预测版本',
+	`used` INT NOT NULL DEFAULT '0' COMMENT '是否使用',
+	`create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`)
+)
+COMMENT='大乐透第二种预测的'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
 

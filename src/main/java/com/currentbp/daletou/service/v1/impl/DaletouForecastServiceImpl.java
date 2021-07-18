@@ -1,6 +1,6 @@
 package com.currentbp.daletou.service.v1.impl;
 
-import com.currentbp.daletou.dao.DaletouForecastDao;
+import com.currentbp.daletou.dao.DaletouForecastForEachVersionDao;
 import com.currentbp.daletou.entity.DaletouForecast;
 import com.currentbp.daletou.service.v1.DaletouForecastService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import java.util.List;
 @Service
 public class DaletouForecastServiceImpl implements DaletouForecastService {
     @Autowired
-    private DaletouForecastDao daletouForecastDao;
+    private DaletouForecastForEachVersionDao daletouForecastDao;
 
     @Override
     public void createTable(Integer daletouId) {

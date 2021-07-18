@@ -1,6 +1,7 @@
 package com.currentbp.daletou.service.v3.impl;
 
 import com.currentbp.BaseTest;
+import com.currentbp.daletou.dao.UserForecastResultDao;
 import com.currentbp.daletou.entity.Daletou;
 import com.currentbp.daletou.facade.impl.DaletouServiceFacadeImplTest;
 import com.currentbp.daletou.service.v3.DaletouServiceVThree;
@@ -20,11 +21,18 @@ public class DaletouServiceVThreeImplTest extends BaseTest {
     private DaletouServiceVThree daletouServiceVThree;
     @Autowired
     private DaletouServiceVThreeAndTwo daletouServiceVThreeAndTwo;
+    @Autowired
+    private UserForecastResultDao userForecastResultDao;
 
     @Test
     public void forecastV3() {
         List<Daletou> daletous = daletouServiceVThree.forecastV3(21063, 5);
         System.out.println(daletous.toString());
+
+    }
+    @Test
+    public void saveForecastV3(){
+        daletouServiceVThree.saveForecastV3(21081);
     }
 
     @Test

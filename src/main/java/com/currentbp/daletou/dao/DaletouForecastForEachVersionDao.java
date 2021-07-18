@@ -21,7 +21,7 @@ import java.util.List;
  * @createTime 20180426
  */
 @Repository
-public class DaletouForecastDao {
+public class DaletouForecastForEachVersionDao {
     @Resource
     private MyJdbcTemplate myJdbcTemplate;
 

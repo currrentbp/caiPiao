@@ -27,8 +27,8 @@ public class UserDaletouDao {
     private MyJdbcTemplate myJdbcTemplate;
 
     private static final String INSERT_SQL = "insert into user_daletou" +
-            "(user_id,forecast_version,daletou,create_time,update_time,daletou_id,win) " +
-            "values(?,?,?,?,?,?,?)";
+            "(user_id,forecast_version,daletou,create_time,update_time,daletou_id,win,win_type) " +
+            "values(?,?,?,?,?,?,?,?)";
 
     public void insert(UserDaletou userDaletou) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -43,7 +43,8 @@ public class UserDaletouDao {
                 ps.setObject(4, now);
                 ps.setObject(5, now);
                 ps.setObject(6, userDaletou.getDaletouId());
-                ps.setObject(7, 0);//默认初始化状态
+                ps.setObject(7, userDaletou.getWin());//默认初始化状态
+                ps.setObject(8,userDaletou.getWinType());
                 return ps;
             }
         }, keyHolder);

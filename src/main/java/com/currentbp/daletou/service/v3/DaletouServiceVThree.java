@@ -12,4 +12,9 @@ public interface DaletouServiceVThree {
      * @return
      */
     List<Daletou> forecastV3(int daletouId, int count);
+
+    /**
+     * 保存所有的预测
+     */
+    void saveForecastV3(long daletouId);
 }

@@ -7,6 +7,7 @@ import com.currentbp.daletou.bo.entity.ProblemDate;
 import com.currentbp.daletou.condition.DaletouPageCondition;
 import com.currentbp.daletou.dao.DaletouDao;
 import com.currentbp.daletou.entity.Daletou;
+import com.currentbp.daletou.service.common.WinService;
 import com.currentbp.daletou.service.v1.AnalysisHistoryService;
 import com.currentbp.daletou.service.v1.DaletouServiceVOne;
 import com.currentbp.daletou.service.v1.ForecastDaletouService;
@@ -31,6 +32,8 @@ public class DaletouServiceVOneImpl implements DaletouServiceVOne {
     private ForecastDaletouService forecastDaletouService;
     @Autowired
     private AnalysisHistoryService analysisHistoryService;
+    @Autowired
+    private WinService winService;
 
     private static Integer SAMPLE_SIZE = 5;
 
@@ -61,7 +64,7 @@ public class DaletouServiceVOneImpl implements DaletouServiceVOne {
         Map<Integer, Daletou> sourceMap = CollectionCommonUtil.getMapFromListByMethodName(source, "getId", Integer.class);
 
         List<Win> result = daletous.stream()
-                .map(daletou -> isWin(daletou, sourceMap.get(daletou.getId()))).collect(Collectors.toList());
+                .map(daletou -> winService.isWin(daletou, sourceMap.get(daletou.getId()))).collect(Collectors.toList());
         return result;
     }
 
