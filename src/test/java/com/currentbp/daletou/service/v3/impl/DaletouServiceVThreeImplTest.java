@@ -32,7 +32,7 @@ public class DaletouServiceVThreeImplTest extends BaseTest {
     }
     @Test
     public void saveForecastV3(){
-        daletouServiceVThree.saveForecastV3(21081);
+        daletouServiceVThree.saveForecastV3(21080);
     }
 
     @Test

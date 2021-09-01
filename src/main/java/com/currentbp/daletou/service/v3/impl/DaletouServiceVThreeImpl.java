@@ -57,7 +57,7 @@ public class DaletouServiceVThreeImpl implements DaletouServiceVThree {
             blueCombinations.forEach(blues -> {
                 Daletou daletou = new Daletou(daletouId, reds, blues);
                 if (isDiff(daletou)) {
-                    StringUtil.printObject(daletou);
+//                    StringUtil.printObject(daletou);
                     allForecastResult.add(daletou);
                 }
             });
@@ -82,7 +82,7 @@ public class DaletouServiceVThreeImpl implements DaletouServiceVThree {
     @Override
     public void saveForecastV3(long daletouId) {
         List<Daletou> daletous = forecastV3((int) daletouId, -1);
-        DaletouBo daletouBo = new DaletouBo("21081:5,13,24,29,35;7,8");
+        DaletouBo daletouBo = new DaletouBo("21080:15,16,20,29,30;6,10");
         daletous.forEach(daletou -> {
             Win win = winService.isWin(daletouBo.toDaletou(), daletou);
 
