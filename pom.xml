@@ -14,7 +14,7 @@
         <cglib_version>2.2</cglib_version>
         <logback.version>1.1.7</logback.version>
         <jackson-core_version>2.8.1</jackson-core_version>
-        <jackson-databind_version>2.4.3</jackson-databind_version>
+        <jackson-databind_version>2.13.4.1</jackson-databind_version>
         <druid.version>1.0.28</druid.version>
         <hikaricp.version>2.3.13</hikaricp.version>
         <mysqlDriver.version>8.0.20</mysqlDriver.version>
